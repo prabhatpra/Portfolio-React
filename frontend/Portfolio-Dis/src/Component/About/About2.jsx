@@ -1,43 +1,47 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { FaReact, FaHtml5, FaCss3Alt, FaJs } from "react-icons/fa";
 
 const skills = [
-  { icon: <FaReact size={28} />, title: "React" },
-  { icon: <FaHtml5 size={28} />, title: "HTML5" },
-  { icon: <FaCss3Alt size={28} />, title: "CSS3" },
-  { icon: <FaJs size={28} />, title: "JavaScript" },
+  { title: "React", desc: "Proficient in building dynamic, responsive UIs using React and Tailwind CSS." },
+  { title: "HTML & CSS", desc: "Expert in semantic HTML and modern CSS practices for clean, accessible web pages." },
+  { title: "JavaScript", desc: "Skilled in writing clean, modular, and efficient JavaScript for scalable applications." },
+  { title: "TypeScript", desc: "Experience in adding type safety and scalability with TypeScript." },
+  { title: "Git & GitHub", desc: "Version control and collaboration using Git and GitHub." },
+  { title: "Tailwind CSS", desc: "Rapidly building responsive and beautiful designs with Tailwind CSS." },
 ];
 
 const AboutPage2 = () => {
   return (
-    <section className="relative w-screen min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-800 py-24 px-6">
-      <motion.div
-        className="max-w-6xl w-full text-center"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+    <section className="flex flex-col items-center justify-center w-full h-full px-4 sm:px-6 md:px-8 text-center py-12">
+      <h1
+        className="text-3xl sm:text-4xl md:text-5xl font-bold text-pink-600 mb-6"
+        data-aos="fade-down"
       >
-        <h2 className="text-5xl font-bold text-pink-600 dark:text-purple-400 mb-6">
-          My Skills
-        </h2>
-        <p className="text-gray-700 dark:text-gray-300 text-lg mb-12">
-          I specialize in front-end development and love creating interactive and visually appealing web applications.
-        </p>
+        My Skills
+      </h1>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-          {skills.map((skill, idx) => (
-            <motion.div
-              key={idx}
-              className="bg-white dark:bg-gray-800 rounded-2xl p-6 flex flex-col items-center shadow-xl hover:scale-105 transition-transform duration-300"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="text-pink-500 dark:text-purple-400 mb-3">{skill.icon}</div>
-              <h3 className="font-bold text-lg">{skill.title}</h3>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+      <p
+        className="text-base sm:text-lg md:text-xl text-gray-600 max-w-xl sm:max-w-2xl md:max-w-3xl leading-relaxed"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        I specialize in front-end development, creating responsive, user-friendly, and high-performance web applications using modern technologies and best practices.
+      </p>
+
+      <div
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mt-10 w-full max-w-6xl"
+        data-aos="zoom-in-up"
+        data-aos-delay="400"
+      >
+        {skills.map((skill, idx) => (
+          <div
+            key={idx}
+            className="p-4 sm:p-6 md:p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500"
+          >
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-2 sm:mb-3">{skill.title}</h3>
+            <p className="text-sm sm:text-base md:text-sm text-gray-600">{skill.desc}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
