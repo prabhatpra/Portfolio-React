@@ -1,5 +1,5 @@
 // src/components/About/About.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -17,6 +17,7 @@ const pages = [AboutPage1, AboutPage2, AboutPage3, AboutPage4];
 
 const About = () => {
   const [index, setIndex] = useState(0);
+  const aboutRef = useRef(null);
   const Page = pages[index];
   const animation = Animation();
 
@@ -24,10 +25,35 @@ const About = () => {
     AOS.init({ duration: 1000, once: true, easing: "ease-in-out" });
   }, []);
 
+  // 👇 Yeh ensure karega ki jab bhi user About section me aaye → Page1 show ho
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIndex(0); // hamesha AboutPage1 show hoga
+          }
+        });
+      },
+      { threshold: 0.4 } // 40% section visible hote hi trigger kare
+    );
+
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    return () => {
+      if (aboutRef.current) {
+        observer.unobserve(aboutRef.current);
+      }
+    };
+  }, []);
+
   const nextPage = () => setIndex((prev) => (prev + 1) % pages.length);
 
   return (
     <section
+      ref={aboutRef}
       id="about"
       className="relative w-screen min-h-screen overflow-hidden
         bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70
