@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-tr from-blue-50 via-cyan-100 to-purple-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-800 text-gray-800 dark:text-gray-100">
+    <footer className="bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70 dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70  text-gray-800 dark:text-gray-100 w-screen">
       
       {/* Main Container */}
       <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-0">

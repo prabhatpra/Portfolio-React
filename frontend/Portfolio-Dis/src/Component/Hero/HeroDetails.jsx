@@ -1,10 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { roles, scrollingDetails, typewriterSettings } from "./HeroData";
 
 const HeroDetails = () => {
   const containerRef = useRef(null);
   const contentRef = useRef(null);
+
+  // Scroll-based minor scaling
+  const { scrollY } = useViewportScroll();
+  const scrollScale = useTransform(scrollY, [0, 300], [1, 1.1]); // small zoom on scroll
 
   useEffect(() => {
     const container = containerRef.current;
@@ -12,19 +16,15 @@ const HeroDetails = () => {
     if (!container || !content) return;
 
     let scrollPos = 0;
-    const speed = 0.5; 
+    const speed = 0.5;
 
-   
     const totalScroll = content.offsetHeight + container.offsetHeight;
 
     const step = () => {
       scrollPos += speed;
 
-      if (scrollPos >= totalScroll) {
-        scrollPos = 0; 
-      }
+      if (scrollPos >= totalScroll) scrollPos = 0;
 
-      
       content.style.transform = `translateY(${container.offsetHeight - scrollPos}px)`;
 
       requestAnimationFrame(step);
@@ -36,12 +36,13 @@ const HeroDetails = () => {
 
   return (
     <div className="flex flex-col max-w-xl mx-auto md:mx-0 px-2 sm:px-0 items-center md:items-start">
-      {/* Name */}
+      {/* Name with initial zoom + minor scroll zoom */}
       <motion.h1
         className="hidden md:block text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4 whitespace-nowrap"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2 }}
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        style={{ scale: scrollScale }}
       >
         Prabhat Prajapati
       </motion.h1>
