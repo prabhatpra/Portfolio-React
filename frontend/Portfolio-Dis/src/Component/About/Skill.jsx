@@ -31,7 +31,7 @@ const skills = [
   { title: "Vercel", level: 65, desc: "Frontend & full-stack deployment.", icon: <FaCloud className="text-black" /> },
 ];
 
-const AboutPage3 = () => {
+const Skill = () => {
   const container = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
@@ -100,4 +100,4 @@ const AboutPage3 = () => {
   );
 };
 
-export default AboutPage3;
+export default Skill;

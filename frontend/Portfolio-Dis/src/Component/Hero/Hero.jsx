@@ -11,8 +11,8 @@ const Hero = () => {
   id="home" className="
     relative w-screen h-screen overflow-hidden
     bg-gradient-to-br 
-    from-blue-50 via-cyan-200 to-purple-100/70  /* Light Mode with transparency */
-    dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70  /* Dark Mode */
+    from-blue-50 via-cyan-200 to-purple-100/70 
+    dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70  
     flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-20
     transition-colors duration-700
   "
