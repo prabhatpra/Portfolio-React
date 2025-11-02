@@ -1,4 +1,3 @@
-// src/components/About/About.jsx
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AOS from "aos";

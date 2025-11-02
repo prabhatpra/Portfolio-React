@@ -1,4 +1,4 @@
-// HeroSocial.jsx
+
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaInstagram, FaFacebook, FaLinkedin, FaGithub, FaUserCircle } from "react-icons/fa";

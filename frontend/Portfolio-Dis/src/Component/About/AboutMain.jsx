@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+
 import Prabhat1 from "../../assets/myimg/prabhat1.jpg";
 import Prabhat2 from "../../assets/myimg/prabhat2.jpg";
 import Prabhat3 from "../../assets/myimg/prabhat3.jpg";
@@ -97,7 +98,7 @@ export default function AboutMain() {
               transition={{ duration: 0.6 }}
               className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center"
             >
-              {/* Left Text */}
+              
               <motion.div
                 variants={cardPop}
                 initial="hidden"
@@ -164,7 +165,7 @@ export default function AboutMain() {
                 </div>
               </motion.div>
 
-              {/* Right Image Section */}
+              
               <motion.div
                 className="md:col-span-5 flex items-center justify-center relative"
                 data-aos="fade-left"

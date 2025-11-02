@@ -1,4 +1,4 @@
-// HeroImg.jsx
+
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import HeroImage from "../../assets/myimg/prabhat.jpg";
