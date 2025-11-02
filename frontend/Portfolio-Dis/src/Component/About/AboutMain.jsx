@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import Prabhat1 from "../../assets/myimg/Prabhat1.jpg";
-import Prabhat2 from "../../assets/myimg/Prabhat2.jpg";
-import Prabhat3 from "../../assets/myimg/Prabhat3.jpg";
+import Prabhat1 from "../../assets/myimg/prabhat1.jpg";
+import Prabhat2 from "../../assets/myimg/prabhat2.jpg";
+import Prabhat3 from "../../assets/myimg/prabhat3.jpg";
 
 import Education from "./Education";
 import Skill from "./Skill";
