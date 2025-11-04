@@ -73,7 +73,7 @@ const Footer = () => {
       <div className="text-center py-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
         Designed & built with ❤️ by{" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 font-semibold">
-          Prabhat Prajapati
+          DisCoderPrabhat
         </span>
       </div>
     </footer>
