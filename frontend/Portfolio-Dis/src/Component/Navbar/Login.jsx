@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { motion } from "framer-motion";
 import LoginCard from "./LoginCard";
@@ -16,9 +16,21 @@ const Login = () => {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [message, setMessage] =useState({ text: "", type: "" });
+ 
 
+  
   const cardRef = useRef(null);
+
+  useEffect(() => {
+    if(message.text){
+      const timer = setTimeout(() => {
+        setMessage({ text: "", type: "" });
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  },[message]);
 
   const handleMouseMove = (e) => {
     if (window.innerWidth < 640) return;
@@ -50,29 +62,58 @@ const Login = () => {
     ? `${-rotateY / 3}px ${rotateX / 3}px 25px 5px rgba(0,200,255,0.6), inset ${rotateY / 5}px ${-rotateX / 5}px 15px rgba(0,200,255,0.3)`
     : "none";
 
-  const handleLoginPopup = () => { setShowPopup(true); setIsLogin(true); setFormData({ userName: "", email: "", password: "", confirmPassword: "" }); setErrorMsg(""); };
-  const handleClosePopup = () => { setShowPopup(false); setForgotType(null); setForgotEmail(""); setErrorMsg(""); };
+  const handleLoginPopup = () => { setShowPopup(true); setIsLogin(true); setFormData({ userName: "", email: "", password: "", confirmPassword: "" }); setMessage({ text: "", type: ""}); };
+  const handleClosePopup = () => { setShowPopup(false); setForgotType(null); setForgotEmail(""); setMessage({ text: "", type: ""}); };
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) { setErrorMsg("Passwords do not match"); return; }
-    try { await registerUser(formData); setIsLogin(true); setFormData({ userName: "", email: "", password: "", confirmPassword: "" }); setErrorMsg(""); alert("Signup successful!"); }
-    catch (error) { setErrorMsg(error.response?.data?.message || "Signup failed"); }
+    try { 
+      const res = await registerUser(formData); 
+      setMessage({ text: res.data.message, type: "success" });
+      setIsLogin(true); 
+      setFormData({ userName: "", email: "", password: "", confirmPassword: "" }); 
+      
+       }
+    catch (error) { 
+      setMessage({ text: error.response?.data?.message || "Signup failed", type: "error" }); }
   };
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    try { await loginUser({ userName: formData.userName, password: formData.password }); setErrorMsg(""); alert("Login successful!"); setShowPopup(false); }
-    catch (error) { setErrorMsg(error.response?.data?.message || "Login failed"); }
+    try {
+      const res = await loginUser({ userName: formData.userName, password: formData.password });
+       
+      setMessage({ text: res.data.message, type: "success" });
+      setShowPopup(false); 
+    }
+    catch (error) { 
+      setMessage({ text: error.response?.data?.message || "Login failed", type: "error" });
+     }
   };
 
   const handleForgotSubmit = async (e) => {
     e.preventDefault();
-    if (!forgotEmail) { setErrorMsg("Enter your email"); return; }
-    if (forgotType === "username") alert(`Username for ${forgotEmail} is: demo_user123`);
-    if (forgotType === "password") alert(`Password reset link sent to: ${forgotEmail}`);
-    setForgotEmail(""); setForgotType(null); setErrorMsg("");
-  };
+    if (!forgotEmail) { 
+      setMessage({ text: "Enter your email", type: "error"});
+      return;
+     }
+
+    if (forgotType === "username") {
+      setMessage({
+    text: `Username for ${forgotUserName} is: demo_user123`,
+    type: "success",});
+  }
+
+    if (forgotType === "password") {
+      setMessage({
+    text: `Password reset link sent to: ${forgotEmail}`,
+    type: "success",});
+      }
+
+    setForgotEmail(""); 
+    setForgotType(null); 
+  }
 
   return (
     <div>
@@ -85,8 +126,20 @@ const Login = () => {
             <FaUser className="text-xl" />
             <span>Login</span>
           </button>
+       {message.text && (
+  <div
+    className={`p-3 mb-4 text-center rounded mx-auto w-fit ${
+      message.type === "success"
+        ? "bg-green-100 text-green-700"
+        : "bg-red-100 text-red-700"
+    }`}
+  >
+    {message.text}
+  </div>
+)}
         </div>
       )}
+      
 
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -103,7 +156,7 @@ const Login = () => {
             animate={{ scale: 1, opacity: 1, y: -20 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.4, type: "spring" }}
-            className="bg-transparent text-black dark:text-white p-4 sm:p-6 rounded-2xl w-[90%] max-w-xs sm:max-w-md relative backdrop-blur-sm text-sm sm:text-base max-h-[90vh] overflow-y-auto"
+            className="bg-transparent text-red-400 dark:text-red-500 p-4 sm:p-6 rounded-2xl w-[90%] max-w-xs sm:max-w-md relative backdrop-blur-sm text-sm sm:text-base max-h-[90vh] overflow-y-auto"
           >
             <button onClick={handleClosePopup} className="absolute top-2 right-3 text-lg z-50">✖</button>
 
@@ -132,7 +185,7 @@ const Login = () => {
                     handleLoginSubmit={handleLoginSubmit}
                     setForgotType={setForgotType}
                     setIsLogin={setIsLogin}
-                    errorMsg={errorMsg}
+                    
                   />
                   <SignupCard
                     formData={formData}
@@ -143,7 +196,7 @@ const Login = () => {
                     setShowConfirmPassword={setShowConfirmPassword}
                     handleSignupSubmit={handleSignupSubmit}
                     setIsLogin={setIsLogin}
-                    errorMsg={errorMsg}
+                    
                   />
                 </motion.div>
               </div>

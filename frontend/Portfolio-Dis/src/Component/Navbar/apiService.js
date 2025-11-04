@@ -1,7 +1,7 @@
 // src/services/apiService.js
 import axios from "axios";
 
-const BASE_URL = "http://localhost:9090/user";
+const BASE_URL = "http://localhost:9298/user";
 
 export const registerUser = async (userData) => {
   // userData ka format hoga:

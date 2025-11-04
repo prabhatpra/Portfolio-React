@@ -142,4 +142,4 @@ const AuthForm = ({ isLogin, setIsLogin, forgotType, setForgotType }) => {
   );
 };
 
-export default AuthForm;
+export default AuthForm; 

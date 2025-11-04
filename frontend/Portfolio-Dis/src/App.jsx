@@ -6,6 +6,7 @@ import About from './Component/About/About'
 import Footer from './Component/Footer/Footer'
 import Experience from './Component/Experience/Experience'
 import Resume from './Component/Resume/Resume'
+import JavaInterview from './Component/JavaBasicQuestion/JavaInterview'
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <About />
       <Projects />
       <Experience />
+      <JavaInterview />
       <Resume />
       <Footer />
     
