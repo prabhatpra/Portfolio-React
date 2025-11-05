@@ -101,7 +101,7 @@ const Login = () => {
 
     if (forgotType === "username") {
       setMessage({
-    text: `Username for ${forgotUserName} is: demo_user123`,
+    text: `Username for ${forgotEmail} is: demo_user123`,
     type: "success",});
   }
 
@@ -114,7 +114,7 @@ const Login = () => {
     setForgotEmail(""); 
     setForgotType(null); 
   }
-
+  
   return (
     <div>
       {!showPopup && (

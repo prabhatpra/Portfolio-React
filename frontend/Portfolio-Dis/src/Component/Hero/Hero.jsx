@@ -20,26 +20,26 @@ const Hero = () => {
   
   <div className="absolute inset-0 bg-white/20 dark:bg-black/20 pointer-events-none z-0"></div>
 
-  {/* Optional: Background floating bubbles or abstract shapes */}
+ 
   <BubbleBackground />
 
-  {/* Main content */}
+ 
   <motion.div
     className="z-10 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10 w-full max-w-7xl"
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 1 }}
   >
-    {/* Hero Image */}
+   
     <HeroImg />
 
-    {/* Hero Details */}
+    
     <div className="flex-1 flex flex-col justify-center md:justify-start md:ml-10 mt-6 md:mt-0 text-center md:text-left">
       <HeroDetails />
     </div>
   </motion.div>
 
-  {/* HeroSocial button at bottom */}
+  
   <div className="absolute bottom-8 w-full flex justify-center z-20">
     <HeroSocial />
   </div>

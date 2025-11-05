@@ -14,7 +14,7 @@ export const roles = [
 ];
 
 
-// Scrolling description
+
 export const scrollingDetails = `
 
 🌟 Hi, I'm Prabhat Prajapati — a passionate Java & Full Stack Developer 🚀  
@@ -45,14 +45,14 @@ as a developer while contributing to impactful projects.**
   .map((line) => line.trim())
   .filter((line) => line);
 
-// Typewriter settings
+
 export const typewriterSettings = {
   TYPING_SPEED: 120,
   DELETING_SPEED: 60,
   PAUSE_TIME: 1800,
 };
 
-// Basic profile lines (without images/links)
+
 export const basicProfileDescriptions = {
   instagram: {
     title: "Instagram Profile",
@@ -88,7 +88,7 @@ export const basicProfileDescriptions = {
   },
 };
 
-// Profile descriptions with images and links
+
 export const profileWithImages = {
   instagram: {
     title: "Instagram Profile",

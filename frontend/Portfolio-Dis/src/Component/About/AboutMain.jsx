@@ -193,31 +193,36 @@ export default function AboutMain() {
                   </motion.div>
                 ))}
 
-                <motion.div
-                  key={images[0]}
-                  layout
-                  onMouseMove={onMove}
-                  onMouseLeave={onLeave}
-                  style={{
-                    rotateY: `${mouse.x}deg`,
-                    rotateX: `${-mouse.y}deg`,
-                    boxShadow: "0 25px 50px rgba(0,0,0,0.25)",
-                  }}
-                  className="relative w-56 h-72 md:w-72 md:h-96 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
-                  data-aos="zoom-in"
-                >
-                  <img
-                    src={images[0]}
-                    className="w-full h-full object-cover rounded-2xl"
-                    alt="Prabhat Main"
-                  />
-                  <div className="absolute left-4 bottom-4 bg-white/30 dark:bg-black/50 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-2 border border-white/20">
-                    <div className="w-2 h-2 rounded-full bg-green-400" />
-                    <span className="text-xs font-medium text-slate-900 dark:text-white">
-                      Open to work
-                    </span>
-                  </div>
-                </motion.div>
+               <AnimatePresence mode="wait">
+  <motion.div
+    key={images[0]} // important for AnimatePresence to detect change
+    onMouseMove={onMove}
+    onMouseLeave={onLeave}
+    initial={{ opacity: 0, x: 100 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: -100 }}
+    transition={{ duration: 0.8, ease: "easeInOut" }}
+    style={{
+      rotateY: `${mouse.x}deg`,
+      rotateX: `${-mouse.y}deg`,
+      boxShadow: "0 25px 50px rgba(0,0,0,0.25)",
+    }}
+    className="relative w-56 h-72 md:w-72 md:h-96 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+  >
+    <img
+      src={images[0]}
+      className="w-full h-full object-cover rounded-2xl"
+      alt="Prabhat Main"
+    />
+    <div className="absolute left-4 bottom-4 bg-white/30 dark:bg-black/50 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-2 border border-white/20">
+      <div className="w-2 h-2 rounded-full bg-green-400" />
+      <span className="text-xs font-medium text-slate-900 dark:text-white">
+        Open to work
+      </span>
+    </div>
+  </motion.div>
+</AnimatePresence>
+
               </motion.div>
             </motion.div>
           ) : (

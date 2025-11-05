@@ -36,7 +36,7 @@ const HeroDetails = () => {
 
   return (
     <div className="flex flex-col max-w-xl mx-auto md:mx-0 px-2 sm:px-0 items-center md:items-start">
-      {/* Name with initial zoom + minor scroll zoom */}
+    
       <motion.h1
         className="hidden md:block text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4 whitespace-nowrap"
         initial={{ scale: 0.5, opacity: 0 }}
@@ -47,12 +47,12 @@ const HeroDetails = () => {
         Prabhat Prajapati
       </motion.h1>
 
-      {/* Typewriter */}
+      
       <div className="w-full text-center md:text-left">
         <Typewriter roles={roles} />
       </div>
 
-      {/* Scrolling details */}
+     
       <div
         ref={containerRef}
         className="overflow-hidden h-64 sm:h-72 md:h-80 relative mt-4 w-full text-center md:text-left"
