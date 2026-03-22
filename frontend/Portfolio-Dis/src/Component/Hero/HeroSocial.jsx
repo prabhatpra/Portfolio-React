@@ -18,7 +18,6 @@ const HeroSocial = () => {
   const [isHovering, setIsHovering] = useState(false);
   const cardRef = useRef(null);
 
-  // ✅ Buttons config (NO repeat code)
   const socialButtons = [
     {
       id: "instagram",
@@ -54,15 +53,16 @@ const HeroSocial = () => {
     },
   ];
 
-  // 3D Tilt Logic
   const handleMouseMove = (e) => {
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    setRotateY(((x / rect.width) - 0.5) * 30);
-    setRotateX(((y / rect.height) - 0.5) * -30);
+
+    // smoother rotation
+    setRotateY(((x / rect.width) - 0.5) * 15);
+    setRotateX(((y / rect.height) - 0.5) * -15);
   };
 
   const handleMouseLeave = () => {
@@ -84,14 +84,13 @@ const HeroSocial = () => {
   ];
 
   return (
-    <motion.div 
-    className="relative"
-    initial={{ opacity: 0, scale:0.5, y: 40}}
-    whileInView={{ opacity: 1, scale: 1, y:0}}
-    viewport={{ once: false, amount: 0.3 }}
-    transition={{ duration: 0.8, ease: "easeOut" }}
-
->
+    <motion.div
+      className="relative"
+      initial={{ opacity: 0, scale: 0.5, y: 40 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.3 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       {/* Open Button */}
       <div className="w-full flex justify-center items-center mb-6">
         <button
@@ -110,8 +109,8 @@ const HeroSocial = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4"
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
             onClick={() => setPopupOpen(false)}
           >
             <motion.div
@@ -127,16 +126,19 @@ const HeroSocial = () => {
               }}
               className="bg-gradient-to-br from-blue-50/90 via-cyan-200/70 to-purple-100/90
               dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/80
-              p-4 sm:p-6 md:p-8 rounded-2xl w-full max-w-[95%] sm:max-w-2xl md:max-w-4xl 
-              h-auto sm:h-[80vh] md:h-[450px] text-gray-800 dark:text-gray-200 
-              shadow-xl relative flex flex-col sm:flex-row gap-6 overflow-y-auto sm:overflow-hidden"
+              p-4 sm:p-6 md:p-8 rounded-2xl 
+              w-full max-w-[85%] sm:max-w-md md:max-w-2xl 
+              h-[320px] sm:h-[340px] md:h-[350px] lg:h-auto
+              text-gray-800 dark:text-gray-200 
+              shadow-xl relative flex flex-col md:flex-row gap-6 
+              overflow-y-auto scrollbar-hide"
               onClick={(e) => e.stopPropagation()}
               initial={{ y: 60, opacity: 0, scale: 0.9 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: 60, opacity: 0, scale: 0.9 }}
               transition={{ type: "spring", stiffness: 120, damping: 10 }}
             >
-              {/* Close Button */}
+              {/* Close */}
               <button
                 onClick={() => setPopupOpen(false)}
                 className="absolute top-4 right-4 text-white text-3xl font-bold"
@@ -144,18 +146,13 @@ const HeroSocial = () => {
                 &times;
               </button>
 
-              {/* Left Section */}
+              {/* LEFT */}
               <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-                <a
-                  href={profileWithImages[profile].link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full"
-                >
+                <a href={profileWithImages[profile].link} target="_blank" rel="noopener noreferrer">
                   <img
                     src={profileWithImages[profile].img}
                     alt="preview"
-                    className="w-full h-48 object-cover rounded-lg mb-3 hover:scale-105 transition duration-300"
+                    className="w-full h-32 sm:h-40 md:h-48 object-cover rounded-lg mb-3 hover:scale-105 transition duration-300"
                   />
                 </a>
 
@@ -179,35 +176,47 @@ const HeroSocial = () => {
                 </a>
               </div>
 
-              {/* Right Buttons */}
-              <div className="w-full md:w-40 flex flex-col justify-center gap-4 md:pl-6">
-                <div className="text-center text-white/70 mb-2">
+              {/* RIGHT */}
+              <div className="w-full md:w-40 flex flex-col md:pl-6 items-center md:items-start">
+                
+                <div className="text-center md:text-left text-white/70 mb-2">
                   {hoverText}
                 </div>
 
-                {socialButtons.map((btn) => (
-                  <motion.button
-                    key={btn.id}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 15,
-                    }}
-                    onClick={() => {
-                      setProfile(btn.id);
-                      setHoverText(btn.text);
-                    }}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition duration-300 ${
-                      profile === btn.id
-                        ? btn.activeClass
-                        : `bg-white/10 ${btn.hoverClass}`
-                    }`}
-                  >
-                    {btn.icon} {btn.label}
-                  </motion.button>
-                ))}
+                {/* Buttons */}
+                <div className="relative flex flex-row md:flex-col gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
+                  {socialButtons.map((btn) => (
+                    <motion.button
+                      key={btn.id}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                      onClick={() => {
+                        setProfile(btn.id);
+                        setHoverText(btn.text);
+                      }}
+                      className={`flex-shrink-0 flex items-center gap-2 
+                        px-2 py-1 text-xs
+                        sm:px-3 sm:py-1.5 sm:text-sm
+                        md:px-4 md:py-2 md:text-sm
+                        rounded-md font-semibold transition duration-300 ${
+                        profile === btn.id
+                          ? btn.activeClass
+                          : `bg-white/10 ${btn.hoverClass}`
+                      }`}
+                    >
+                      {btn.icon} {btn.label}
+                    </motion.button>
+                  ))}
+
+                  {/* 👉 scroll hint arrow (mobile only) */}
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 text-white/50 text-xs md:hidden">
+                    →
+                  </div>
+                </div>
               </div>
+
+              {/* 👉 fade effect only for mobile */}
+              <div className="gradient-fade-bottom md:hidden"></div>
             </motion.div>
           </motion.div>
         )}
