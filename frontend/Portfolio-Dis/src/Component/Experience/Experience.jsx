@@ -32,10 +32,11 @@ function Experience() {
     items.find((it) => it.id === selectedId) || items[0] || null;
 
   return (
-    <section
-      id="experience"
-      className="min-h-screen py-16 px-4 md:px-12 lg:px-20 bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70 dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70 transition-colors duration-75 w-screen"
-    >
+   <section
+  id="experience"
+  className="min-h-screen py-16 px-4 md:px-12 lg:px-20 
+  transition-colors duration-75 w-screen"
+>
       <div className="max-w-7xl mx-auto flex flex-col gap-12 h-full">
         {/* Header */}
         <div

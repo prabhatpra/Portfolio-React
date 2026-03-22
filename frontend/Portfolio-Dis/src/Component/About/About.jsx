@@ -2,8 +2,6 @@ import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-import BubbleBackground from "../BubbleBackground/BubbleBackground.jsx";
 import { Animation } from "./Animation";
 import AboutMain from "./AboutMain";
 
@@ -19,13 +17,10 @@ const About = () => {
     <section
       ref={aboutRef}
       id="about"
-      className="relative w-screen min-h-screen overflow-hidden
-        bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70
-        dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70
-        flex flex-col items-center justify-start transition-colors duration-700"
-    >
+    className="relative w-screen min-h-screen overflow-hidden
+flex flex-col items-center justify-start transition-colors duration-700"
+>
       <div className="absolute inset-0 bg-white/20 dark:bg-black/20 pointer-events-none z-0" />
-      <BubbleBackground />
 
       <div className="relative z-10 w-full flex-1 flex items-center justify-center">
         <AnimatePresence mode="wait">

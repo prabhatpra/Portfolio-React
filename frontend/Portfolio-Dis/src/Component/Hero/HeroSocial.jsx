@@ -1,7 +1,12 @@
-
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaInstagram, FaFacebook, FaLinkedin, FaGithub, FaUserCircle } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebook,
+  FaLinkedin,
+  FaGithub,
+  FaUserCircle,
+} from "react-icons/fa";
 import { profileWithImages, basicProfileDescriptions } from "./HeroData";
 
 const HeroSocial = () => {
@@ -13,6 +18,43 @@ const HeroSocial = () => {
   const [isHovering, setIsHovering] = useState(false);
   const cardRef = useRef(null);
 
+  // ✅ Buttons config (NO repeat code)
+  const socialButtons = [
+    {
+      id: "instagram",
+      label: "Instagram",
+      icon: <FaInstagram />,
+      activeClass: "bg-pink-400 text-black shadow-md shadow-pink-500/40",
+      hoverClass: "hover:bg-pink-300 hover:text-white",
+      text: "Instagram Profile",
+    },
+    {
+      id: "facebook",
+      label: "Facebook",
+      icon: <FaFacebook />,
+      activeClass: "bg-blue-600 text-black shadow-md shadow-blue-500/40",
+      hoverClass: "hover:bg-blue-500 hover:text-white",
+      text: "Facebook Profile",
+    },
+    {
+      id: "linkedin",
+      label: "LinkedIn",
+      icon: <FaLinkedin />,
+      activeClass: "bg-blue-400 text-black shadow-md shadow-blue-500/40",
+      hoverClass: "hover:bg-blue-300 hover:text-white",
+      text: "Connect on LinkedIn",
+    },
+    {
+      id: "github",
+      label: "GitHub",
+      icon: <FaGithub />,
+      activeClass: "bg-green-400 text-black shadow-md shadow-green-500/40",
+      hoverClass: "hover:bg-green-300 hover:text-white",
+      text: "View GitHub Projects",
+    },
+  ];
+
+  // 3D Tilt Logic
   const handleMouseMove = (e) => {
     const card = cardRef.current;
     if (!card) return;
@@ -32,17 +74,24 @@ const HeroSocial = () => {
   const handleMouseEnter = () => setIsHovering(true);
 
   const glowShadow = isHovering
-    ? `${-rotateY / 3}px ${rotateX / 3}px 20px 5px rgba(255,0,0,0.6), inset ${rotateY / 5}px ${-rotateX / 5}px 10px rgba(255,0,0,0.3)`
+    ? `${-rotateY / 3}px ${rotateX / 3}px 20px 5px rgba(255,0,0,0.6),
+       inset ${rotateY / 5}px ${-rotateX / 5}px 10px rgba(255,0,0,0.3)`
     : "none";
 
-  // Combine lines from both profileWithImages and basicProfileDescriptions
   const allProfileLines = [
     ...(profileWithImages[profile].lines || []),
-    ...(basicProfileDescriptions[profile].lines || [])
+    ...(basicProfileDescriptions[profile].lines || []),
   ];
 
   return (
-    <div className="relative">
+    <motion.div 
+    className="relative"
+    initial={{ opacity: 0, scale:0.5, y: 40}}
+    whileInView={{ opacity: 1, scale: 1, y:0}}
+    viewport={{ once: false, amount: 0.3 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+
+>
       {/* Open Button */}
       <div className="w-full flex justify-center items-center mb-6">
         <button
@@ -58,40 +107,35 @@ const HeroSocial = () => {
       <AnimatePresence>
         {popupOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4"
             onClick={() => setPopupOpen(false)}
           >
-         <motion.div
-  ref={cardRef}
-  onMouseMove={handleMouseMove}
-  onMouseLeave={handleMouseLeave}
-  onMouseEnter={handleMouseEnter}
-  style={{
-    rotateX: rotateX,
-    rotateY: rotateY,
-    transformPerspective: 1000,
-    boxShadow: glowShadow,
-    transition: "box-shadow 0.1s ease-out, transform 0.2s ease-out",
-  }}
-  className="
-    bg-gradient-to-br from-blue-50/90 via-cyan-200/70 to-purple-100/90
-    dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/80
-    p-4 sm:p-6 md:p-8 rounded-2xl w-full max-w-[95%] sm:max-w-2xl md:max-w-4xl 
-    h-auto sm:h-[80vh] md:h-[450px] text-gray-800 dark:text-gray-200 
-    shadow-xl border border-transparent relative flex flex-col sm:flex-row 
-    gap-6 overflow-y-auto sm:overflow-hidden
-  "
-  onClick={(e) => e.stopPropagation()}
-  initial={{ scale: 0.8, opacity: 0 }}
-  animate={{ scale: 1, opacity: 1 }}
-  exit={{ scale: 0.8, opacity: 0 }}
-  transition={{ duration: 0.3 }}
->
-
-
+            <motion.div
+              ref={cardRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              onMouseEnter={handleMouseEnter}
+              style={{
+                rotateX,
+                rotateY,
+                transformPerspective: 1000,
+                boxShadow: glowShadow,
+              }}
+              className="bg-gradient-to-br from-blue-50/90 via-cyan-200/70 to-purple-100/90
+              dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/80
+              p-4 sm:p-6 md:p-8 rounded-2xl w-full max-w-[95%] sm:max-w-2xl md:max-w-4xl 
+              h-auto sm:h-[80vh] md:h-[450px] text-gray-800 dark:text-gray-200 
+              shadow-xl relative flex flex-col sm:flex-row gap-6 overflow-y-auto sm:overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ y: 60, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 60, opacity: 0, scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 120, damping: 10 }}
+            >
               {/* Close Button */}
               <button
                 onClick={() => setPopupOpen(false)}
@@ -100,7 +144,7 @@ const HeroSocial = () => {
                 &times;
               </button>
 
-              {/* Left: Image + Profile Details */}
+              {/* Left Section */}
               <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
                 <a
                   href={profileWithImages[profile].link}
@@ -110,16 +154,21 @@ const HeroSocial = () => {
                 >
                   <img
                     src={profileWithImages[profile].img}
-                    alt={`${profile} preview`}
-                    className="w-full h-48 object-cover rounded-lg mb-3 hover:scale-105 transition-transform duration-300"
+                    alt="preview"
+                    className="w-full h-48 object-cover rounded-lg mb-3 hover:scale-105 transition duration-300"
                   />
                 </a>
-                <h2 className="text-red-400 text-lg font-semibold mb-2">{profileWithImages[profile].title}</h2>
+
+                <h2 className="text-red-400 text-lg font-semibold mb-2">
+                  {profileWithImages[profile].title}
+                </h2>
+
                 <div className="text-white text-sm space-y-1 mb-2">
                   {allProfileLines.map((line, i) => (
                     <p key={i}>{line}</p>
                   ))}
                 </div>
+
                 <a
                   href={profileWithImages[profile].link}
                   target="_blank"
@@ -130,71 +179,40 @@ const HeroSocial = () => {
                 </a>
               </div>
 
-              {/* Right: Buttons */}
+              {/* Right Buttons */}
               <div className="w-full md:w-40 flex flex-col justify-center gap-4 md:pl-6">
-                <div className="text-center text-white/70 mb-2">{hoverText}</div>
+                <div className="text-center text-white/70 mb-2">
+                  {hoverText}
+                </div>
 
-                <button
-                  onClick={() => {
-                    setProfile("instagram");
-                    setHoverText("Instagram Profile");
-                  }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition duration-300 ${
-                    profile === "instagram"
-                      ? "bg-pink-400 text-black shadow-md shadow-pink-500/40"
-                      : "bg-white/10 hover:bg-pink-300 hover:text-white"
-                  }`}
-                >
-                  <FaInstagram /> Instagram
-                </button>
-
-                <button
-                  onClick={() => {
-                    setProfile("facebook");
-                    setHoverText("Facebook Profile");
-                  }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition duration-300 ${
-                    profile === "facebook"
-                      ? "bg-blue-600 text-black shadow-md shadow-blue-500/40"
-                      : "bg-white/10 hover:bg-blue-500 hover:text-white"
-                  }`}
-                >
-                  <FaFacebook /> Facebook
-                </button>
-
-                <button
-                  onClick={() => {
-                    setProfile("linkedin");
-                    setHoverText("Connect on LinkedIn");
-                  }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition duration-300 ${
-                    profile === "linkedin"
-                      ? "bg-blue-400 text-black shadow-md shadow-blue-500/40"
-                      : "bg-white/10 hover:bg-blue-300 hover:text-white"
-                  }`}
-                >
-                  <FaLinkedin /> LinkedIn
-                </button>
-
-                <button
-                  onClick={() => {
-                    setProfile("github");
-                    setHoverText("View GitHub Projects");
-                  }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition duration-300 ${
-                    profile === "github"
-                      ? "bg-green-400 text-black shadow-md shadow-green-500/40"
-                      : "bg-white/10 hover:bg-green-300 hover:text-white"
-                  }`}
-                >
-                  <FaGithub /> GitHub
-                </button>
+                {socialButtons.map((btn) => (
+                  <motion.button
+                    key={btn.id}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 15,
+                    }}
+                    onClick={() => {
+                      setProfile(btn.id);
+                      setHoverText(btn.text);
+                    }}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition duration-300 ${
+                      profile === btn.id
+                        ? btn.activeClass
+                        : `bg-white/10 ${btn.hoverClass}`
+                    }`}
+                  >
+                    {btn.icon} {btn.label}
+                  </motion.button>
+                ))}
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 

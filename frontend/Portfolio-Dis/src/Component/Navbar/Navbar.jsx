@@ -45,8 +45,8 @@ const Navbar = () => {
   className={`shadow-md
     relative mx-auto
     ${scrolled
-      ? "w-1/2  h-12 rounded-lg bg-transparent backdrop-blur-md"
-      : "w-full h-14 bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-800"}
+      ? "w-1/2  h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-md"
+      : "w-full h-14 bg-white/30 dark:bg-black/40 backdrop-blur-md"}
     transition-all duration-300`}
 >
 

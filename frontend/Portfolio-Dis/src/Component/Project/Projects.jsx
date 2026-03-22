@@ -32,12 +32,11 @@ const Projects = () => {
 
   return (
     <section
-      id="project"
-      className="relative w-screen min-h-screen overflow-hidden
-                 bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70
-                 dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70
-                 flex flex-col items-center px-4 sm:px-6 md:px-20 py-10 transition-colors duration-700"
-    >
+  id="project"
+  className="relative w-screen min-h-screen overflow-hidden
+             flex flex-col items-center px-4 sm:px-6 md:px-20 py-10
+             transition-colors duration-700"
+>
       <div className="absolute inset-0 bg-white/20 dark:bg-black/20 pointer-events-none z-0"></div>
 
       <div className="relative z-10 w-full max-w-7xl flex flex-col items-center gap-8">
@@ -47,10 +46,12 @@ const Projects = () => {
 
         <div className="text-center">
           <button
-            className="bg-green-500 text-white px-5 py-2 rounded-lg hover:bg-green-600 transition-colors"
+            className="bg-gradient-to-br from-blue-300 via-cyan-500 to-purple-400
+            dark:from-gray-600 dark:via-purple-700 dark:to-indigo-800 text-white px-5 py-2 rounded-lg hover:bg-green-600 transition-colors group"
             onClick={() => setShowForm(true)}
           >
-            Add New Project
+           <span className="block group-hover:hidden"> Add New Project </span>
+           <span className="hidden group-hover:block">Only for Admin</span>
           </button>
         </div>
 

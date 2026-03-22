@@ -66,7 +66,7 @@ export default function Education() {
   useEffect(() => {
     AOS.init({
       duration: 800,
-      once: false, // false => har scroll pe chalega
+      once: false,
       offset: 100,
       easing: "ease-in-out",
     });
@@ -74,12 +74,12 @@ export default function Education() {
 
   return (
     <div
-      className="min-h-screen py-16 px-6 md:px-12 bg-gradient-to-b from-gray-50/0 via-gray-100/0 to-gray-200/0 dark:from-gray-900/0 dark:to-gray-950/0"
+      className="min-h-screen py-16 px-4 sm:px-6 md:px-12 lg:px-24 bg-gradient-to-b from-gray-50/0 via-gray-100/0 to-gray-200/0 dark:from-gray-900/0 dark:to-gray-950/0"
       data-aos="fade-up"
     >
       {/* 🔹 Heading */}
       <h2
-        className="text-3xl font-extrabold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500"
+        className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500"
         data-aos="zoom-in"
       >
         Education Journey
@@ -87,7 +87,7 @@ export default function Education() {
 
       {/* 🔹 Buttons */}
       <div
-        className="flex justify-center flex-wrap gap-4 mb-10"
+        className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-10"
         data-aos="fade-up"
         data-aos-delay="200"
       >
@@ -95,7 +95,7 @@ export default function Education() {
           <button
             key={edu.id}
             onClick={() => setActiveTab(edu.id)}
-            className={`px-3 py-1.5 rounded-full text-sm md:text-base font-semibold transition-all border 
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm md:text-base font-semibold transition-all border 
               ${
                 activeTab === edu.id
                   ? "bg-gradient-to-r from-red-200 to-slate-400 text-white border-transparent shadow-md"
@@ -114,49 +114,53 @@ export default function Education() {
         key={activeTab}
         data-aos="fade-up"
         data-aos-delay="400"
-        className="max-w-5xl mx-auto border border-purple-500/40 rounded-2xl p-8 md:p-10 relative overflow-hidden"
+        className="max-w-full sm:max-w-3xl md:max-w-5xl mx-auto border border-purple-500/40 rounded-2xl p-6 sm:p-8 md:p-10 relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/15 via-pink-500/10 to-blue-400/10 rounded-2xl pointer-events-none"></div>
 
         <div className="relative z-10">
           <div
-            className="flex flex-col md:flex-row items-start md:items-center gap-6"
+            className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6"
             data-aos="fade-right"
           >
-            <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-purple-500 to-blue-400 flex items-center justify-center text-white shadow-md">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-purple-500 to-blue-400 flex items-center justify-center text-white shadow-md">
               {activeEdu.icon}
             </div>
             <div>
               <h3
-                className="text-2xl md:text-3xl font-bold text-black dark:text-white"
+                className="text-xl sm:text-2xl md:text-3xl font-bold text-black dark:text-white"
                 data-aos="fade-left"
               >
                 {activeEdu.title}
               </h3>
-              <p className="text-gray-700 dark:text-gray-300 font-medium">
+              <p className="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">
                 {activeEdu.institution}
               </p>
-              <p className="text-sm text-gray-500">{activeEdu.location}</p>
-              <p className="text-sm text-gray-500">{activeEdu.year}</p>
+              <p className="text-xs sm:text-sm text-gray-500">{activeEdu.location}</p>
+              <p className="text-xs sm:text-sm text-gray-500">{activeEdu.year}</p>
             </div>
           </div>
 
           <p
-            className="mt-6 text-gray-800 dark:text-gray-300 leading-relaxed"
+            className="mt-4 sm:mt-6 text-gray-800 dark:text-gray-300 leading-relaxed text-sm sm:text-base"
             data-aos="fade-up"
           >
             {activeEdu.description}
           </p>
 
-          <div className="mt-6 space-y-2" data-aos="fade-up" data-aos-delay="200">
+          <div
+            className="mt-4 sm:mt-6 space-y-2 sm:space-y-3 md:space-y-4 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             {activeEdu.achievements.map((ach, i) => (
               <p
                 key={i}
-                className="text-sm text-gray-900 dark:text-gray-200 flex items-center gap-2"
+                className="text-xs sm:text-sm text-gray-900 dark:text-gray-200 flex items-start gap-2"
                 data-aos="fade-right"
                 data-aos-delay={100 + i * 100}
               >
-                <span className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400"></span>
+                <span className="w-2 h-2 mt-1 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex-shrink-0"></span>
                 {ach}
               </p>
             ))}

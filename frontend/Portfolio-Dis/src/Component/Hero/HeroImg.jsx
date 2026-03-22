@@ -1,142 +1,68 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import HeroImage from "../../assets/myimg/prabhat.jpg";
 
 const HeroImg = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false, mirror: true, offset: 80, easing: "ease-in-out" });
+  }, []);
+
   return (
-    <div className="flex justify-center md:justify-start w-full">
-      {/* ===== Outer Card ===== */}
+    <div className="flex justify-center md:justify-start w-full lg:mt-8 mt-36">
+      
       <motion.div
+        
         className="
           relative
-          w-48 sm:w-56 md:w-64 lg:w-72
-          h-80 sm:h-96 md:h-[28rem] lg:h-[32rem]
-          rounded-3xl
+          w-44 sm:w-52 md:w-64 lg:w-72
+          h-80 sm:h-[24rem] md:h-[28rem] lg:h-[32rem]
+          rounded-[2rem]
           overflow-hidden
-          bg-gradient-to-br from-white/90 to-gray-100/70 dark:from-gray-900 dark:to-gray-800
-          border border-gray-200/60 dark:border-gray-700/60
-          shadow-xl
-          backdrop-blur-md
-          flex flex-col items-center justify-end
+          bg-gradient-to-br from-white/80 to-gray-200/60 
+          dark:from-gray-900/80 dark:to-gray-800/70
+          border border-white/30 dark:border-gray-700/50
+          shadow-[0_10px_40px_rgba(0,0,0,0.25)]
+          backdrop-blur-xl
           group
+          cursor-pointer
         "
-        whileHover={{ y: -6, scale: 1.02 }}
-        transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+        initial={{ scale: 0.9, opacity: 0, y: 0}}
+        whileInView={{ scale: 1, opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        whileHover={{ scale: 1.04, rotate: 1 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20, duration: 1.2 }}
+
       >
-        {/* Profile Image */}
-        <div className="absolute top-0 left-0 w-full h-4/5 overflow-hidden">
+        
+        {/* Image */}
+        <div className="absolute inset-0 overflow-hidden">
           <motion.img
             src={HeroImage}
             alt="Prabhat Prajapati"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             draggable={false}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
         </div>
 
-        {/* Name & Button Section */}
-        <div className="relative flex flex-col items-center gap-1 p-2 sm:p-3 md:p-4 text-center w-full">
-
-          {/* Animated Color Overlay behind text */}
-          <motion.div
-            className="absolute inset-0 rounded-b-3xl -z-10"
-            style={{
-              background: 'linear-gradient(270deg, #ff0080, #7928ca, #00fff0, #ff0080)',
-              backgroundSize: '600% 600%',
-            }}
-            animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-          />
-
-          <h1 className="text-base sm:text-lg md:text-xl font-extrabold text-gray-900 dark:text-white tracking-wide">
-            Prabhat Prajapati
-          </h1>
-
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="
-              mt-1 px-4 py-1
-              bg-gradient-to-r from-slate-600 via-green-200 to-violet-600
-              dark:from-lime-600 dark:via-amber-300 dark:to-green-950
-              text-indigo-600 font-semibold text-xs sm:text-sm
-              rounded-lg
-              shadow-md
-              hover:shadow-lg hover:scale-105
-              transition-all duration-300
-              cursor-pointer
-              focus:outline-none focus:ring-2 focus:ring-blue-400
-              flex items-center justify-center gap-1
-            "
-          >
-            About me <span className="text-white text-base">→</span>
-          </button>
+        {/* Glow Effect */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500">
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 blur-2xl opacity-30"></div>
         </div>
+
+        {/* Bottom Info Section */}
+        <div className="relative z-10 p-4 text-white">
+          <h2 className="text-xl font-semibold">Prabhat Prajapati</h2>
+          <p className="text-sm opacity-80">Java Backend Developer</p>
+        </div>
+
       </motion.div>
-
-      {/* ===== Popup Modal ===== */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
-            onClick={() => setIsModalOpen(false)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              onClick={(e) => e.stopPropagation()}
-              className="
-                relative
-                bg-white/10 dark:bg-gray-500/10
-                backdrop-blur-xl
-                border border-cyan-300 dark:border-red-600/50
-                rounded-2xl
-                shadow-1xl
-                p-6 sm:p-8
-                w-full max-w-sm sm:max-w-md
-                text-center
-              "
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-3 right-3 text-gray-600 dark:text-gray-300 text-2xl font-bold hover:text-cyan-500 transition-colors duration-200"
-              >
-                &times;
-              </button>
-
-              {/* Profile Image */}
-              <div className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-cyan-400/50 dark:ring-violet-900 shadow-lg">
-                <img
-                  src={HeroImage}
-                  alt="Prabhat Prajapati"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Title */}
-              <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-indigo-600 dark:text-amber-500 mb-2">
-                About Me
-              </h2>
-
-              {/* Short Description */}
-              <p className="text-amber-400 dark:text-cyan-600 text-sm sm:text-base md:text-base leading-relaxed">
-                I am a <span className="font-semibold">Java-based Full Stack Developer</span> 
-                working on secure microservices using <span className="font-semibold text-green-700 dark:text-pink-400">Spring Boot</span>. 
-                I also work with <span className="font-semibold text-cyan-600 dark:text-cyan-400">React</span> 
-                and <span className="font-semibold text-blue-600 dark:text-purple-400">Tailwind CSS</span> 
-                to build modern, responsive web apps.
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };

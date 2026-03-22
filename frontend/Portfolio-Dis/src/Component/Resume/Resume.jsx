@@ -2,16 +2,18 @@
 import React from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { motion } from "framer-motion";
-import BubbleBackground from "../BubbleBackground/BubbleBackground.jsx";
 import ResumeData from "./ResumeData.js";
 import ResumePDF from "./ResumePDF.jsx";
 import ResumePreview from "./ResumePreview.jsx";
 
 export default function Resume() {
   return (
-    <div id = "resume" className="relative py-12 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70 dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70 min-h-screen w-screen overflow-hidden">
-      <BubbleBackground />
-
+   <div
+  id="resume"
+  className="relative py-12 px-4 md:px-8 lg:px-16 
+  min-h-screen w-screen overflow-hidden"
+>
+ <div className="absolute inset-0 bg-white/20 dark:bg-black/20 pointer-events-none z-0"></div>
       <div className="relative max-w-6xl mx-auto z-10">
         <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
           <div className="flex items-center justify-between mb-8">

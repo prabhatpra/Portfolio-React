@@ -3,32 +3,31 @@ import { motion } from "framer-motion";
 import HeroImg from "./HeroImg";
 import HeroDetails from "./HeroDetails";
 import HeroSocial from "./HeroSocial";
-import BubbleBackground from "../BubbleBackground/BubbleBackground.jsx";
 
 const Hero = () => {
   return (
 <section
   id="home" className="
-    relative w-screen h-screen overflow-hidden
-    bg-gradient-to-br 
-    from-blue-50 via-cyan-200 to-purple-100/70 
-    dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70  
-    flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-20
-    transition-colors duration-700
-  "
+  relative w-screen h-screen overflow-hidden
+  bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70
+  dark:bg-none dark:bg-black
+  flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-20
+  transition-colors duration-700
+"
 >
   
   <div className="absolute inset-0 bg-white/20 dark:bg-black/20 pointer-events-none z-0"></div>
 
  
-  <BubbleBackground />
+
 
  
   <motion.div
     className="z-10 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10 w-full max-w-7xl"
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1 }}
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: false, amount: 0.3 }}
+    transition={{ duration: 1.5, ease: "easeOut" }}
   >
    
     <HeroImg />

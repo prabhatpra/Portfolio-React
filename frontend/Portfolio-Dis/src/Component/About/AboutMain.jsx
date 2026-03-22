@@ -33,7 +33,7 @@ export default function AboutMain() {
   const [images, setImages] = useState([Prabhat1, Prabhat2, Prabhat3]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  // ✅ Initialize AOS (with refresh support)
+ 
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -42,12 +42,12 @@ export default function AboutMain() {
     });
   }, []);
 
-  // ✅ Refresh AOS whenever active section changes
+ 
   useEffect(() => {
     AOS.refresh();
   }, [active]);
 
-  // 🌀 Auto image rotation
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setImages((prev) => {
@@ -67,7 +67,7 @@ export default function AboutMain() {
 
   const onLeave = () => setMouse({ x: 0, y: 0 });
 
-  // 🖱 Manual click image reorder
+  
   const handleShadowClick = (idx) => {
     if (idx === 0) return;
     setImages((prev) => {
@@ -195,7 +195,7 @@ export default function AboutMain() {
 
                <AnimatePresence mode="wait">
   <motion.div
-    key={images[0]} // important for AnimatePresence to detect change
+    key={images[0]} 
     onMouseMove={onMove}
     onMouseLeave={onLeave}
     initial={{ opacity: 0, x: 100 }}

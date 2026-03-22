@@ -3,8 +3,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70 dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70  text-gray-800 dark:text-gray-100 w-screen">
-      
+   <footer className="text-gray-800 dark:text-gray-100 w-screen relative overflow-hidden">
       {/* Main Container */}
       <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-0">
         
@@ -69,12 +68,11 @@ const Footer = () => {
       {/* Divider */}
       <div className="border-t border-gray-300 dark:border-gray-700 mx-6 md:mx-12"></div>
 
-      {/* Bottom Section */}
-      <div className="text-center py-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-        Designed & built with ❤️ by{" "}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 font-semibold">
-          Prabhat Prajapati
-        </span>
+      <div className="text-center py-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400 relative z-10">
+    Designed & built with ❤️ by{" "}
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 font-semibold">
+      Prabhat Prajapati
+    </span>
       </div>
     </footer>
   );

@@ -1,4 +1,3 @@
-// BubbleBackground.jsx
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
@@ -55,7 +54,7 @@ const Bubble = ({ bubble }) => (
   />
 );
 
-const BubbleBackground = () => {
+const BubbleBackground = ({ children }) => {
   const [bubbles, setBubbles] = useState([]);
   const animationRef = useRef();
 
@@ -80,6 +79,7 @@ const BubbleBackground = () => {
     const update = () => {
       setBubbles((prev) => {
         const next = prev.map((b) => ({ ...b }));
+
         next.forEach((b) => {
           b.x += b.vx * (1 + b.speedBoost);
           b.y += b.vy * (1 + b.speedBoost);
@@ -100,8 +100,10 @@ const BubbleBackground = () => {
             if (detectCollision(next[i], next[j])) bounce(next[i], next[j]);
           }
         }
+
         return next;
       });
+
       animationRef.current = requestAnimationFrame(update);
     };
 
@@ -110,10 +112,25 @@ const BubbleBackground = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-0">
-      {bubbles.map((b) => (
-        <Bubble key={b.id} bubble={b} />
-      ))}
+    <div
+      className="
+        relative w-screen min-h-screen overflow-hidden
+        bg-gradient-to-br from-blue-50 via-cyan-200 to-purple-100/70
+        dark:bg-none dark:bg-black
+        transition-colors duration-700
+      "
+    >
+      {/* Bubbles */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {bubbles.map((b) => (
+          <Bubble key={b.id} bubble={b} />
+        ))}
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   );
 };

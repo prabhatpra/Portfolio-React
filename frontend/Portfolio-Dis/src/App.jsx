@@ -6,14 +6,11 @@ import About from './Component/About/About'
 import Footer from './Component/Footer/Footer'
 import Experience from './Component/Experience/Experience'
 import Resume from './Component/Resume/Resume'
-
-
+import BubbleBackground from './Component/BubbleBackground/BubbleBackground'
 
 const App = () => {
-  
   return (
-    <div>
-      
+    <BubbleBackground>
       <Navbar />
       <Hero />
       <About />
@@ -21,9 +18,8 @@ const App = () => {
       <Experience />
       <Resume />
       <Footer />
-    
-    </div>
+    </BubbleBackground>
   );
-
 };
-export default App
+
+export default App;
