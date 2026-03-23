@@ -57,9 +57,9 @@ const HeroImg = () => {
         </div>
 
         {/* Bottom Info Section */}
-        <div className="relative z-10 p-4 text-white">
-          <h2 className="text-xl font-semibold">Prabhat Prajapati</h2>
-          <p className="text-sm opacity-80">Java Backend Developer</p>
+        <div className="absolute bottom-4 right-4 z-10 text-right">
+          <h2 className="text-xl font-bold bg-gradient-to-r from-fuchsia-600 via-orange-500 bg-clip-text text-transparent">Prabhat Prajapati</h2>
+          <p className="text-sm opacity-90 bg-gradient-to-r from-orange-300 to-blue-400 bg-clip-text text-transparent">Java Backend Developer</p>
         </div>
 
       </motion.div>
