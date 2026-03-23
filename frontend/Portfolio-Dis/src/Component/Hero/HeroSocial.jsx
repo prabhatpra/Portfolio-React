@@ -95,10 +95,11 @@ const HeroSocial = () => {
       <div className="w-full flex justify-center items-center mb-6">
         <button
           onClick={() => setPopupOpen(true)}
-          className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-full shadow-lg flex items-center gap-2"
+          className="px-6 py-3 border-2 border-purple-500 hover:bg-cyan-300 dark:hover:bg-fuchsia-400 dark:text-white text-orange-600 font-bold rounded-full shadow-lg flex items-center gap-2 text-transparent group"
         >
           <FaUserCircle size={24} />
-          Social Profiles
+         <span className="block group-hover:hidden">Social Profiles</span>
+          <span className="hidden group-hover:block">Click to Explore</span>
         </button>
       </div>
 
@@ -208,14 +209,14 @@ const HeroSocial = () => {
                     </motion.button>
                   ))}
 
-                  {/* 👉 scroll hint arrow (mobile only) */}
+                  {/*  scroll hint arrow (mobile only) */}
                   <div className="absolute right-0 top-1/2 -translate-y-1/2 text-white/50 text-xs md:hidden">
                     →
                   </div>
                 </div>
               </div>
 
-              {/* 👉 fade effect only for mobile */}
+              {/*  fade effect only for mobile */}
               <div className="gradient-fade-bottom md:hidden"></div>
             </motion.div>
           </motion.div>
