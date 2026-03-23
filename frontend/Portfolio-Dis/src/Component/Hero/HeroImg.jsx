@@ -33,7 +33,7 @@ const HeroImg = () => {
         initial={{ scale: 0.9, opacity: 0, y: 0}}
         whileInView={{ scale: 1, opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
-        whileHover={{ scale: 1.04, rotate: 1 }}
+        whileHover={{ scale: 1.04, rotate: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, duration: 1.2 }}
 
       >
