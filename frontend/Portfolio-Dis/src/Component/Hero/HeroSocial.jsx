@@ -178,7 +178,7 @@ const HeroSocial = () => {
               </div>
 
               {/* RIGHT */}
-              <div className="w-full md:w-40 flex flex-col md:pl-6 items-center md:items-start">
+              <div className="w-full md:w-40 flex flex-col md:pl-6 items-center md:items-start justify-center">
                 
                 <div className="text-center md:text-left text-white/70 mb-2">
                   {hoverText}
