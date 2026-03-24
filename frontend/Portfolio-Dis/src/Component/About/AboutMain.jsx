@@ -130,17 +130,16 @@ export default function AboutMain() {
                 </p>
 
                 <p className="mt-3 text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-                  I love solving complex problems and exploring modern
-                  technologies. I focus on clean architecture, teamwork, and
-                  user experience.
+                  I enjoy building REST APIs, handling backend logic, and improving application performance.
+                  Built multiple REST APIs and backend system using Spring boot and MySQL.
                 </p>
 
                 <div className="mt-8 flex flex-col items-start gap-3">
                   <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                    🚀 Explore More
+                    🚀 Explore My Journey
                   </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    👇 Click a section below to explore my journey
+                    👇 Click to view my education, skills, and experience.
                   </p>
 
                   <div className="flex flex-wrap gap-3 mt-2">
@@ -217,7 +216,7 @@ export default function AboutMain() {
     <div className="absolute left-4 bottom-4 bg-white/30 dark:bg-black/50 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-2 border border-white/20">
       <div className="w-2 h-2 rounded-full bg-green-400" />
       <span className="text-xs font-medium text-slate-900 dark:text-white">
-        Open to work
+        Available for Opportunites
       </span>
     </div>
   </motion.div>
