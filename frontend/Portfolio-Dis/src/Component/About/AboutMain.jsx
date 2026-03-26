@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useViewportScroll, useTransform, useSpring } from "framer-motion";
 
 import Prabhat1 from "../../assets/myimg/prabhat1.jpg";
 import Prabhat2 from "../../assets/myimg/prabhat2.jpg";
@@ -19,7 +19,6 @@ const sections = [
 
 const componentsMap = { Education, Skill, Internship, Certificate };
 
-
 const cardPop = {
   hidden: { opacity: 0, scale: 0.95, y: 80 },
   show: {
@@ -34,13 +33,13 @@ const cardPop = {
 const leftCardAnim = {
   hidden: { opacity: 0, x: -120, y: -120, scale: 0.95 },
   show: {
-    opacity: 1, 
-    x: 0, 
-    y: 0, 
-    scale: 1, 
-    transition: { duration: 0.7, ease: "easeOut" }, 
+    opacity: 1,
+    x: 0,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: "easeOut" },
   },
-  exit: { opacity: 0, x: -80, y: -80, scale: 0.95}, 
+  exit: { opacity: 0, x: -80, y: -80, scale: 0.95 },
 };
 
 export default function AboutMain() {
@@ -48,7 +47,12 @@ export default function AboutMain() {
   const [images, setImages] = useState([Prabhat1, Prabhat2, Prabhat3]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  //  Auto image rotate
+  // Smooth scroll animation for LEFT card
+  const { scrollY } = useViewportScroll();
+  const yRange = useTransform(scrollY, [0, 1000], [-20, 20]);
+  const smoothY = useSpring(yRange, { damping: 25, stiffness: 80 });
+
+  // Auto image rotate
   useEffect(() => {
     const interval = setInterval(() => {
       setImages((prev) => {
@@ -85,21 +89,20 @@ export default function AboutMain() {
   return (
     <section className="relative w-full min-h-screen px-6 py-20 flex items-start justify-center overflow-hidden">
       <div className="w-full max-w-7xl">
-
         <AnimatePresence mode="wait">
           {!active ? (
             <motion.div
               key="intro"
               className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center"
             >
-
               {/* LEFT */}
               <motion.div
                 variants={leftCardAnim}
                 initial="hidden"
                 whileInView="show"
                 exit="exit"
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
+                style={{ y: smoothY }} // ← scroll-based smooth motion
                 className="md:col-span-7 bg-white/10 dark:bg-black/30 backdrop-blur-md 
                 border border-white/20 dark:border-white/5 rounded-2xl p-8 shadow-xl"
               >
@@ -117,10 +120,10 @@ export default function AboutMain() {
                   <span className="text-pink-500">React.js</span>.
                 </p>
 
-               <p className="mt-2 text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-  I have experience in building REST APIs with authentication and database integration, and have worked 
-  on backend systems including order management and Stripe payment integration. I also have experience in building responsive frontends using React.js and Tailwind CSS.
-</p>
+                <p className="mt-2 text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                  I have experience in building REST APIs with authentication and database integration, and have worked 
+                  on backend systems including order management and Stripe payment integration. I also have experience in building responsive frontends using React.js and Tailwind CSS.
+                </p>
 
                 <div className="mt-8 flex flex-col items-start gap-3">
                   <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
@@ -146,7 +149,6 @@ export default function AboutMain() {
 
               {/* RIGHT */}
               <motion.div className="md:col-span-5 flex items-center justify-center relative">
-
                 {/* Shadow Images */}
                 {images.slice(1).map((img, idx) => (
                   <motion.div
@@ -185,7 +187,6 @@ export default function AboutMain() {
                     className="relative w-56 h-72 md:w-72 md:h-96 rounded-2xl overflow-hidden shadow-2xl"
                   >
                     <img src={images[0]} className="w-full h-full object-cover" />
-
                     <div className="absolute left-4 bottom-4 bg-white/30 dark:bg-black/50 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-green-400" />
                       <span className="text-xs text-white">
@@ -194,7 +195,6 @@ export default function AboutMain() {
                     </div>
                   </motion.div>
                 </AnimatePresence>
-
               </motion.div>
             </motion.div>
           ) : (
@@ -206,7 +206,6 @@ export default function AboutMain() {
               variants={cardPop}
             >
               <div className="bg-white/10 dark:bg-black/30 backdrop-blur-md rounded-2xl p-6 shadow-xl">
-
                 {React.createElement(componentsMap[active], {
                   onClose: () => setActive(null),
                 })}
@@ -219,7 +218,6 @@ export default function AboutMain() {
                     ← Back
                   </button>
                 </div>
-
               </div>
             </motion.div>
           )}
@@ -235,7 +233,6 @@ export default function AboutMain() {
         >
           Currently, I’m looking for opportunities to grow and contribute.
         </motion.p>
-
       </div>
     </section>
   );

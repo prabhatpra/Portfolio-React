@@ -58,3 +58,10 @@ html, body, #root {
     pointer-events: none;
 
 }
+
+
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
