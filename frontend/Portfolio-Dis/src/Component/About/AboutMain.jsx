@@ -49,8 +49,8 @@ export default function AboutMain() {
 
   // Smooth scroll animation for LEFT card
   const { scrollY } = useViewportScroll();
-  const yRange = useTransform(scrollY, [0, 1000], [-20, 20]);
-  const smoothY = useSpring(yRange, { damping: 25, stiffness: 80 });
+  const yRange = useTransform(scrollY, [0, 1000], [-40, 40]);
+  const smoothY = useSpring(yRange, { damping: 50, stiffness: 40 });
 
   // Auto image rotate
   useEffect(() => {
@@ -156,6 +156,11 @@ export default function AboutMain() {
                     layout
                     onClick={() => handleShadowClick(idx + 1)}
                     whileHover={{ scale: 1.05 }}
+                    initial={{ opacity: 0, x: 100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 100 }}
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{ type: "spring", stiffness: 50, damping: 25 }}
                     className="absolute w-48 h-64 md:w-64 md:h-80 overflow-hidden cursor-pointer rounded-2xl"
                     style={{
                       top: idx === 0 ? "-1.5rem" : "auto",

@@ -7,29 +7,29 @@ import { FaCloud, FaCode, FaServer } from "react-icons/fa";
 const internships = [
   {
     id: 1,
-    role: "Cloud Computing & DevOps Intern",
-    company: "Techvanto Academy",
-    duration: "June 2023 - August 2023",
+    role: "Python with Machine Learning Intern",
+    company: "Briztech infosystems Pvt Ltd",
+    duration: "Jan 2023 - Feb 2023",
     description:
-      "Worked with AWS EC2, Docker, Jenkins, and CI/CD pipelines. Automated deployments and learned real-world DevOps workflow.",
+      "Worked on Python-based machine learning projects, including data preproccessing, model training, and deployment using Flask.",
     icon: <FaCloud size={30} />,
   },
   {
     id: 2,
-    role: "Full Stack Java Developer Intern",
-    company: "NextGen Coders",
-    duration: "January 2024 - April 2024",
+    role: "Web Developer Intern",
+    company: "Lifetech Software Shine with technology",
+    duration: "Sept 2023 - Sept 2023",
     description:
-      "Developed REST APIs in Spring Boot, integrated MySQL, and built front-end in React with Tailwind CSS and JWT security.",
+      "Contributed to frontend development using HTML, CSS, and JavaScript, enhancing user experience and implementing responsive design.",
     icon: <FaCode size={30} />,
   },
   {
     id: 3,
-    role: "Backend & API Developer Intern",
+    role: "Java Developer Intern",
     company: "Code Matrix Labs",
-    duration: "May 2024 - July 2024",
+    duration: "Feb 2025 - Mar 2025",
     description:
-      "Focused on backend performance, API optimization, Swagger documentation, and microservice-based architecture.",
+      "Developed backend services using Java and Spring Boot, including REST API development, database integration, and authentication mechanisms. Implemented Stripe payment system microservice backend system.",
     icon: <FaServer size={30} />,
   },
 ];

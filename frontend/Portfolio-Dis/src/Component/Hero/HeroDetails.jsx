@@ -8,7 +8,7 @@ const HeroDetails = () => {
 
   // Scroll-based minor scaling
   const { scrollY } = useViewportScroll();
-  const scrollScale = useTransform(scrollY, [0, 300], [1, 1.1]); // small zoom on scroll
+  const scrollScale = useTransform(scrollY, [0, 300], [1, 1.5]); // small zoom on scroll
 
   useEffect(() => {
     const container = containerRef.current;
