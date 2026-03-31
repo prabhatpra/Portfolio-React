@@ -112,12 +112,27 @@ const Projects = () => {
             ))}
           </div>
 
+         <div className="flex justify-center mt-4 gap-2 lg:hidden">
+  {projects.map((_, idx) => (
+    <button
+      key={idx}
+      onClick={() => setCurrentIndex(idx)}
+      className={`w-3 h-3 rounded-full transition-all duration-300 
+        ${
+          currentIndex === idx
+            ? "bg-blue-500 scale-125 shadow-md shadow-blue-400"
+            : "bg-gray-400 dark:bg-gray-600"
+        }`}
+    />
+  ))}
+</div>
+
           {/* Left button */}
           <button
             onClick={handlePrev}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-20 
             bg-white/70 dark:bg-black/50 p-2 rounded-full shadow-lg
-            hover:bg-white dark:hover:bg-black hidden lg:flex"
+            hover:scale-110 transition flex lg:hidden"
           >
             <ChevronLeft className="w-6 h-6 text-gray-700 dark:text-gray-200" />
           </button>
@@ -127,7 +142,7 @@ const Projects = () => {
             onClick={handleNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-20 
             bg-white/70 dark:bg-black/50 p-2 rounded-full shadow-lg
-            hover:bg-white dark:hover:bg-black hidden lg:flex"
+            hover:scale-110 transition flex lg:hidden"
           >
             <ChevronRight className="w-6 h-6 text-gray-700 dark:text-gray-200" />
           </button>
