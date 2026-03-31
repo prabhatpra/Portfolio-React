@@ -1,4 +1,3 @@
-// ProjectCard.jsx
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaCommentDots, FaImages } from "react-icons/fa";
@@ -46,7 +45,7 @@ const ProjectCard = ({
         style={{
           rotateX,
           rotateY,
-          transformPerspective: 1000,
+          transformPerspective: 600,
           boxShadow: isHovering
             ? `0 -10px 20px rgba(0,153,255,0.5), 0 10px 20px rgba(255,0,85,0.4), inset ${rotateY / 5}px ${-rotateX / 5}px 12px rgba(255,255,255,0.08)`
             : "none",
