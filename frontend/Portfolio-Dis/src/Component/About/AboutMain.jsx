@@ -108,16 +108,18 @@ export default function AboutMain() {
               >
                 <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
                   Hi, I’m{" "}
-                  <span className="text-indigo-600 dark:text-indigo-400">
+                  <span className="bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400 bg-clip-text text-transparent">
                     Prabhat Prajapati
                   </span>
                 </h2>
 
                 <p className="mt-3 text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-                  A passionate <span className="font-semibold text-blue-600">Full Stack Developer</span>{" "}
-                  building scalable apps using <span className="text-teal-500">Java</span>,{" "}
-                  <span className="text-green-500">Spring Boot</span>, and{" "}
-                  <span className="text-pink-500">React.js</span>.
+                  A passionate <span className="font-semibold bg-gradient-to-r from-blue-500
+                  to-cyan-500 bg-clip-text text-transparent">Full Stack Developer</span>{" "}
+                  building scalable apps using {" "}
+                  <span className="font-semibold text-orange-400">Java</span>,{" "}
+                  <span className="font-semibold text-green-500">Spring Boot</span>, and{" "}
+                  <span className="font-semibold text-sky-500">React.js</span>.
                 </p>
 
                 <p className="mt-2 text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
@@ -126,7 +128,8 @@ export default function AboutMain() {
                 </p>
 
                 <div className="mt-8 flex flex-col items-start gap-3">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500
+                  bg-clip-text text-transparent">
                     🚀 Explore My Journey
                   </h3>
 

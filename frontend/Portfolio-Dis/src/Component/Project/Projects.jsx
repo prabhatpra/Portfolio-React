@@ -53,7 +53,9 @@ const Projects = () => {
           exit={{ opacity: 0, y: 60 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: false, amount: 0.3 }}
-          className="text-3xl font-bold text-center text-lime-500 dark:text-gray-100"
+          className="text-3xl font-bold text-center 
+          bg-gradient-to-r from-blue-600 via-purple-500 to-pink-600
+          bg-clip-text text-transparent"
         >
           My Projects
         </motion.h1>
