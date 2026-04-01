@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaCommentDots, FaImages } from "react-icons/fa";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion"; 
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const ProjectCard = ({
   title,
@@ -16,11 +16,22 @@ const ProjectCard = ({
   const [rotateY, setRotateY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const cardRef = useRef(null);
+  const modalRef = useRef(null);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Mouse move for 3D effect
-  const handleMouseMove = (e) => {
-    const rect = cardRef.current.getBoundingClientRect();
+  const handleMouseMove = (e, ref) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setRotateY(((x / rect.width) - 0.5) * 30);
@@ -39,7 +50,7 @@ const ProjectCard = ({
       {/* Card */}
       <motion.div
         ref={cardRef}
-        onMouseMove={handleMouseMove}
+        onMouseMove={(e) => !isMobile && handleMouseMove(e, cardRef)}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
@@ -51,14 +62,14 @@ const ProjectCard = ({
             : "none",
           transition: "box-shadow 0.15s ease-out, transform 0.2s ease-out",
         }}
-        className="relative bg-white/5 dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70 bg-gradient-to-br border border-white/10 rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:scale-[1.03] transition-all duration-500"
+        className="relative bg-white/5 dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70 bg-gradient-to-br border border-white/10 rounded-2xl shadow-lg overflow-hidden cursor-pointer lg:hover:scale-[1.03] transition-all duration-500"
         initial={{ scale: 0.95, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: false }}
         transition={{ duration: 0.4 }}
       >
         {/* Image */}
-        <img src={image} alt={title} className="w-full h-48 object-cover rounded-t-2xl" />
+        <img src={image} alt={title} className="w-full h-40 sm:h-48 md:h-52 object-cover rounded-t-2xl" />
 
         {/* Content */}
         <div className="p-5 text-white">
@@ -80,7 +91,7 @@ const ProjectCard = ({
           )}
 
           {/* Links */}
-          <div className="flex justify-between items-center mt-6">
+          <div className="flex justify-between items-center mt-6 flex-wrap gap-2">
             {liveLink && (
               <a
                 href={liveLink}
@@ -104,9 +115,12 @@ const ProjectCard = ({
           </div>
 
           {/* View Full Project Button */}
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center">
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsModalOpen(true);
+              }}
               className="relative px-6 py-2.5 rounded-full text-white border border-white/20 overflow-hidden group transition-all duration-300"
             >
               <span className="relative z-10">View Full Project</span>
@@ -124,12 +138,12 @@ const ProjectCard = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-2 sm:p-4"
             onClick={() => setIsModalOpen(false)}
           >
             <motion.div
-              ref={cardRef}
-              onMouseMove={handleMouseMove}
+              ref={modalRef}
+              onMouseMove={(e) => !isMobile && handleMouseMove(e, modalRef)}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               style={{
@@ -141,49 +155,75 @@ const ProjectCard = ({
                   : "none",
                 transition: "box-shadow 0.15s ease-out, transform 0.2s ease-out",
               }}
-              className="bg-gradient-to-br dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70 p-6 rounded-2xl w-full max-w-3xl relative flex flex-col gap-4 overflow-y-auto max-h-[90vh]"
+              className="bg-gradient-to-br dark:from-gray-900/80 dark:via-purple-900/60 dark:to-indigo-800/70 
+                p-6 rounded-2xl w-full max-w-[95%] sm:max-w-[85%] md:max-w-[70%] lg:max-w-2xl
+                relative flex flex-col gap-4 overflow-y-auto max-h-[70vh] sm:max-h-[60vh] md:max-h-[65vh] lg:max-h-[90vh] scrollbar-hide "
               onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Close Button */}
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-3 right-3 text-3xl font-bold text-white"
-              >
-                &times;
-              </button>
+            {/* Close Button */}
+<button
+  onClick={() => setIsModalOpen(false)}
+  className="absolute top-2 sm:top-1 right-2 sm:right-1 text-2xl sm:text-xl font-bold text-white"
+>
+  &times;
+</button>
 
-              {/* Image */}
-              <img src={image} alt={title} className="w-full h-64 object-cover rounded-xl" />
+{/* Image */}
+<img 
+  src={image} 
+  alt={title} 
+  className="w-full h-48 sm:h-36 md:h-40 object-cover rounded-xl" 
+/>
 
-              {/* Title & Description */}
-              <h2 className="text-2xl font-bold text-white">{title}</h2>
-              <p className="text-white/80">{description}</p>
+{/* Title & Description */}
+<h2 className="text-2xl sm:text-xl md:text-lg font-bold text-white">{title}</h2>
+<p className="text-white/80 text-sm sm:text-xs md:text-sm">{description}</p>
 
-              {/* Tech tags */}
-              {tech.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {tech.map((t, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 rounded-full text-white bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 text-sm shadow-md"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              )}
+{/* Tech tags */}
+{tech.length > 0 && (
+  <div className="flex flex-wrap gap-2 mt-2">
+    {tech.map((t, i) => (
+      <span
+        key={i}
+        className="px-2 py-1 sm:px-1 sm:py-0.5 md:px-2 md:py-1 rounded-full text-white text-xs sm:text-[10px] md:text-xs bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 shadow-md"
+      >
+        {t}
+      </span>
+    ))}
+  </div>
+)}
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-3 mt-4">
-                {liveLink && <a href={liveLink} target="_blank" rel="noopener noreferrer" className="flex-1 px-4 py-2 rounded-full bg-blue-500 text-white text-center hover:bg-blue-600">Live Project</a>}
-                {githubLink && <a href={githubLink} target="_blank" rel="noopener noreferrer" className="flex-1 px-4 py-2 rounded-full bg-gray-700 text-white text-center hover:bg-gray-800">View Code</a>}
-                {feedbackLink && <a href={feedbackLink} target="_blank" rel="noopener noreferrer" className="flex-1 px-4 py-2 rounded-full bg-green-500 text-white text-center hover:bg-green-600">Feedback</a>}
-                {screenshotsLink && <a href={screenshotsLink} target="_blank" rel="noopener noreferrer" className="flex-1 px-4 py-2 rounded-full bg-purple-500 text-white text-center hover:bg-purple-600">Screenshots</a>}
-              </div>
+{/* Action Buttons */}
+<div className="flex flex-wrap gap-3 mt-4">
+  {liveLink && (
+    <a href={liveLink} target="_blank" rel="noopener noreferrer" 
+       className="flex-1 min-w-[100px] sm:min-w-[80px] md:min-w-[90px] px-3 sm:px-2 md:px-3 py-2 sm:py-1 md:py-2 rounded-full bg-blue-500 text-white text-center text-sm sm:text-xs md:text-sm hover:bg-blue-600">
+      Live Project
+    </a>
+  )}
+  {githubLink && (
+    <a href={githubLink} target="_blank" rel="noopener noreferrer" 
+       className="flex-1 min-w-[100px] sm:min-w-[80px] md:min-w-[90px] px-3 sm:px-2 md:px-3 py-2 sm:py-1 md:py-2 rounded-full bg-gray-700 text-white text-center text-sm sm:text-xs md:text-sm hover:bg-gray-800">
+      View Code
+    </a>
+  )}
+  {feedbackLink && (
+    <a href={feedbackLink} target="_blank" rel="noopener noreferrer" 
+       className="flex-1 min-w-[100px] sm:min-w-[80px] md:min-w-[90px] px-3 sm:px-2 md:px-3 py-2 sm:py-1 md:py-2 rounded-full bg-green-500 text-white text-center text-sm sm:text-xs md:text-sm hover:bg-green-600">
+      Feedback
+    </a>
+  )}
+  {screenshotsLink && (
+    <a href={screenshotsLink} target="_blank" rel="noopener noreferrer" 
+       className="flex-1 min-w-[100px] sm:min-w-[80px] md:min-w-[90px] px-3 sm:px-2 md:px-3 py-2 sm:py-1 md:py-2 rounded-full bg-purple-500 text-white text-center text-sm sm:text-xs md:text-sm hover:bg-purple-600">
+      Screenshots
+    </a>
+  )}
+</div>
             </motion.div>
           </motion.div>
         )}

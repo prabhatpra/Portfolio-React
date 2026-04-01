@@ -10,6 +10,7 @@ const Projects = () => {
   const [projects, setProjects] = useState(demoProjects);
   const [showForm, setShowForm] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const handleAddProject = (newProject) => {
     setProjects([...projects, newProject]);
@@ -33,6 +34,7 @@ const Projects = () => {
     onSwipedRight: handlePrev,
     preventScrollOnSwipe: true,
     trackMouse: true,
+    delta: 40
   });
 
   return (
@@ -105,17 +107,17 @@ const Projects = () => {
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {projects.map((project, idx) => (
-              <div key={idx} className="flex-shrink-0 w-full px-4">
+            {projects.map((project) => (
+              <div key={project.title} className="flex-shrink-0 w-full px-4">
                 <ProjectCard {...project} />
               </div>
             ))}
           </div>
 
          <div className="flex justify-center mt-4 gap-2 lg:hidden">
-  {projects.map((_, idx) => (
+  {projects.map((project, idx) => (
     <button
-      key={idx}
+      key={project.title}
       onClick={() => setCurrentIndex(idx)}
       className={`w-3 h-3 rounded-full transition-all duration-300 
         ${
@@ -150,8 +152,8 @@ const Projects = () => {
 
         {/* Desktop Grid */}
         <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6 w-full">
-          {projects.map((project, idx) => (
-            <ProjectCard key={idx} {...project} />
+          {projects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
           ))}
         </div>
 
