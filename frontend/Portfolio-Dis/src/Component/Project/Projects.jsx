@@ -5,7 +5,7 @@ import { demoProjects } from "./ProjectData";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSwipeable } from "react-swipeable";
 import { motion, AnimatePresence } from "framer-motion";
-import Modal from "./Modal"; // Make sure Modal component exists
+import Modal from "./Modal";
 
 const Projects = () => {
   const [projects, setProjects] = useState(demoProjects);
@@ -14,6 +14,16 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // 🔥 Common animation (scroll reveal)
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 60 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   // Add new project
   const handleAddProject = (newProject) => {
     setProjects([...projects, newProject]);
@@ -21,10 +31,14 @@ const Projects = () => {
 
   // Carousel navigation
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? projects.length - 1 : prev - 1
+    );
   };
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) =>
+      prev === projects.length - 1 ? 0 : prev + 1
+    );
   };
 
   // Swipe handlers for mobile
@@ -50,11 +64,10 @@ const Projects = () => {
 
         {/* Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 60 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: false, amount: 0.3 }}
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
           className="text-3xl font-bold text-center 
             bg-gradient-to-r from-blue-600 via-purple-500 to-pink-600
             bg-clip-text text-transparent"
@@ -64,11 +77,10 @@ const Projects = () => {
 
         {/* Add Project Button */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: false, amount: 0.3 }}
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
         >
           <button
             className="bg-gradient-to-br from-blue-300 via-cyan-500 to-purple-400
@@ -83,11 +95,10 @@ const Projects = () => {
 
         {/* Welcome Message */}
         <motion.p
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 60 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: false, amount: 0.3 }}
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
           className="text-lg sm:text-xl font-medium text-center
             bg-gradient-to-r from-blue-500 via-purple-400 to-pink-400
             bg-clip-text text-transparent leading-relaxed max-w-2xl"
@@ -105,13 +116,20 @@ const Projects = () => {
           >
             {projects.map((project) => (
               <div key={project.title} className="flex-shrink-0 w-full px-4">
-                <ProjectCard
-                  {...project}
-                  openModal={() => {
-                    setSelectedProject(project);
-                    setIsModalOpen(true);
-                  }}
-                />
+                <motion.div
+                  variants={fadeInUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: false, amount: 0.2 }}
+                >
+                  <ProjectCard
+                    {...project}
+                    openModal={() => {
+                      setSelectedProject(project);
+                      setIsModalOpen(true);
+                    }}
+                  />
+                </motion.div>
               </div>
             ))}
           </div>
@@ -153,23 +171,30 @@ const Projects = () => {
         {/* Desktop Grid */}
         <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6 w-full">
           {projects.map((project) => (
-            <ProjectCard
+            <motion.div
               key={project.title}
-              {...project}
-              openModal={() => {
-                setSelectedProject(project);
-                setIsModalOpen(true);
-              }}
-            />
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: false, amount: 0.2 }}
+            >
+              <ProjectCard
+                {...project}
+                openModal={() => {
+                  setSelectedProject(project);
+                  setIsModalOpen(true);
+                }}
+              />
+            </motion.div>
           ))}
         </div>
 
         {/* Footer Text */}
         <motion.p
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
           className="mt-10 text-center text-base sm:text-lg text-gray-600 dark:text-gray-300 italic"
         >
           Thanks for visiting 💙 Your time here means a lot!
