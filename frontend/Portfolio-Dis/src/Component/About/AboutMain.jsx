@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useViewportScroll, useTransform, useSpring } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 
 import Prabhat1 from "../../assets/myimg/prabhat1.jpg";
 import Prabhat2 from "../../assets/myimg/prabhat2.jpg";
@@ -47,10 +53,12 @@ export default function AboutMain() {
   const [images, setImages] = useState([Prabhat1, Prabhat2, Prabhat3]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  // Smooth scroll animation for LEFT card
-  const { scrollY } = useViewportScroll();
-  const yRange = useTransform(scrollY, [0, 1000], [-40, 40]);
-  const smoothY = useSpring(yRange, { damping: 50, stiffness: 40 });
+  // ✅ FIX 1: useScroll (replace deprecated useViewportScroll)
+  const { scrollY } = useScroll();
+
+  // ✅ FIX 2: smoother + optimized range
+  const yRange = useTransform(scrollY, [0, 500], [-30, 30]);
+  const smoothY = useSpring(yRange, { damping: 40, stiffness: 80 });
 
   // Auto image rotate
   useEffect(() => {
@@ -102,7 +110,7 @@ export default function AboutMain() {
                 whileInView="show"
                 exit="exit"
                 viewport={{ once: false, amount: 0.2 }}
-                style={{ y: smoothY }} // ← scroll-based smooth motion
+                style={{ y: smoothY }}
                 className="md:col-span-7 bg-white/10 dark:bg-black/30 backdrop-blur-md 
                 border border-white/20 dark:border-white/5 rounded-2xl p-8 shadow-xl"
               >
@@ -114,9 +122,11 @@ export default function AboutMain() {
                 </h2>
 
                 <p className="mt-3 text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-                  A passionate <span className="font-semibold bg-gradient-to-r from-blue-500
-                  to-cyan-500 bg-clip-text text-transparent">Full Stack Developer</span>{" "}
-                  building scalable apps using {" "}
+                  A passionate{" "}
+                  <span className="font-semibold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+                    Full Stack Developer
+                  </span>{" "}
+                  building scalable apps using{" "}
                   <span className="font-semibold text-orange-400">Java</span>,{" "}
                   <span className="font-semibold text-green-500">Spring Boot</span>, and{" "}
                   <span className="font-semibold text-sky-500">React.js</span>.
@@ -128,8 +138,7 @@ export default function AboutMain() {
                 </p>
 
                 <div className="mt-8 flex flex-col items-start gap-3">
-                  <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500
-                  bg-clip-text text-transparent">
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
                     🚀 Explore My Journey
                   </h3>
 
@@ -140,8 +149,7 @@ export default function AboutMain() {
                         onClick={() => setActive(sec.id)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="px-3 py-1 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-400
-                        text-white font-semibold shadow-md"
+                        className="px-3 py-1 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-400 text-white font-semibold shadow-md"
                       >
                         {sec.label}
                       </motion.button>
@@ -152,11 +160,10 @@ export default function AboutMain() {
 
               {/* RIGHT */}
               <motion.div className="md:col-span-5 flex items-center justify-center relative">
-                {/* Shadow Images */}
                 {images.slice(1).map((img, idx) => (
                   <motion.div
                     key={idx}
-                    layout
+                    layout="position"  // ✅ FIX
                     onClick={() => handleShadowClick(idx + 1)}
                     whileHover={{ scale: 1.05 }}
                     initial={{ opacity: 0, x: 100 }}
@@ -174,7 +181,7 @@ export default function AboutMain() {
                       opacity: 0.5,
                     }}
                   >
-                    <img src={img} className="w-full h-full object-cover" />
+                    <img src={img} alt="Prabhat preview" className="w-full h-full object-cover" />
                   </motion.div>
                 ))}
 
@@ -194,13 +201,7 @@ export default function AboutMain() {
                     }}
                     className="relative w-56 h-72 md:w-72 md:h-96 rounded-2xl overflow-hidden shadow-2xl"
                   >
-                    <img src={images[0]} className="w-full h-full object-cover" />
-                    <div className="absolute left-4 bottom-4 bg-white/30 dark:bg-black/50 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-green-400" />
-                      <span className="text-xs text-white">
-                        Actively seeking opportunities
-                      </span>
-                    </div>
+                    <img src={images[0]} alt="Prabhat main" className="w-full h-full object-cover" />
                   </motion.div>
                 </AnimatePresence>
               </motion.div>
@@ -237,9 +238,9 @@ export default function AboutMain() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 0.6 }}
-          className="mt-20 text-orange-400 dark:text-emerald-200 text-lg text-center"
+          className="mt-20 text-lg text-center  bg-gradient-to-r from-orange-400 via-pink-300 to-emerald-400 bg-clip-text text-transparent"
         >
-          Currently, I’m looking for opportunities to grow and contribute.
+         I am a passionate Full Stack Developer skilled in React, Tailwind CSS, and backend technologies, actively seeking opportunities to build scalable applications, solve real-world problems, and grow in a professional environment.
         </motion.p>
       </div>
     </section>
