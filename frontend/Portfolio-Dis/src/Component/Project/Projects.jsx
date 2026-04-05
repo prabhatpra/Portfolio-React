@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import AddProjectForm from "./AddProjectForm";
 import { demoProjects } from "./ProjectData";
@@ -14,7 +14,11 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 🔥 Common animation (scroll reveal)
+  // ✅ NEW
+  const [showButtons, setShowButtons] = useState(false);
+  const timerRef = useRef(null);
+
+  // 🔥 animation
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     show: {
@@ -24,24 +28,36 @@ const Projects = () => {
     },
   };
 
-  // Add new project
   const handleAddProject = (newProject) => {
     setProjects([...projects, newProject]);
   };
 
-  // Carousel navigation
   const handlePrev = () => {
     setCurrentIndex((prev) =>
       prev === 0 ? projects.length - 1 : prev - 1
     );
   };
+
   const handleNext = () => {
     setCurrentIndex((prev) =>
       prev === projects.length - 1 ? 0 : prev + 1
     );
   };
 
-  // Swipe handlers for mobile
+  // ✅ NEW (activity logic)
+  const handleUserActivity = () => {
+    setShowButtons(true);
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      setShowButtons(false);
+    }, 2000);
+  };
+
+  // swipe
   const handlers = useSwipeable({
     onSwipedLeft: handleNext,
     onSwipedRight: handlePrev,
@@ -53,6 +69,9 @@ const Projects = () => {
   return (
     <section
       id="project"
+      onTouchStart={handleUserActivity}
+      onTouchMove={handleUserActivity}
+      onMouseMove={handleUserActivity}
       className="relative w-screen min-h-screen overflow-hidden
         flex flex-col items-center px-4 sm:px-6 md:px-20 py-10
         transition-colors duration-700"
@@ -149,20 +168,25 @@ const Projects = () => {
             ))}
           </div>
 
-          {/* Navigation Buttons */}
+          {/* ✅ Navigation Buttons */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20
+            className={`absolute left-0 top-1/2 -translate-y-1/2 z-20
               bg-white/70 dark:bg-black/50 p-2 rounded-full shadow-lg
-              hover:scale-110 transition flex lg:hidden"
+              hover:scale-110 transition flex lg:hidden
+              transition-opacity duration-300
+              ${showButtons ? "opacity-100" : "opacity-0 pointer-events-none"}`}
           >
             <ChevronLeft className="w-6 h-6 text-gray-700 dark:text-gray-200" />
           </button>
+
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20
+            className={`absolute right-0 top-1/2 -translate-y-1/2 z-20
               bg-white/70 dark:bg-black/50 p-2 rounded-full shadow-lg
-              hover:scale-110 transition flex lg:hidden"
+              hover:scale-110 transition flex lg:hidden
+              transition-opacity duration-300
+              ${showButtons ? "opacity-100" : "opacity-0 pointer-events-none"}`}
           >
             <ChevronRight className="w-6 h-6 text-gray-700 dark:text-gray-200" />
           </button>
@@ -189,7 +213,7 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Footer Text */}
+        {/* Footer */}
         <motion.p
           variants={fadeInUp}
           initial="hidden"
@@ -200,7 +224,6 @@ const Projects = () => {
           Thanks for visiting 💙 Your time here means a lot!
         </motion.p>
 
-        {/* Add Project Form */}
         {showForm && (
           <AddProjectForm
             onAddProject={handleAddProject}
@@ -208,7 +231,6 @@ const Projects = () => {
           />
         )}
 
-        {/* Project Modal */}
         <AnimatePresence>
           {isModalOpen && selectedProject && (
             <Modal
