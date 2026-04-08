@@ -1,28 +1,23 @@
-// ExperienceUtils.jsx
 import React from "react";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-} from "recharts";
 
+// FILTERS
 export const FILTERS = ["All", "Intern", "Job", "Freelance"];
 
+// Filter Tabs
 export function FilterTabs({ active, onChange }) {
   return (
-    <div className="flex gap-3 flex-wrap justify-center md:justify-start">
+    <div className="flex gap-3 flex-wrap">
       {FILTERS.map((f) => (
         <button
           key={f}
           onClick={() => onChange(f)}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-shadow focus:outline-none focus:ring-2 focus:ring-sky-300 ${
+          className={`px-4 py-2 rounded-full text-sm font-medium 
+          transition-all duration-300
+
+          ${
             active === f
-              ? "bg-sky-600 text-white shadow-md"
-              : "bg-white bg-opacity-60 dark:bg-gray-800 dark:bg-opacity-60"
+              ? "bg-teal-500 text-white shadow-md"
+              : "bg-gray-100 dark:bg-gray-700 hover:scale-105"
           }`}
         >
           {f}
@@ -32,6 +27,7 @@ export function FilterTabs({ active, onChange }) {
   );
 }
 
+// Logo Grid
 export function LogoGrid({ items, selectedId, onSelect }) {
   return (
     <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-4">
@@ -39,10 +35,13 @@ export function LogoGrid({ items, selectedId, onSelect }) {
         <button
           key={it.id}
           onClick={() => onSelect(it.id)}
-          className={`group p-3 rounded-lg shadow-sm transform transition-all focus:outline-none focus:ring-2 focus:ring-sky-300 flex items-center justify-center ${
+          className={`p-3 rounded-xl flex items-center justify-center
+          transition-all duration-300
+
+          ${
             selectedId === it.id
-              ? "scale-105 bg-sky-50 dark:bg-sky-900/30 shadow-lg"
-              : "bg-white/70 dark:bg-gray-900/60"
+              ? "bg-teal-100/40 dark:bg-teal-900/30 scale-105 shadow-lg"
+              : "bg-gray-100 dark:bg-gray-800 hover:scale-105"
           }`}
         >
           <img
@@ -56,46 +55,21 @@ export function LogoGrid({ items, selectedId, onSelect }) {
   );
 }
 
-export function TechChart({ tech }) {
-  return (
-    <div style={{ width: "100%", height: 140 }} className="mt-2">
-      <ResponsiveContainer>
-        <BarChart
-          data={tech}
-          layout="vertical"
-          margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis type="number" hide domain={[0, 100]} />
-          <YAxis dataKey="name" type="category" width={90} />
-          <Tooltip />
-          <Bar dataKey="value" barSize={14} radius={[6, 6, 6, 6]} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
-
+// Snapshots
 export function SnapshotRow({ snapshots }) {
-  if (!snapshots || snapshots.length === 0)
-    return (
-      <p className="text-sm text-gray-500 dark:text-gray-400">
-        No snapshots available.
-      </p>
-    );
+  if (!snapshots || snapshots.length === 0) {
+    return <p className="text-sm text-gray-500">No snapshots</p>;
+  }
+
   return (
-    <div className="flex gap-4 overflow-x-auto py-2">
+    <div className="flex gap-4 overflow-x-auto">
       {snapshots.map((s, i) => (
-        <div
+        <img
           key={i}
-          className="min-w-[180px] rounded-md overflow-hidden shadow-md"
-        >
-          <img
-            src={s}
-            alt={`snapshot-${i}`}
-            className="w-full h-32 object-cover"
-          />
-        </div>
+          src={s}
+          alt="snapshot"
+          className="w-40 h-28 object-cover rounded-lg hover:scale-105 transition"
+        />
       ))}
     </div>
   );
