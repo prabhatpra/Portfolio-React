@@ -95,7 +95,7 @@ const HeroSocial = () => {
       <div className="w-full flex justify-center items-center mb-6">
         <button
           onClick={() => setPopupOpen(true)}
-          className="px-6 py-3 border-2 border-purple-500 hover:bg-sky-400 dark:hover:bg-fuchsia-400 dark:text-white text-amber-900 font-bold rounded-full shadow-lg flex items-center gap-2 group"
+          className="px-6 py-3 border-2 border-green-300 hover:bg-gradient-to-r from-sky-400 to-pink-400 dark:hover:bg-fuchsia-400 dark:text-white text-purple-700 font-bold rounded-full shadow-lg flex items-center gap-2 group"
         >
           <FaUserCircle size={24} />
          <span className="block group-hover:hidden">Social Profiles</span>
