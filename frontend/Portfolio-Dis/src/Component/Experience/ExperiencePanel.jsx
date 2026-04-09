@@ -18,10 +18,20 @@ function ExperiencePanel({ selected }) {
       shadow-xl border border-white/10"
     >
       {/* LEFT */}
-      <div className="md:w-2/3 flex flex-col gap-6">
-
+      <motion.div 
+        className="md:w-2/3 flex flex-col gap-6"
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+      >
         {/* Top */}
-        <div className="flex gap-5">
+        <motion.div className="flex gap-5"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="w-20 h-20 rounded-xl bg-white/20 flex items-center justify-center">
             <img
               src={selected.logo}
@@ -32,8 +42,8 @@ function ExperiencePanel({ selected }) {
 
           <div>
             <h3 className="text-2xl font-bold 
-            bg-gradient-to-r from-teal-400 via-red-400 to-cyan-500
-            bg-clip-text text-transparent">
+              bg-gradient-to-r from-teal-400 via-red-400 to-cyan-500
+              bg-clip-text text-transparent">
               {selected.role}
             </h3>
 
@@ -41,10 +51,15 @@ function ExperiencePanel({ selected }) {
               {selected.company} • {selected.duration} • {selected.location}
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bullets */}
-        <div className="flex flex-wrap gap-2">
+        <motion.div className="flex flex-wrap gap-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           {selected.bullets.map((b, i) => (
             <span
               key={i}
@@ -55,10 +70,15 @@ function ExperiencePanel({ selected }) {
               {b}
             </span>
           ))}
-        </div>
+        </motion.div>
 
         {/* Metrics */}
-        <div className="flex flex-wrap gap-4">
+        <motion.div className="flex flex-wrap gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           {selected.metrics.map((m) => (
             <div
               key={m.label}
@@ -70,30 +90,49 @@ function ExperiencePanel({ selected }) {
               <p className="text-lg font-bold">{m.value}%</p>
             </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* RIGHT */}
-      <div className="md:w-1/3 flex flex-col justify-start gap-6">
-
+      <motion.div 
+        className="md:w-1/3 flex flex-col justify-start gap-6"
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+      >
         {/* Testimonial */}
-        <div className="rounded-xl p-10 
-        bg-white/20 dark:bg-white/10 backdrop-blur-md shadow-md">
+        <motion.div className="rounded-xl p-10 
+        bg-white/20 dark:bg-white/10 backdrop-blur-md shadow-md"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        >
           <h5 className="text-sm font-semibold">Testimonial</h5>
           <p className="mt-2 text-sm italic text-gray-700 dark:text-gray-300">
             "{selected.testimonial}"
           </p>
-        </div>
+        </motion.div>
 
-        {/* Snapshots - Testimonial ke niche */}
-        <div className="pt-10">
+        {/* Snapshots */}
+        <motion.div className="pt-10 overflow-auto scrollbar-hide"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <h4 className="text-sm font-medium mb-2">Snapshots</h4>
           <SnapshotRow snapshots={selected.snapshots} />
-        </div>
+        </motion.div>
 
         {/* Buttons */}
-        <div className="flex flex-col gap-3">
-          {/* GitHub Button */}
+        <motion.div className="flex flex-col gap-3"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           {selected.github && (
             <a
               href={selected.github}
@@ -101,14 +140,13 @@ function ExperiencePanel({ selected }) {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 
               px-4 py-2 rounded-lg text-sm font-medium
-               bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300
+              bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300
               hover:scale-105 hover:shadow-lg transition-all duration-300"
             >
               <FaGithub /> View Code
             </a>
           )}
 
-          {/* Live Button */}
           {selected.live && (
             <a
               href={selected.live}
@@ -123,18 +161,17 @@ function ExperiencePanel({ selected }) {
             </a>
           )}
 
-          {/* New Button: View Full Details */}
           <button
             onClick={() => alert("Full details clicked!")}
             className="flex items-center justify-center gap-2 
               px-4 py-2 rounded-lg text-sm font-semibold
-               bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300 text-black
+              bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300 text-black
               hover:scale-105 hover:shadow-lg transition-all duration-300"
           >
             View Full Details
           </button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 }
