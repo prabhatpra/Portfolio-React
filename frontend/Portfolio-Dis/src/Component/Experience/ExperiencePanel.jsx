@@ -71,19 +71,13 @@ function ExperiencePanel({ selected }) {
             </div>
           ))}
         </div>
-
-        {/* Snapshots */}
-        <div>
-          <h4 className="text-sm font-medium mb-2">Snapshots</h4>
-          <SnapshotRow snapshots={selected.snapshots} />
-        </div>
       </div>
 
       {/* RIGHT */}
-      <div className="md:w-1/3 flex flex-col justify-between gap-6">
+      <div className="md:w-1/3 flex flex-col justify-start gap-6">
 
         {/* Testimonial */}
-        <div className="rounded-xl p-5 
+        <div className="rounded-xl p-10 
         bg-white/20 dark:bg-white/10 backdrop-blur-md shadow-md">
           <h5 className="text-sm font-semibold">Testimonial</h5>
           <p className="mt-2 text-sm italic text-gray-700 dark:text-gray-300">
@@ -91,9 +85,14 @@ function ExperiencePanel({ selected }) {
           </p>
         </div>
 
+        {/* Snapshots - Testimonial ke niche */}
+        <div className="pt-10 overflow-x-hidden overflow-y-hidden">
+          <h4 className="text-sm font-medium mb-2">Snapshots</h4>
+          <SnapshotRow snapshots={selected.snapshots} />
+        </div>
+
         {/* Buttons */}
         <div className="flex flex-col gap-3">
-
           {/* GitHub Button */}
           {selected.github && (
             <a
