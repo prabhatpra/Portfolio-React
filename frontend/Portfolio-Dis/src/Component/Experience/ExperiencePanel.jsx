@@ -86,7 +86,7 @@ function ExperiencePanel({ selected }) {
         </div>
 
         {/* Snapshots - Testimonial ke niche */}
-        <div className="pt-10 overflow-x-hidden">
+        <div className="pt-10">
           <h4 className="text-sm font-medium mb-2">Snapshots</h4>
           <SnapshotRow snapshots={selected.snapshots} />
         </div>
@@ -101,7 +101,7 @@ function ExperiencePanel({ selected }) {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 
               px-4 py-2 rounded-lg text-sm font-medium
-              bg-gradient-to-r from-gray-800 to-gray-600 text-white
+               bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300
               hover:scale-105 hover:shadow-lg transition-all duration-300"
             >
               <FaGithub /> View Code
@@ -116,7 +116,7 @@ function ExperiencePanel({ selected }) {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 
               px-4 py-2 rounded-lg text-sm font-medium
-              bg-gradient-to-r from-teal-500 to-cyan-500 text-white
+              bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300 text-black
               hover:scale-105 hover:shadow-lg transition-all duration-300"
             >
               <FaExternalLinkAlt /> Live Demo
@@ -127,8 +127,8 @@ function ExperiencePanel({ selected }) {
           <button
             onClick={() => alert("Full details clicked!")}
             className="flex items-center justify-center gap-2 
-              px-4 py-2 rounded-lg text-sm font-medium
-              bg-gradient-to-r from-purple-500 to-pink-500 text-white
+              px-4 py-2 rounded-lg text-sm font-semibold
+               bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300 text-black
               hover:scale-105 hover:shadow-lg transition-all duration-300"
           >
             View Full Details
