@@ -20,7 +20,6 @@ const Navbar = () => {
   const cvRef = useRef(null);
   const menuRef = useRef(null);
 
-  // Scroll handler (close everything)
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
@@ -32,7 +31,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Outside click handler (CV + Menu)
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (cvRef.current && !cvRef.current.contains(event.target)) {
@@ -62,64 +60,46 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 z-40 w-screen">
       <div
-        className={`mx-auto transition-all duration-300 shadow-md relative
+        className={`mx-auto transition-all duration-300 shadow-md
         ${
           scrolled
             ? "w-1/2 h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-md"
             : "w-full h-14 bg-white/30 dark:bg-black/40 backdrop-blur-md"
         }`}
       >
-        <div className="py-1 px-2 h-full">
-          <div className="container mx-auto flex items-center justify-between px-4 md:px-6 lg:px-10">
+        <div className="h-full px-4 md:px-6 lg:px-10">
+          <div className="flex items-center justify-between h-full">
 
-            {/* Logo */}
+            {/* LOGO */}
             <a href="#" className="flex items-center gap-2 font-bold">
               <img
                 src={PrabhatImg}
                 alt="logo"
-                className={`rounded-full ${
+                className={`rounded-full transition-all ${
                   scrolled ? "w-7 h-7" : "w-10 h-10"
                 }`}
               />
             </a>
 
-            {/* Mobile Button */}
-            <div className="md:hidden absolute right-2 top-4 z-[9999]">
+            {/* MOBILE MENU BUTTON */}
+            <div className="md:hidden z-[9999]">
               <button onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <HiX className="w-6 h-6 text-black dark:text-white" /> : <HiMenuAlt3 className="w-6 h-6 text-black dark:text-white"/>}
+                {isOpen ? (
+                  <HiX className="w-6 h-6 text-black dark:text-white" />
+                ) : (
+                  <HiMenuAlt3 className="w-6 h-6 text-black dark:text-white" />
+                )}
               </button>
             </div>
 
-            {/* Mobile Menu */}
-            <div ref={menuRef}>
-              <AnimatePresence>
-                {isOpen && (
-                  <motion.div
-                    className="absolute top-16 right-4 bg-transparent dark:bg-transparent border-2 rounded-lg hover:border-2 border-sky-500rounded-lg shadow-md p-2 w-48 z-[9999]"
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    variants={menuVariants}
-                  >
-                    {menuItems.map((item, i) => (
-                      <a
-                        key={i}
-                        href={item.link}
-                        onClick={() => setIsOpen(false)}
-                        className="block p-2 hover:text-green-500 dark:hover:text-cyan-500 text-violet-700 font-medium rounded-md transition-colors"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex gap-4">
+            {/* DESKTOP MENU */}
+            <div className="hidden md:flex items-center gap-8 text-gray-800 dark:text-gray-200 font-medium">
               {menuItems.map((item, i) => (
-                <a key={i} href={item.link}>
+                <a
+                  key={i}
+                  href={item.link}
+                  className="hover:text-green-500 transition"
+                >
                   {item.name}
                 </a>
               ))}
@@ -129,46 +109,76 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
 
               {/* CV DROPDOWN */}
-              <div
-                ref={cvRef}
-                className="relative"
-              >
+              <div ref={cvRef} className="relative">
+
                 <button
                   onClick={() => setCvOpen(!cvOpen)}
-                  className="px-3 py-1 rounded-full bg-cyan-500 text-black"
+                  className="px-3 py-1 rounded-full bg-cyan-500 text-black font-medium"
                 >
                   ⬇ CV
                 </button>
 
-                {cvOpen && (
-                  <div className="absolute left-0 mt-2 w-28 bg-white dark:bg-gray-800 rounded shadow z-[9999]">
-                    <a
-                      href="/resume.pdf"
-                      target="_blank"
-                      className="block px-3 py-2 hover:bg-gray-200"
-                      onClick={() => setCvOpen(false)}
+                <AnimatePresence>
+                  {cvOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                      className="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden z-[9999]"
                     >
-                      View
-                    </a>
+                      <a
+                        href="/resume.pdf"
+                        target="_blank"
+                        className="block px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+                        onClick={() => setCvOpen(false)}
+                      >
+                        View
+                      </a>
 
-                    <a
-                      href="/resume.pdf"
-                      download
-                      className="block px-3 py-2 hover:bg-gray-200"
-                      onClick={() => setCvOpen(false)}
-                    >
-                      Download
-                    </a>
-                  </div>
-                )}
+                      <a
+                        href="/resume.pdf"
+                        download
+                        className="block px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+                        onClick={() => setCvOpen(false)}
+                      >
+                        Download
+                      </a>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
-              {/* Dark Mode */}
+              {/* DARK MODE */}
               <DarkMode />
-
             </div>
+
           </div>
         </div>
+
+        {/* MOBILE MENU */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              ref={menuRef}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="md:hidden absolute right-4 top-16 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-md p-2 z-[9999]"
+            >
+              {menuItems.map((item, i) => (
+                <a
+                  key={i}
+                  href={item.link}
+                  onClick={() => setIsOpen(false)}
+                  className="block p-2 hover:text-green-500"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
     </div>
   );
