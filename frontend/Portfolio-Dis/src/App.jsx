@@ -5,7 +5,6 @@ import Projects from './Component/Project/Projects'
 import About from './Component/About/About'
 import Footer from './Component/Footer/Footer'
 import Experience from './Component/Experience/Experience'
-import Resume from './Component/Resume/Resume'
 import BubbleBackground from './Component/BubbleBackground/BubbleBackground'
 
 const App = () => {
@@ -21,7 +20,6 @@ const App = () => {
       <About />
       <Projects />
       <Experience />
-      <Resume />
       <Footer />
     </BubbleBackground>
   );
