@@ -46,13 +46,13 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 z-40 w-screen">
+    <div className="fixed top-0 z-40 w-full">
       <div
         className={`mx-auto transition-all duration-300 shadow-md relative
         ${
           scrolled
-            ? "w-1/2 h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-md"
-            : "w-full h-14 bg-white/30 dark:bg-black/40 backdrop-blur-md"
+            ? "w-[90%] md:w-1/2 h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-md"
+            : "w-full h-12 bg-white/30 dark:bg-black/40 backdrop-blur-md"
         }`}
       >
         <div className="h-full px-4 md:px-6 lg:px-10">
@@ -68,7 +68,7 @@ const Navbar = () => {
             </a>
 
             {/* DESKTOP MENU */}
-            <div className="hidden md:flex items-center gap-6 text-gray-800 dark:text-gray-200 font-medium">
+            <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 text-gray-800 dark:text-gray-200 font-medium">
               {menuItems.map((item, i) => (
                 <a
                   key={i}
@@ -84,10 +84,15 @@ const Navbar = () => {
             <div className="flex items-center gap-5 ml-auto">
 
               {/* CV */}
-              <div ref={cvRef} className="relative">
+              <div ref={cvRef} 
+              className={`relative transition-all duration-300 ${
+              scrolled 
+              ? "opacity-0 -translate-y-2 pointer-events-none" 
+              : "opacity-100 translate-y-0"
+  }`}>
                 <button
                   onClick={() => setCvOpen(!cvOpen)}
-                  className="px-2 py-1 sm:px-3 sm:py-1 sm:text-sm 
+                  className="px-2 py-1 text-xs
                   md:px-4 md:py-2 md:text-base rounded-full bg-transparent border-2 border-sky-900 text-black dark:text-white font-medium hover:bg-cyan-600 hover:scale-105 transition"
                 >
                   ⬇ CV
@@ -153,7 +158,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden absolute right-4 top-16 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-md p-2 z-[9999]"
+            className="md:hidden absolute right-4 top-[60px] w-48 bg-white dark:bg-gray-900 rounded-lg shadow-md p-2 z-[9999]"
           >
             {menuItems.map((item, i) => (
               <a
