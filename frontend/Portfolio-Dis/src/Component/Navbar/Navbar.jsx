@@ -87,7 +87,8 @@ const Navbar = () => {
               <div ref={cvRef} className="relative">
                 <button
                   onClick={() => setCvOpen(!cvOpen)}
-                  className="px-3 py-1 rounded-full bg-transparent border-2 border-sky-900 text-black dark:text-white font-medium hover:bg-cyan-600 hover:scale-105 transition"
+                  className="px-2 py-1 sm:px-3 sm:py-1 sm:text-sm 
+                  md:px-4 md:py-2 md:text-base rounded-full bg-transparent border-2 border-sky-900 text-black dark:text-white font-medium hover:bg-cyan-600 hover:scale-105 transition"
                 >
                   ⬇ CV
                 </button>
