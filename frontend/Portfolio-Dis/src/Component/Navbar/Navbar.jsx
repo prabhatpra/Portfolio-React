@@ -36,31 +36,19 @@ const Navbar = () => {
       if (cvRef.current && !cvRef.current.contains(event.target)) {
         setCvOpen(false);
       }
-
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const menuVariants = {
-    hidden: { opacity: 0, scale: 0, originX: 1, originY: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { type: "spring", stiffness: 300, damping: 25 },
-    },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
-  };
 
   return (
     <div className="fixed top-0 z-40 w-screen">
       <div
-        className={`mx-auto transition-all duration-300 shadow-md
+        className={`mx-auto transition-all duration-300 shadow-md relative
         ${
           scrolled
             ? "w-1/2 h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-md"
@@ -71,34 +59,21 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-full">
 
             {/* LOGO */}
-            <a href="#" className="flex items-center gap-2 font-bold">
+            <a href="#" className="flex items-center gap-2">
               <img
                 src={PrabhatImg}
                 alt="logo"
-                className={`rounded-full transition-all ${
-                  scrolled ? "w-7 h-7" : "w-10 h-10"
-                }`}
+                className="rounded-full w-10 h-10 hover:scale-110 transition"
               />
             </a>
 
-            {/* MOBILE MENU BUTTON */}
-            <div className="md:hidden z-[9999]">
-              <button onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? (
-                  <HiX className="w-6 h-6 text-black dark:text-white" />
-                ) : (
-                  <HiMenuAlt3 className="w-6 h-6 text-black dark:text-white" />
-                )}
-              </button>
-            </div>
-
             {/* DESKTOP MENU */}
-            <div className="hidden md:flex items-center gap-8 text-gray-800 dark:text-gray-200 font-medium">
+            <div className="hidden md:flex items-center gap-6 text-gray-800 dark:text-gray-200 font-medium">
               {menuItems.map((item, i) => (
                 <a
                   key={i}
                   href={item.link}
-                  className="hover:text-green-500 transition"
+                  className="hover:text-green-500 hover:scale-105 transition"
                 >
                   {item.name}
                 </a>
@@ -106,14 +81,13 @@ const Navbar = () => {
             </div>
 
             {/* RIGHT SIDE */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-5 ml-auto">
 
-              {/* CV DROPDOWN */}
+              {/* CV */}
               <div ref={cvRef} className="relative">
-
                 <button
                   onClick={() => setCvOpen(!cvOpen)}
-                  className="px-3 py-1 rounded-full bg-cyan-500 text-black font-medium"
+                  className="px-3 py-1 rounded-full bg-transparent border-2 border-sky-900 text-black dark:text-white font-medium hover:bg-cyan-600 hover:scale-105 transition"
                 >
                   ⬇ CV
                 </button>
@@ -149,37 +123,51 @@ const Navbar = () => {
               </div>
 
               {/* DARK MODE */}
-              <DarkMode />
+              <div className="hover:scale-110 transition">
+                <DarkMode />
+              </div>
+
+              {/* HAMBURGER (ONLY MD/SM) */}
+              <div className="md:hidden flex items-center">
+                <button onClick={() => setIsOpen(!isOpen)}>
+                  {isOpen ? (
+                    <HiX className="w-6 h-6 text-black dark:text-white" />
+                  ) : (
+                    <HiMenuAlt3 className="w-6 h-6 text-black dark:text-white hover:text-green-500 transition" />
+                  )}
+                </button>
+              </div>
+
             </div>
 
           </div>
         </div>
-
-        {/* MOBILE MENU */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              ref={menuRef}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="md:hidden absolute right-4 top-16 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-md p-2 z-[9999]"
-            >
-              {menuItems.map((item, i) => (
-                <a
-                  key={i}
-                  href={item.link}
-                  onClick={() => setIsOpen(false)}
-                  className="block p-2 hover:text-green-500"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
       </div>
+
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            ref={menuRef}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden absolute right-4 top-16 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-md p-2 z-[9999]"
+          >
+            {menuItems.map((item, i) => (
+              <a
+                key={i}
+                href={item.link}
+                onClick={() => setIsOpen(false)}
+                className="block p-2 hover:text-green-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition"
+              >
+                {item.name}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 };
