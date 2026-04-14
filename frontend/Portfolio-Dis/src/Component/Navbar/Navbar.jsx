@@ -109,7 +109,7 @@ const Navbar = () => {
                       <a
                         href="/resume.pdf"
                         target="_blank"
-                        className="block px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+                        className="block px-3 py-2 hover:bg-gray-200 dark:text-sky-300 dark:hover:bg-gray-700"
                         onClick={() => setCvOpen(false)}
                       >
                         View
@@ -118,7 +118,7 @@ const Navbar = () => {
                       <a
                         href="/resume.pdf"
                         download
-                        className="block px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+                        className="block px-3 py-2 hover:bg-gray-200 dark:text-sky-300 dark:hover:bg-gray-700"
                         onClick={() => setCvOpen(false)}
                       >
                         Download
@@ -158,7 +158,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden absolute right-4 top-[60px] w-48 bg-white dark:bg-gray-900 rounded-lg shadow-md p-2 z-[9999]"
+            className="md:hidden absolute right-4 top-[60px] w-48 bg-white dark:text-sky-300 dark:bg-gray-900 rounded-lg shadow-md p-2 z-[9999]"
           >
             {menuItems.map((item, i) => (
               <a
