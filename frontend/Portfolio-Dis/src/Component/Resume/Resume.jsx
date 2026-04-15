@@ -1,50 +1,127 @@
-// src/Component/Resume/Resume.jsx
 import React from "react";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import { motion } from "framer-motion";
-import ResumeData from "./ResumeData.js";
-import ResumePDF from "./ResumePDF.jsx";
-import ResumePreview from "./ResumePreview.jsx";
+import ResumeData from "./resumeData";
 
-export default function Resume() {
+const Resume = () => {
   return (
-   <div
-  id="resume"
-  className="relative py-12 px-4 md:px-8 lg:px-16 
-  min-h-screen w-screen overflow-hidden"
->
- <div className="absolute inset-0 bg-white/20 dark:bg-black/20 pointer-events-none z-0"></div>
-      <div className="relative max-w-6xl mx-auto z-10">
-        <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">Resume</h2>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Clean, downloadable and personalized PDF (watermarked with your name).</p>
-            </div>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
 
-            <div className="flex items-center gap-3">
-              <PDFDownloadLink
-                document={<ResumePDF user={ResumeData} />}
-                fileName={`Resume_${ResumeData.name.replace(/\s+/g, "_")}.pdf`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-md shadow"
-              >
-                {({ loading }) => (loading ? "Preparing PDF..." : "Download PDF")}
-              </PDFDownloadLink>
+      {/* Download Button (only screen pe dikhega) */}
+      <button
+        onClick={() => window.print()}
+        className="print:hidden fixed top-5 right-5 px-4 py-2 bg-blue-500 text-white rounded-lg shadow"
+      >
+        Download CV
+      </button>
 
-              <button
-                onClick={() => window.print()}
-                className="px-4 py-2 border rounded-md text-sm bg-white/60 hover:bg-white dark:bg-gray-800/60"
+      {/* Resume Container */}
+      <div className="resume-container w-full max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-4 md:p-8">
+
+        {/* HEADER */}
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold dark:text-white">{ResumeData.name}</h1>
+          <p className="text-gray-600 dark:text-gray-300">
+            {ResumeData.title}
+          </p>
+        </div>
+
+        {/* CAREER OBJECTIVE */}
+        <section className="mb-5">
+          <h2 className="text-lg dark:text-white font-semibold border-b mb-1">Career Objective</h2>
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            {ResumeData.careerObjective}
+          </p>
+        </section>
+
+        {/* CONTACT */}
+        <section className="mb-5">
+          <h2 className="text-lg font-semibold dark:text-white border-b mb-1">Contact</h2>
+          <p className="text-sm dark:text-gray-300">Email: {ResumeData.contact.email}</p>
+          <p className="text-sm dark:text-gray-300">Phone: {ResumeData.contact.phone}</p>
+          <p className="text-sm dark:text-gray-300">Location: {ResumeData.contact.location}</p>
+          <p className="text-sm dark:text-gray-300">LinkedIn: {ResumeData.contact.linkedin}</p>
+          <p className="text-sm dark:text-gray-300">GitHub: {ResumeData.contact.github}</p>
+        </section>
+
+        {/* SKILLS */}
+        <section className="mb-5">
+          <h2 className="text-lg font-semibold dark:text-white border-b mb-2">Technical Skills</h2>
+          <div className="flex flex-wrap gap-2">
+            {ResumeData.technicalSkills.map((skill, i) => (
+              <span
+                key={i}
+                className="bg-gray-200 dark:text-gray-300 dark:bg-gray-700 px-3 py-1 rounded-full text-xs"
               >
-                Print
-              </button>
-            </div>
+                {skill}
+              </span>
+            ))}
           </div>
-        </motion.div>
+        </section>
 
-        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }}>
-          <ResumePreview data={ResumeData} />
-        </motion.div>
+        {/* WORK EXPERIENCE */}
+        <section className="mb-5">
+          <h2 className="text-lg font-semibold dark:text-white border-b mb-2">Work Experience</h2>
+          {ResumeData.workExperience.map((exp, i) => (
+            <div key={i} className="mb-3">
+              <h3 className="font-semibold text-sm dark:text-white">
+                {exp.role} - {exp.company}
+              </h3>
+              <p className="text-xs dark:text-gray-300">{exp.duration}</p>
+              <ul className="list-disc ml-5 text-xs dark:text-gray-300">
+                {exp.details.map((d, idx) => (
+                  <li key={idx}>{d}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+        {/* INTERNSHIPS */}
+        <section className="mb-5">
+          <h2 className="text-lg font-semibold dark:text-white border-b mb-2">Internships</h2>
+          {ResumeData.internships.map((intern, i) => (
+            <div key={i} className="mb-3">
+              <h3 className="font-semibold dark:text-gray-300 text-sm">
+                {intern.title} - {intern.company}
+              </h3>
+              <p className="text-xs dark:text-gray-300">{intern.duration}</p>
+              <ul className="list-disc ml-5 text-xs dark:text-gray-300">
+                {intern.details.map((d, idx) => (
+                  <li key={idx}>{d}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+        {/* PROJECTS */}
+        <section className="mb-5">
+          <h2 className="text-lg font-semibold dark:text-white border-b mb-2">Projects</h2>
+          {ResumeData.projects.map((proj, i) => (
+            <div key={i} className="mb-3">
+              <h3 className="font-semibold text-sm dark:text-white">{proj.title}</h3>
+              <p className="text-xs dark:text-gray-300">{proj.tech}</p>
+              <ul className="list-disc ml-5 text-xs dark:text-gray-300">
+                {proj.details.map((d, idx) => (
+                  <li key={idx}>{d}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+        {/* EDUCATION */}
+        <section>
+          <h2 className="text-lg font-semibold dark:text-white border-b mb-2">Education</h2>
+          <ul className="list-disc ml-5 text-xs dark:text-gray-300">
+            {ResumeData.education.map((edu, i) => (
+              <li key={i}>{edu}</li>
+            ))}
+          </ul>
+        </section>
+
       </div>
     </div>
   );
-}
+};
+
+export default Resume;

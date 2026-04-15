@@ -1,4 +1,6 @@
-import React, {useEffect } from 'react'
+import React from 'react'
+import{ Routes, Route } from "react-router-dom";
+
 import Navbar from './Component/Navbar/Navbar'
 import Hero from './Component/Hero/Hero'
 import Projects from './Component/Project/Projects'
@@ -6,13 +8,9 @@ import About from './Component/About/About'
 import Footer from './Component/Footer/Footer'
 import Experience from './Component/Experience/Experience'
 import BubbleBackground from './Component/BubbleBackground/BubbleBackground'
+import Resume from './Component/Resume/Resume'
 
-const App = () => {
-
-  useEffect(() => {
-    window.scrollTo(0, { behavior: "smooth" });
-  }, []);
-
+const Home = () => {
   return (
     <BubbleBackground>
       <Navbar />
@@ -22,6 +20,16 @@ const App = () => {
       <Experience />
       <Footer />
     </BubbleBackground>
+  );
+};
+
+const App = () => {
+  return (
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/resume" element={<Resume />} />
+      </Routes>
   );
 };
 

@@ -69,3 +69,23 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
+
+@media print {
+
+    body{
+        background:white;
+    }
+
+    .resume-container {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 20mm;
+        margin: 0;
+        box-shadow: none;
+        background: white;
+    }
+
+    .print\:hidden {
+        display: none;
+    }
+}

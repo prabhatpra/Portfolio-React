@@ -3,6 +3,7 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
 import DarkMode from "./DarkMode";
 import PrabhatImg from "../../assets/myimg/prabhat.png";
+import { Link } from "react-router-dom";
 
 const menuItems = [
   { name: "Home", link: "#home" },
@@ -69,15 +70,25 @@ const Navbar = () => {
 
             {/* DESKTOP MENU */}
             <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 text-gray-800 dark:text-gray-200 font-medium">
-              {menuItems.map((item, i) => (
-                <a
-                  key={i}
-                  href={item.link}
-                  className="hover:text-green-500 hover:scale-105 transition"
-                >
-                  {item.name}
-                </a>
-              ))}
+              {menuItems.map((item, i) =>
+  item.link.startsWith("#") ? (
+    <a
+      key={i}
+      href={item.link}
+      className="hover:text-green-500 hover:scale-105 transition"
+    >
+      {item.name}
+    </a>
+  ) : (
+    <Link
+      key={i}
+      to={item.link}
+      className="hover:text-green-500 hover:scale-105 transition"
+    >
+      {item.name}
+    </Link>
+  )
+)}
             </div>
 
             {/* RIGHT SIDE */}
@@ -106,14 +117,13 @@ const Navbar = () => {
                       exit={{ opacity: 0, scale: 0.9, y: -10 }}
                       className="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden z-[9999]"
                     >
-                      <a
-                        href="/resume.pdf"
-                        target="_blank"
+                      <Link
+                        to="/resume"
                         className="block px-3 py-2 hover:bg-gray-200 dark:text-sky-300 dark:hover:bg-gray-700"
                         onClick={() => setCvOpen(false)}
                       >
                         View
-                      </a>
+                      </Link>
 
                       <a
                         href="/resume.pdf"
