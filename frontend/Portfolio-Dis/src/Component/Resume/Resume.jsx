@@ -1,5 +1,5 @@
 import React from "react";
-import ResumeData from "./resumeData";
+import RsumeData from "./ResumeData";
 
 const Resume = () => {
   return (

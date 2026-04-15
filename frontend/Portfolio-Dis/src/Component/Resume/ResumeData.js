@@ -1,5 +1,5 @@
 // src/Component/Resume/ResumeData.js
-const resumeData = {
+const ResumeData = {
   name: "Prabhat Prajapati",
   title: "Junior Backend & Full-Stack Developer",
   careerObjective:
@@ -85,4 +85,4 @@ const resumeData = {
   ]
 };
 
-export default resumeData;
+export default ResumeData;
