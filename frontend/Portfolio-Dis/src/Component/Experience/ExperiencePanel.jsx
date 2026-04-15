@@ -63,7 +63,7 @@ function ExperiencePanel({ selected }) {
           {selected.bullets.map((b, i) => (
             <span
               key={i}
-              className="text-xs px-3 py-1 rounded-full 
+              className="text-xs px-3 py-1  dark:text-gray-300 rounded-full 
               bg-white/20 dark:bg-white/10 
               border border-white/10"
             >
@@ -87,7 +87,7 @@ function ExperiencePanel({ selected }) {
               dark:from-cyan-900/40 dark:to-blue-900/40"
             >
               <p className="text-xs text-gray-500">{m.label}</p>
-              <p className="text-lg font-bold">{m.value}%</p>
+              <p className="text-lg dark:text-gray-400 font-bold">{m.value}%</p>
             </div>
           ))}
         </motion.div>
@@ -109,7 +109,7 @@ function ExperiencePanel({ selected }) {
         viewport={{ once: false, amount: 0.3 }}
         transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <h5 className="text-sm font-semibold">Testimonial</h5>
+          <h5 className="text-sm dark:text-white font-semibold">Testimonial</h5>
           <p className="mt-2 text-sm italic text-gray-700 dark:text-gray-300">
             "{selected.testimonial}"
           </p>
@@ -122,7 +122,7 @@ function ExperiencePanel({ selected }) {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h4 className="text-sm font-medium mb-2">Snapshots</h4>
+          <h4 className="text-sm font-medium dark:text-white mb-2">Snapshots</h4>
           <SnapshotRow snapshots={selected.snapshots} />
         </motion.div>
 
