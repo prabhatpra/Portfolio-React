@@ -13,9 +13,10 @@ function ExperiencePanel({ selected }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4 }}
-      className="bg-white/10 dark:bg-white/5 backdrop-blur-xl 
+      className="bg-white/10 dark:bg-gradient-to-br dark:from-teal-600 dark:via-blue-500 dark:to-fuchsia-400
+      backdrop-blur-xl 
       rounded-3xl p-6 md:p-10 flex flex-col md:flex-row gap-10 
-      shadow-xl border border-white/10"
+      shadow-xl border border-white/10 dark:border-white/5"
     >
       {/* LEFT */}
       <motion.div 
@@ -47,7 +48,7 @@ function ExperiencePanel({ selected }) {
               {selected.role}
             </h3>
 
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm dark:text-gray-300 text-black mt-1">
               {selected.company} • {selected.duration} • {selected.location}
             </p>
           </div>
@@ -86,7 +87,7 @@ function ExperiencePanel({ selected }) {
               bg-gradient-to-br from-cyan-100/40 to-blue-200/40
               dark:from-cyan-900/40 dark:to-blue-900/40"
             >
-              <p className="text-xs text-gray-500">{m.label}</p>
+              <p className="text-xs text-black dark:text-slate-300">{m.label}</p>
               <p className="text-lg dark:text-gray-400 font-bold">{m.value}%</p>
             </div>
           ))}
@@ -110,7 +111,7 @@ function ExperiencePanel({ selected }) {
         transition={{ duration: 0.6, delay: 0.1 }}
         >
           <h5 className="text-sm dark:text-white font-semibold">Testimonial</h5>
-          <p className="mt-2 text-sm italic text-gray-700 dark:text-gray-300">
+          <p className="mt-2 text-sm italic text-gray-900 dark:text-gray-300">
             "{selected.testimonial}"
           </p>
         </motion.div>
