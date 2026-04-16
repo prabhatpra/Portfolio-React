@@ -101,7 +101,7 @@ export default function AboutMain() {
           {!active ? (
             <motion.div
               key="intro"
-              className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center"
+              className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center"
             >
               {/* LEFT */}
               <motion.div
@@ -109,10 +109,11 @@ export default function AboutMain() {
                 initial="hidden"
                 whileInView="show"
                 exit="exit"
-                viewport={{ once: false, amount: 0.2 }}
-                style={{ y: smoothY }}
-                className="md:col-span-7 bg-white/10 dark:bg-black/30 backdrop-blur-md 
-                border border-white/20 dark:border-white/5 rounded-2xl p-8 shadow-xl"
+                viewport={{ once: false, amount: 0.3 }}
+                className="md:col-span-7 bg-white/10 
+                dark:bg-gradient-to-br dark:from-slate-900 dark:via-indigo-950 dark:to-slate-900
+                backdrop-blur-md 
+                border border-white/20 dark:border-white/10 rounded-2xl p-8 shadow-xl"
               >
                 <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
                   Hi, I’m{" "}
@@ -171,7 +172,7 @@ export default function AboutMain() {
                     exit={{ opacity: 0, x: 100 }}
                     viewport={{ once: false, amount: 0.3 }}
                     transition={{ type: "spring", stiffness: 50, damping: 25 }}
-                    className="absolute w-48 h-64 md:w-64 md:h-80 overflow-hidden cursor-pointer rounded-2xl"
+                    className="absolute w-48 h-64 md:w-64 md:h-80 overflow-hidden cursor-pointer rounded-2xl hover:scale-105 transition-transform duration-300 "
                     style={{
                       top: idx === 0 ? "-1.5rem" : "auto",
                       right: idx === 0 ? "-1.5rem" : "auto",

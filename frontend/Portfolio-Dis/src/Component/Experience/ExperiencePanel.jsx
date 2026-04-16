@@ -9,11 +9,16 @@ function ExperiencePanel({ selected }) {
   return (
     <motion.div
       key={selected.id}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 50, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4 }}
-      className="bg-white/10 dark:bg-gradient-to-br dark:from-teal-600 dark:via-blue-500 dark:to-fuchsia-400
+      viewport={{ once: false, amount: 0.3 }}
+
+      
+      transition={{ duration: 0.5, ease: "easeOut" }}
+
+      className="bg-white/10 dark:bg-gradient-to-br dark:from-teal-900/40 dark:via-blue-900/40 dark:to-fuchsia-900/40
       backdrop-blur-xl 
       rounded-3xl p-6 md:p-10 flex flex-col md:flex-row gap-10 
       shadow-xl border border-white/10 dark:border-white/5"
