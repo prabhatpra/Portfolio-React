@@ -3,7 +3,7 @@ import ResumeData from "./ResumeData";
 
 const Resume = () => {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-sky-700 to-purple-100 dark:from-gray-900 dark:to-black p-6">
 
       {/* Download Button (only screen pe dikhega) */}
       <button
