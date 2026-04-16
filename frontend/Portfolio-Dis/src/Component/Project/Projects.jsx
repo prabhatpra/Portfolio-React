@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 import AddProjectForm from "./AddProjectForm";
 import { demoProjects } from "./ProjectData";
@@ -14,7 +14,6 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // ✅ NEW
   const [showButtons, setShowButtons] = useState(false);
   const timerRef = useRef(null);
 
@@ -27,6 +26,15 @@ const Projects = () => {
       transition: { duration: 0.6, ease: "easeOut" },
     },
   };
+
+  // ✅ FIX: cleanup timer (memory leak fix)
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   const handleAddProject = (newProject) => {
     setProjects([...projects, newProject]);
@@ -44,7 +52,7 @@ const Projects = () => {
     );
   };
 
-  // ✅ NEW (activity logic)
+  // ✅ Activity logic
   const handleUserActivity = () => {
     setShowButtons(true);
 
@@ -72,14 +80,12 @@ const Projects = () => {
       onTouchStart={handleUserActivity}
       onTouchMove={handleUserActivity}
       onMouseMove={handleUserActivity}
-      className="relative w-screen min-h-screen overflow-hidden
-        flex flex-col items-center px-4 sm:px-6 md:px-20 py-10
-        transition-colors duration-700"
+      className="relative w-full min-h-screen overflow-hidden
+      flex flex-col items-center px-4 sm:px-6 md:px-20 py-16
+      transition-colors duration-700"
     >
-      {/* Background overlay */}
-      <div className="absolute inset-0 bg-white/20 dark:bg-black/20 pointer-events-none z-0"></div>
 
-      <div className="relative z-10 w-full max-w-7xl flex flex-col items-center gap-8">
+      <div className="relative z-10 w-full max-w-7xl flex flex-col items-center gap-10">
 
         {/* Heading */}
         <motion.h1
@@ -87,9 +93,9 @@ const Projects = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.2 }}
-          className="text-3xl font-bold text-center 
-            bg-gradient-to-r from-blue-600 via-purple-500 to-pink-600
-            bg-clip-text text-transparent"
+          className="mt-10 text-3xl font-bold text-center 
+          bg-gradient-to-r from-blue-600 via-purple-500 to-pink-600
+          bg-clip-text text-transparent"
         >
           My Projects
         </motion.h1>
@@ -103,8 +109,8 @@ const Projects = () => {
         >
           <button
             className="bg-gradient-to-br from-blue-300 via-cyan-500 to-purple-400
-              dark:from-gray-600 dark:via-purple-700 dark:to-indigo-800
-              text-white px-5 py-2 rounded-lg hover:bg-green-600 transition-colors group"
+            dark:from-gray-600 dark:via-purple-700 dark:to-indigo-800
+            text-white px-5 py-2 rounded-lg hover:bg-green-600 transition-colors group"
             onClick={() => setShowForm(true)}
           >
             <span className="block group-hover:hidden">Add New Project</span>
@@ -119,8 +125,8 @@ const Projects = () => {
           whileInView="show"
           viewport={{ once: false, amount: 0.2 }}
           className="text-lg sm:text-xl font-medium text-center
-            bg-gradient-to-r from-blue-500 via-purple-400 to-pink-400
-            bg-clip-text text-transparent leading-relaxed max-w-2xl"
+          bg-gradient-to-r from-blue-500 via-purple-400 to-pink-400
+          bg-clip-text text-transparent leading-relaxed max-w-2xl"
         >
           Welcome to my code-space 👨‍💻 <br />
           Here, logic meets creativity and ideas turn into real experiences. <br />
@@ -133,8 +139,8 @@ const Projects = () => {
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {projects.map((project) => (
-              <div key={project.title} className="flex-shrink-0 w-full px-4">
+            {projects.map((project, idx) => (
+              <div key={idx} className="flex-shrink-0 w-full px-4">
                 <motion.div
                   variants={fadeInUp}
                   initial="hidden"
@@ -155,9 +161,9 @@ const Projects = () => {
 
           {/* Dots */}
           <div className="flex justify-center mt-4 gap-2 lg:hidden">
-            {projects.map((project, idx) => (
+            {projects.map((_, idx) => (
               <button
-                key={project.title}
+                key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   currentIndex === idx
@@ -168,14 +174,14 @@ const Projects = () => {
             ))}
           </div>
 
-          {/* ✅ Navigation Buttons */}
+          {/* Navigation Buttons */}
           <button
             onClick={handlePrev}
             className={`absolute left-0 top-1/2 -translate-y-1/2 z-20
-              bg-white/70 dark:bg-black/50 p-2 rounded-full shadow-lg
-              hover:scale-110 transition flex lg:hidden
-              transition-opacity duration-300
-              ${showButtons ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+            bg-white/70 dark:bg-black/50 p-2 rounded-full shadow-lg
+            hover:scale-110 transition flex lg:hidden
+            transition-opacity duration-300
+            ${showButtons ? "opacity-100" : "opacity-0 pointer-events-none"}`}
           >
             <ChevronLeft className="w-6 h-6 text-gray-700 dark:text-gray-200" />
           </button>
@@ -183,10 +189,10 @@ const Projects = () => {
           <button
             onClick={handleNext}
             className={`absolute right-0 top-1/2 -translate-y-1/2 z-20
-              bg-white/70 dark:bg-black/50 p-2 rounded-full shadow-lg
-              hover:scale-110 transition flex lg:hidden
-              transition-opacity duration-300
-              ${showButtons ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+            bg-white/70 dark:bg-black/50 p-2 rounded-full shadow-lg
+            hover:scale-110 transition flex lg:hidden
+            transition-opacity duration-300
+            ${showButtons ? "opacity-100" : "opacity-0 pointer-events-none"}`}
           >
             <ChevronRight className="w-6 h-6 text-gray-700 dark:text-gray-200" />
           </button>
@@ -194,9 +200,9 @@ const Projects = () => {
 
         {/* Desktop Grid */}
         <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6 w-full">
-          {projects.map((project) => (
+          {projects.map((project, idx) => (
             <motion.div
-              key={project.title}
+              key={idx}
               variants={fadeInUp}
               initial="hidden"
               whileInView="show"

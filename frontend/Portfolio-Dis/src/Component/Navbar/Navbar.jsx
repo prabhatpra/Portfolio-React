@@ -21,17 +21,17 @@ const Navbar = () => {
   const cvRef = useRef(null);
   const menuRef = useRef(null);
 
+  // ✅ FIX: only scroll state update (menu auto close removed)
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
-      setCvOpen(false);
-      setIsOpen(false);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ✅ Outside click handler
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (cvRef.current && !cvRef.current.contains(event.target)) {
@@ -47,20 +47,20 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 z-40 w-full">
+    <div className="fixed top-0 z-50 w-full">
       <div
         className={`mx-auto transition-all duration-300 shadow-md relative
         ${
           scrolled
-            ? "w-[90%] md:w-1/2 h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-md"
-            : "w-full h-12 bg-white/30 dark:bg-black/40 backdrop-blur-md"
+            ? "w-[90%] md:w-1/2 h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-lg"
+            : "w-full h-12 bg-white/30 dark:bg-black/40 backdrop-blur-lg"
         }`}
       >
         <div className="h-full px-4 md:px-6 lg:px-10">
           <div className="flex items-center justify-between h-full">
 
             {/* LOGO */}
-            <a href="#" className="flex items-center gap-2">
+            <a href="#home" className="flex items-center gap-2">
               <img
                 src={PrabhatImg}
                 alt="logo"
@@ -71,40 +71,41 @@ const Navbar = () => {
             {/* DESKTOP MENU */}
             <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 text-gray-800 dark:text-gray-200 font-medium">
               {menuItems.map((item, i) =>
-  item.link.startsWith("#") ? (
-    <a
-      key={i}
-      href={item.link}
-      className="hover:text-green-500 hover:scale-105 transition"
-    >
-      {item.name}
-    </a>
-  ) : (
-    <Link
-      key={i}
-      to={item.link}
-      className="hover:text-green-500 hover:scale-105 transition"
-    >
-      {item.name}
-    </Link>
-  )
-)}
+                item.link.startsWith("#") ? (
+                  <a
+                    key={i}
+                    href={item.link}
+                    className="hover:text-green-500 hover:scale-105 transition"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={i}
+                    to={item.link}
+                    className="hover:text-green-500 hover:scale-105 transition"
+                  >
+                    {item.name}
+                  </Link>
+                )
+              )}
             </div>
 
             {/* RIGHT SIDE */}
             <div className="flex items-center gap-5 ml-auto">
 
               {/* CV */}
-              <div ref={cvRef} 
-              className={`relative transition-all duration-300 ${
-              scrolled 
-              ? "opacity-0 -translate-y-2 pointer-events-none" 
-              : "opacity-100 translate-y-0"
-  }`}>
+              <div
+                ref={cvRef}
+                className={`relative transition-all duration-300 ${
+                  scrolled
+                    ? "opacity-0 -translate-y-2 pointer-events-none"
+                    : "opacity-100 translate-y-0"
+                }`}
+              >
                 <button
                   onClick={() => setCvOpen(!cvOpen)}
-                  className="px-2 py-1 text-xs
-                  md:px-4 md:py-2 md:text-base rounded-full bg-transparent border-2 border-sky-900 text-black dark:text-white font-medium hover:bg-cyan-600 hover:scale-105 transition"
+                  className="px-2 py-1 text-xs md:px-4 md:py-2 md:text-base rounded-full border-2 border-sky-900 text-black dark:text-white font-medium hover:bg-cyan-600 hover:text-white hover:scale-105 transition"
                 >
                   ⬇ CV
                 </button>
@@ -115,7 +116,7 @@ const Navbar = () => {
                       initial={{ opacity: 0, scale: 0.9, y: -10 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                      className="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden z-[9999]"
+                      className="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden z-50"
                     >
                       <Link
                         to="/resume"
@@ -143,7 +144,7 @@ const Navbar = () => {
                 <DarkMode />
               </div>
 
-              {/* HAMBURGER (ONLY MD/SM) */}
+              {/* HAMBURGER */}
               <div className="md:hidden flex items-center">
                 <button onClick={() => setIsOpen(!isOpen)}>
                   {isOpen ? (
@@ -155,7 +156,6 @@ const Navbar = () => {
               </div>
 
             </div>
-
           </div>
         </div>
       </div>
@@ -168,22 +168,32 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden absolute right-4 top-[60px] w-48 bg-white dark:text-sky-300 dark:bg-gray-900 rounded-lg shadow-md p-2 z-[9999]"
+            className="md:hidden absolute right-4 top-[60px] w-48 bg-white dark:bg-gray-900 rounded-lg shadow-md p-2 z-50"
           >
-            {menuItems.map((item, i) => (
-              <a
-                key={i}
-                href={item.link}
-                onClick={() => setIsOpen(false)}
-                className="block p-2 hover:text-green-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition"
-              >
-                {item.name}
-              </a>
-            ))}
+            {menuItems.map((item, i) =>
+              item.link.startsWith("#") ? (
+                <a
+                  key={i}
+                  href={item.link}
+                  onClick={() => setIsOpen(false)}
+                  className="block p-2 hover:text-green-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={i}
+                  to={item.link}
+                  onClick={() => setIsOpen(false)}
+                  className="block p-2 hover:text-green-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition"
+                >
+                  {item.name}
+                </Link>
+              )
+            )}
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 };

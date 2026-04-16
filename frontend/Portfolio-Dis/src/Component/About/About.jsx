@@ -17,10 +17,9 @@ const About = () => {
     <section
       ref={aboutRef}
       id="about"
-    className="relative w-screen min-h-screen overflow-hidden
+    className="relative w-full min-h-screen overflow-hidden
 flex flex-col items-center justify-start transition-colors duration-700"
 >
-      <div className="absolute inset-0 bg-white/20 dark:bg-black/20 pointer-events-none z-0" />
 
       <div className="relative z-10 w-full flex-1 flex items-center justify-center">
         <AnimatePresence mode="wait">

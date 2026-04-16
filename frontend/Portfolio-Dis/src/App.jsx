@@ -9,6 +9,7 @@ import Footer from './Component/Footer/Footer'
 import Experience from './Component/Experience/Experience'
 import BubbleBackground from './Component/BubbleBackground/BubbleBackground'
 import Resume from './Component/Resume/Resume'
+import Contact from './Component/Contact/Contact'
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <About />
       <Projects />
       <Experience />
+      <Contact />
       <Footer />
     </BubbleBackground>
   );
