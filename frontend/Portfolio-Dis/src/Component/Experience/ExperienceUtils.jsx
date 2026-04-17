@@ -44,11 +44,13 @@ export function LogoGrid({ items, selectedId, onSelect }) {
               : "bg-gray-100 dark:bg-gray-800 hover:scale-105"
           }`}
         >
-          <img
-            src={it.logo}
-            alt={it.company}
-            className="w-12 h-12 object-contain"
-          />
+          <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white dark:bg-gray-700 shadown-inner">
+            <img
+              src={it.logo}
+              alt={it.company}
+              className="w-8 h-8 object-contain graycale hover:grayscale-0 transition"
+            />
+          </div>
         </button>
       ))}
     </div>

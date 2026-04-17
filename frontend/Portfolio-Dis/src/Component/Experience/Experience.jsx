@@ -58,7 +58,7 @@ function Experience() {
             bg-clip-text text-transparent">
               Experience Dashboard
 
-               <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
               Interactive & recruiter-friendly experience section
             </p>
             </motion.h2>

@@ -15,7 +15,6 @@ const Hero = () => {
     "
     >
 
-
       {/* Main Content */}
       <motion.div
         className="z-10 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10 w-full max-w-7xl"

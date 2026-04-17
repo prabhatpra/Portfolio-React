@@ -1,5 +1,54 @@
 export const data = [
   {
+    id: 3,
+    type: "Intern",
+    company: "HulkHire Tech",
+    role: "Java Backend Developer Intern",
+    duration: "Feb 2025 – Mar 2025",
+    location: "Remote",
+
+    github: "https://github.com/your-username/stripe-payment-system",
+    live: "",
+
+    bullets: [
+      "Designed and developed a secure payment system using Spring Boot and Microservices architecture.",
+      "Integrated Stripe Payment Gateway to handle online transactions including payment intent creation and confirmation.",
+      "Built REST APIs for product management, order processing, and payment execution.",
+      "Implemented end-to-end payment flow from frontend request to backend processing and Stripe API communication.",
+      "Handled webhook events from Stripe to track payment status (success, failure, refund).",
+      "Ensured secure data handling using validation, exception handling, and proper API design.",
+      "Tested APIs using Postman and validated real-time payment scenarios in Stripe test mode.",
+      "Deployed backend services on AWS for scalable and production-ready environment."
+    ],
+
+    metrics: [
+      { label: "Backend Development", value: 90 },
+      { label: "System Design", value: 85 },
+    ],
+
+    tech: [
+      { name: "Java", value: 90 },
+      { name: "Spring Boot", value: 85 },
+      { name: "Microservices", value: 80 },
+      { name: "Stripe API", value: 85 },
+      { name: "REST API", value: 85 },
+      { name: "Postman", value: 80 },
+      { name: "AWS", value: 70 },
+      { name: "Git", value: 75 },
+    ],
+
+    snapshots: [
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800",
+      "https://images.unsplash.com/photo-1605902711622-cfb43c4437f0?w=800",
+    ],
+
+    logo: "https://cdn-icons-png.flaticon.com/512/226/226777.png",
+
+    testimonial:
+      "Successfully built a secure and scalable payment system with real-world API integration — Mentor",
+  },
+
+  {
     id: 1,
     type: "Intern",
     company: "TechSolve Web Solutions Pvt Ltd",
@@ -83,51 +132,6 @@ export const data = [
 
     testimonial:
       "Strong analytical thinking and ability to convert data into insights — Supervisor",
-  },
-
-  {
-    id: 3,
-    type: "Intern",
-    company: "HulkHire Tech",
-    role: "Java Backend Developer Intern",
-    duration: "Feb 2025 – Mar 2025",
-    location: "Remote",
-
-    github: "https://github.com/your-username/stripe-payment-system",
-    live: "",
-
-    bullets: [
-      "Developed secure payment system using Spring Boot and Microservices.",
-      "Integrated Stripe API for transaction handling.",
-      "Built multiple services for product, payment, and notifications.",
-      "Deployed application on AWS with scalability focus.",
-    ],
-
-    metrics: [
-      { label: "Backend Development", value: 90 },
-      { label: "Team Collaboration", value: 85 },
-    ],
-
-    tech: [
-      { name: "Java", value: 90 },
-      { name: "Spring Boot", value: 85 },
-      { name: "Microservices", value: 80 },
-      { name: "Stripe API", value: 75 },
-      { name: "AWS", value: 65 },
-      { name: "REST API", value: 80 },
-      { name: "Git", value: 70 },
-      { name: "GitHub", value: 80 },
-    ],
-
-    snapshots: [
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800",
-      "https://images.unsplash.com/photo-1605902711622-cfb43c4437f0?w=800",
-    ],
-
-    logo: "https://cdn-icons-png.flaticon.com/512/226/226777.png",
-
-    testimonial:
-      "Delivered scalable backend services with strong security practices — Mentor",
   },
 
   {

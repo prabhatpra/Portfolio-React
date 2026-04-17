@@ -42,7 +42,7 @@ function ExperiencePanel({ selected }) {
             <img
               src={selected.logo}
               alt={selected.company}
-              className="w-12 h-12 object-contain"
+              className="w-10 h-10 object-contain"
             />
           </div>
 
