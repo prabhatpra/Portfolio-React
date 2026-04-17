@@ -44,7 +44,9 @@ function Contact() {
   };
 
   return (
-    <div className="relative w-full min-h-screen flex items-center justify-center px-4 py-10">
+    <div 
+    id="contact"
+    className="relative w-full min-h-screen flex items-center justify-center px-4 py-10">
 
       <div className="relative z-10 w-full max-w-3xl">
 
