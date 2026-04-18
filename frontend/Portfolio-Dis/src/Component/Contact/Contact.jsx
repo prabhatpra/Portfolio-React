@@ -8,6 +8,7 @@ function Contact() {
     reason: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,9 +21,23 @@ function Contact() {
       alert("Please fill all required fields ⚠️");
       return;
     }
+    if(!form.email.includes("@")){
+      alert("Please enter a valid email address ❌");
+      return;
+    }
 
-    alert("Message sent successfully 🚀");
-    setForm({ name: "", email: "", reason: "", message: "" });
+    if(!form.reason){
+      alert("Please select a reason for contact ⚠️");
+      return;
+    }
+
+    setLoading(true);
+
+    setTimeout(() => {
+      alert("Message sent successfully 🚀");
+      setForm({ name: "", email: "", reason: "", message: "" });
+      setLoading(false);
+    }, 1000);
   };
 
   const container = {
@@ -88,6 +103,7 @@ function Contact() {
           <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
             <motion.input
+              type="text"
               variants={item}
               whileFocus={{ scale: 1.02 }}
               name="name"
@@ -105,6 +121,7 @@ function Contact() {
             />
 
             <motion.input
+              type="email"
               variants={item}
               whileFocus={{ scale: 1.02 }}
               name="email"
@@ -183,7 +200,7 @@ function Contact() {
               transition-all duration-300
             "
           >
-            Send Message 🚀
+            {loading ? "Sending..." : "Send Message 🚀"}
           </motion.button>
 
         </motion.form>
