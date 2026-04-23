@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaInstagram,
@@ -11,12 +11,45 @@ import { profileWithImages, basicProfileDescriptions } from "./HeroData";
 
 const HeroSocial = () => {
   const [popupOpen, setPopupOpen] = useState(false);
+
+
   const [profile, setProfile] = useState("instagram");
+
+  const profiles = ["instagram", "facebook", "linkedin", "github"];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const [hoverText, setHoverText] = useState("Instagram Profile");
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const cardRef = useRef(null);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setPopupOpen(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  
+  const handleNext = () => {
+    const nextIndex = (currentIndex + 1) % profiles.length;
+    setCurrentIndex(nextIndex);
+    setProfile(profiles[nextIndex]);
+  };
+
+  const handlePrev = () => {
+    const prevIndex =
+      currentIndex === 0 ? profiles.length - 1 : currentIndex - 1;
+    setCurrentIndex(prevIndex);
+    setProfile(profiles[prevIndex]);
+  };
 
   const socialButtons = [
     {
@@ -60,7 +93,6 @@ const HeroSocial = () => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // smoother rotation
     setRotateY(((x / rect.width) - 0.5) * 15);
     setRotateX(((y / rect.height) - 0.5) * -15);
   };
@@ -98,7 +130,7 @@ const HeroSocial = () => {
           className="px-6 py-3 border-2 border-green-300 hover:bg-gradient-to-r from-sky-400 to-pink-400 dark:hover:bg-fuchsia-400 dark:text-white text-purple-700 font-bold rounded-full shadow-lg flex items-center gap-2 group"
         >
           <FaUserCircle size={24} />
-         <span className="block group-hover:hidden">Social Profiles</span>
+          <span className="block group-hover:hidden">Social Profiles</span>
           <span className="hidden group-hover:block">Click to Explore</span>
         </button>
       </div>
@@ -134,10 +166,6 @@ const HeroSocial = () => {
               shadow-xl relative flex flex-col md:flex-row gap-6 
               overflow-y-auto scrollbar-hide"
               onClick={(e) => e.stopPropagation()}
-              initial={{ y: 60, opacity: 0, scale: 0.9 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 60, opacity: 0, scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 120, damping: 10 }}
             >
               {/* Close */}
               <button
@@ -148,7 +176,7 @@ const HeroSocial = () => {
               </button>
 
               {/* LEFT */}
-              <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left relative">
                 <a href={profileWithImages[profile].link} target="_blank" rel="noopener noreferrer">
                   <img
                     src={profileWithImages[profile].img}
@@ -175,23 +203,32 @@ const HeroSocial = () => {
                 >
                   Click to visit profile
                 </a>
+
+                {/* 🔥 Mobile Arrows */}
+                <div className="flex md:hidden justify-between w-full absolute top-1/2 left-0 px-2 -translate-y-1/2">
+                  <button onClick={handlePrev} className="text-white bg-black/40 px-3 py-1 rounded-full">
+                    ←
+                  </button>
+                  <button onClick={handleNext} className="text-white bg-black/40 px-3 py-1 rounded-full">
+                    →
+                  </button>
+                </div>
               </div>
 
-              {/* RIGHT */}
-              <div className="w-full md:w-40 flex flex-col md:pl-6 items-center md:items-start justify-center">
-                
+              {/* RIGHT (Desktop only) */}
+              <div className="hidden md:flex w-full md:w-40 flex flex-col md:pl-6 items-center md:items-start justify-center">
                 <div className="text-center md:text-left text-white/70 mb-2">
                   {hoverText}
                 </div>
 
-                {/* Buttons */}
                 <div className="relative flex flex-row md:flex-col gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
                   {socialButtons.map((btn) => (
                     <motion.button
                       key={btn.id}
                       whileHover={{ scale: 1.05 }}
-                      transition={{ type: "spring", stiffness: 200, damping: 15 }}
                       onClick={() => {
+                        const index = profiles.indexOf(btn.id);
+                        setCurrentIndex(index);
                         setProfile(btn.id);
                         setHoverText(btn.text);
                       }}
@@ -199,25 +236,17 @@ const HeroSocial = () => {
                         px-2 py-1 text-xs
                         sm:px-3 sm:py-1.5 sm:text-sm
                         md:px-4 md:py-2 md:text-sm
-                        rounded-md font-semibold transition duration-300 ${
-                        profile === btn.id
+                        rounded-md font-semibold transition duration-300 ${profile === btn.id
                           ? btn.activeClass
                           : `bg-white/10 ${btn.hoverClass}`
-                      }`}
+                        }`}
                     >
                       {btn.icon} {btn.label}
                     </motion.button>
                   ))}
-
-                  {/*  scroll hint arrow (mobile only) */}
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 text-white/50 text-xs md:hidden">
-                    →
-                  </div>
                 </div>
               </div>
 
-              {/*  fade effect only for mobile */}
-              <div className="gradient-fade-bottom md:hidden"></div>
             </motion.div>
           </motion.div>
         )}
