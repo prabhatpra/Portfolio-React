@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Login from "../Navbar/Login";
 
 const certificates = [
   { id: 1, title: "Java Full Stack Certificate", img: "/certificates/java_fullstack.png" },

@@ -21,40 +21,45 @@ const Navbar = () => {
   const cvRef = useRef(null);
   const menuRef = useRef(null);
 
-  // ✅ FIX: only scroll state update (menu auto close removed)
+  // SCROLL HANDLER
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 30);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Outside click handler
+  // OUTSIDE CLICK SAFE HANDLER
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (cvRef.current && !cvRef.current.contains(event.target)) {
         setCvOpen(false);
       }
+
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // CLOSE ALL MENUS (SAFE UX)
+  const closeMenus = () => {
+    setIsOpen(false);
+    setCvOpen(false);
+  };
 
   return (
     <div className="fixed top-0 z-50 w-full">
       <div
         className={`mx-auto transition-all duration-300 shadow-md relative
-        ${
-          scrolled
+        ${scrolled
             ? "w-[90%] md:w-1/2 h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-lg"
             : "w-full h-12 bg-white/30 dark:bg-black/40 backdrop-blur-lg"
-        }`}
+          }`}
       >
         <div className="h-full px-4 md:px-6 lg:px-10">
           <div className="flex items-center justify-between h-full">
@@ -68,7 +73,7 @@ const Navbar = () => {
               />
             </a>
 
-            {/* DESKTOP MENU */}
+            {/* MENU */}
             <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 text-gray-800 dark:text-gray-200 font-medium">
               {menuItems.map((item, i) =>
                 item.link.startsWith("#") ? (
@@ -95,16 +100,9 @@ const Navbar = () => {
             <div className="flex items-center gap-5 ml-auto">
 
               {/* CV */}
-              <div
-                ref={cvRef}
-                className={`relative transition-all duration-300 ${
-                  scrolled
-                    ? "opacity-0 -translate-y-2 pointer-events-none"
-                    : "opacity-100 translate-y-0"
-                }`}
-              >
+              <div ref={cvRef} className="relative">
                 <button
-                  onClick={() => setCvOpen(!cvOpen)}
+                  onClick={() => setCvOpen((prev) => !prev)}
                   className="px-2 py-1 text-xs md:px-4 md:py-2 md:text-base rounded-full border-2 border-sky-900 text-black dark:text-white font-medium hover:bg-cyan-600 hover:text-white hover:scale-105 transition"
                 >
                   ⬇ CV
@@ -120,8 +118,8 @@ const Navbar = () => {
                     >
                       <Link
                         to="/resume"
+                        onClick={closeMenus}
                         className="block px-3 py-2 hover:bg-gray-200 dark:text-sky-300 dark:hover:bg-gray-700"
-                        onClick={() => setCvOpen(false)}
                       >
                         View
                       </Link>
@@ -129,8 +127,8 @@ const Navbar = () => {
                       <a
                         href="/resume.pdf"
                         download
+                        onClick={closeMenus}
                         className="block px-3 py-2 hover:bg-gray-200 dark:text-sky-300 dark:hover:bg-gray-700"
-                        onClick={() => setCvOpen(false)}
                       >
                         Download
                       </a>
@@ -140,17 +138,15 @@ const Navbar = () => {
               </div>
 
               {/* DARK MODE */}
-              <div className="hover:scale-110 transition">
-                <DarkMode />
-              </div>
+              <DarkMode />
 
               {/* HAMBURGER */}
-              <div className="md:hidden flex items-center">
-                <button onClick={() => setIsOpen(!isOpen)}>
+              <div className="md:hidden">
+                <button onClick={() => setIsOpen((prev) => !prev)}>
                   {isOpen ? (
-                    <HiX className="w-6 h-6 text-black dark:text-white" />
+                    <HiX className="w-6 h-6" />
                   ) : (
-                    <HiMenuAlt3 className="w-6 h-6 text-black dark:text-white hover:text-green-500 transition" />
+                    <HiMenuAlt3 className="w-6 h-6 hover:text-green-500 transition" />
                   )}
                 </button>
               </div>
@@ -175,7 +171,7 @@ const Navbar = () => {
                 <a
                   key={i}
                   href={item.link}
-                  onClick={() => setIsOpen(false)}
+                  onClick={closeMenus}
                   className="block p-2 hover:text-green-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition"
                 >
                   {item.name}
@@ -184,7 +180,7 @@ const Navbar = () => {
                 <Link
                   key={i}
                   to={item.link}
-                  onClick={() => setIsOpen(false)}
+                  onClick={closeMenus}
                   className="block p-2 hover:text-green-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition"
                 >
                   {item.name}
