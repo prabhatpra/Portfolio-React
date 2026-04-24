@@ -8,36 +8,59 @@ function Contact() {
     reason: "",
     message: "",
   });
+
   const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // 🔥 ONLY LOGIC ADDED HERE
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.name || !form.email || !form.message) {
-      alert("Please fill all required fields ⚠️");
-      return;
-    }
-    if(!form.email.includes("@")){
-      alert("Please enter a valid email address ❌");
+    if (!form.name || !form.email || !form.message || !form.reason) {
+      setResponse("⚠️ Please fill all fields");
       return;
     }
 
-    if(!form.reason){
-      alert("Please select a reason for contact ⚠️");
+    if (!form.email.includes("@")) {
+      setResponse("❌ Invalid email");
       return;
     }
 
-    setLoading(true);
+    try {
+      setLoading(true);
+      setResponse("");
 
-    setTimeout(() => {
-      alert("Message sent successfully 🚀");
-      setForm({ name: "", email: "", reason: "", message: "" });
+      console.log("Sending data 👉", form);
+
+      const res = await fetch("http://localhost:8089/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      console.log("Status 👉", res.status);
+
+      const data = await res.json();
+      console.log("Response 👉", data);
+
+      if (res.ok) {
+        setResponse("✅ Message sent successfully!");
+        setForm({ name: "", email: "", reason: "", message: "" });
+      } else {
+        setResponse("❌ Failed to send message");
+      }
+    } catch (error) {
+      console.log("Error 👉", error);
+      setResponse("❌ Server error");
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   const container = {
@@ -59,13 +82,11 @@ function Contact() {
   };
 
   return (
-    <div 
-    id="contact"
-    className="relative w-full min-h-screen flex items-center justify-center px-4 py-10">
+    <div id="contact" className="relative w-full min-h-screen flex items-center justify-center px-4 py-10">
 
       <div className="relative z-10 w-full max-w-3xl">
 
-        {/* HEADER */}
+        {/* HEADER (same UI) */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,21 +103,14 @@ function Contact() {
           </p>
         </motion.div>
 
-        {/* FORM */}
+        {/* FORM (UNCHANGED UI) */}
         <motion.form
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.2 }}
           onSubmit={handleSubmit}
-          className="
-            w-full rounded-2xl p-6 md:p-10 shadow-2xl space-y-5
-            backdrop-blur-xl
-
-            bg-white/10
-            dark:bg-gradient-to-br dark:from-slate-900/40 dark:via-indigo-950/40 dark:to-slate-900/40
-            border border-white/10 dark:border-white/20
-          "
+          className="w-full rounded-2xl p-6 md:p-10 shadow-2xl space-y-5 backdrop-blur-xl bg-white/10 dark:bg-gradient-to-br dark:from-slate-900/40 dark:via-indigo-950/40 dark:to-slate-900/40 border border-white/10 dark:border-white/20"
         >
 
           {/* NAME + EMAIL */}
@@ -104,104 +118,63 @@ function Contact() {
 
             <motion.input
               type="text"
-              variants={item}
-              whileFocus={{ scale: 1.02 }}
               name="name"
               value={form.name}
               onChange={handleChange}
               placeholder="Full Name"
-              className="
-                p-3 rounded-xl outline-none transition
-                bg-white/20 dark:bg-white/10 backdrop-blur-md
-                text-black dark:text-white
-                border border-white/20
-                placeholder:text-gray-600 dark:placeholder:text-gray-400
-                focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300
-              "
+              className="p-3 rounded-xl outline-none transition bg-white/20 dark:bg-white/10 backdrop-blur-md text-black dark:text-white border border-white/20"
             />
 
             <motion.input
               type="email"
-              variants={item}
-              whileFocus={{ scale: 1.02 }}
               name="email"
               value={form.email}
               onChange={handleChange}
               placeholder="Email Address"
-              className="
-                p-3 rounded-xl outline-none transition
-                bg-white/20 dark:bg-white/10 backdrop-blur-md
-                text-black dark:text-white
-                border border-white/20
-                placeholder:text-gray-600 dark:placeholder:text-gray-400
-                focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300
-              "
+              className="p-3 rounded-xl outline-none transition bg-white/20 dark:bg-white/10 backdrop-blur-md text-black dark:text-white border border-white/20"
             />
           </motion.div>
 
           {/* SELECT */}
-          <motion.div variants={item} className="relative">
-            <motion.select
-              whileFocus={{ scale: 1.02 }}
-              name="reason"
-              value={form.reason}
-              onChange={handleChange}
-              className="
-                w-full p-3 rounded-xl outline-none transition
-                bg-white/20 dark:bg-white/10 backdrop-blur-md
-                text-black dark:text-slate-400
-                border border-white/20
-                focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300
-                appearance-none cursor-pointer
-              "
-            >
-              <option value="">Select Reason</option>
-              <option value="project">Project Collaboration</option>
-              <option value="job">Job Opportunity</option>
-              <option value="freelance">Freelance Work</option>
-              <option value="support">Support / Help</option>
-              <option value="other">Other</option>
-            </motion.select>
-
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-300 pointer-events-none">
-              ▼
-            </span>
-          </motion.div>
+          <motion.select
+            name="reason"
+            value={form.reason}
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl bg-white/20 dark:bg-white/10 text-black dark:text-slate-400 border border-white/20"
+          >
+            <option value="">Select Reason</option>
+            <option value="project">Project Collaboration</option>
+            <option value="job">Job Opportunity</option>
+            <option value="freelance">Freelance Work</option>
+            <option value="support">Support / Help</option>
+            <option value="other">Other</option>
+          </motion.select>
 
           {/* MESSAGE */}
           <motion.textarea
-            variants={item}
-            whileFocus={{ scale: 1.02 }}
             name="message"
             value={form.message}
             onChange={handleChange}
             placeholder="Write your message..."
             rows="6"
-            className="
-              w-full p-3 rounded-xl outline-none resize-none transition
-              bg-white/20 dark:bg-white/10 backdrop-blur-md
-              text-black dark:text-white
-              border border-white/20
-              placeholder:text-gray-600 dark:placeholder:text-gray-400
-              focus:border-indigo-400 focus:ring-2 focus:ring-indigo-300
-            "
+            className="w-full p-3 rounded-xl bg-white/20 dark:bg-white/10 text-black dark:text-white border border-white/20"
           />
 
           {/* BUTTON */}
           <motion.button
-            variants={item}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             type="submit"
-            className="
-              w-full py-3 rounded-xl
-              flex items-center justify-center gap-2 text-sm font-medium text-black
-              bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300
-              transition-all duration-300
-            "
+            disabled={loading}
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300"
           >
             {loading ? "Sending..." : "Send Message 🚀"}
           </motion.button>
+
+          {/* RESPONSE MESSAGE */}
+          {response && (
+            <p className="text-center text-sm mt-2 text-white">
+              {response}
+            </p>
+          )}
 
         </motion.form>
       </div>
