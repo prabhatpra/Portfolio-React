@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const SignupCard = ({
@@ -10,30 +10,33 @@ const SignupCard = ({
   setShowConfirmPassword,
   handleSignupSubmit,
   setIsLogin,
-  errorMsg
+  errorMsg,
 }) => {
-
+  // SAFE STATE UPDATE
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
-    <div className="absolute inset-0  p-4 sm:p-6 shadow-xl [transform:rotateY(180deg)] [backface-visibility:hidden]">
+    <div className="absolute inset-0 p-4 sm:p-6 shadow-xl [transform:rotateY(180deg)] [backface-visibility:hidden]">
 
+      {/* ERROR SAFE */}
       {errorMsg && (
-        <div className="text-red-700 bg-red-100 p-3 mb-4 text-center rounded">{errorMsg}</div>
+        <div className="text-red-700 bg-red-100 p-3 mb-4 text-center rounded">
+          {errorMsg}
+        </div>
       )}
-     
-       <h2 className="text-center text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 mb-2 drop-shadow-md">
-  Signup
-</h2>
 
+      <h2 className="text-center text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 mb-2 drop-shadow-md">
+        Signup
+      </h2>
 
-     <div className="mb-4 text-center text-sm sm:text-base font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 drop-shadow-md">
-  🚀 Sign up to explore my projects and portfolio updates.
-</div>
-
-      
+      <div className="mb-4 text-center text-sm sm:text-base font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 drop-shadow-md">
+        🚀 Sign up to explore my projects and portfolio updates.
+      </div>
 
       <form onSubmit={handleSignupSubmit}>
         <input
@@ -45,6 +48,7 @@ const SignupCard = ({
           onChange={handleChange}
           required
         />
+
         <input
           type="email"
           name="email"
@@ -54,6 +58,8 @@ const SignupCard = ({
           onChange={handleChange}
           required
         />
+
+        {/* PASSWORD */}
         <div className="relative mb-4">
           <input
             type={showPassword ? "text" : "password"}
@@ -64,14 +70,17 @@ const SignupCard = ({
             onChange={handleChange}
             required
           />
+
           <button
             type="button"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowPassword((prev) => !prev)}
             className="absolute inset-y-0 right-3 flex items-center text-gray-500"
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
+
+        {/* CONFIRM PASSWORD */}
         <div className="relative mb-4">
           <input
             type={showConfirmPassword ? "text" : "password"}
@@ -82,9 +91,10 @@ const SignupCard = ({
             onChange={handleChange}
             required
           />
+
           <button
             type="button"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            onClick={() => setShowConfirmPassword((prev) => !prev)}
             className="absolute inset-y-0 right-3 flex items-center text-gray-500"
           >
             {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
