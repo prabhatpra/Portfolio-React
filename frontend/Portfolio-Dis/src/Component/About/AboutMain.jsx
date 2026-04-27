@@ -127,15 +127,17 @@ export default function AboutMain() {
                   <span className="font-semibold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
                     Full Stack Developer
                   </span>{" "}
-                  building scalable apps using{" "}
-                  <span className="font-semibold text-orange-400">Java</span>,{" "}
-                  <span className="font-semibold text-green-500">Spring Boot</span>, and{" "}
-                  <span className="font-semibold text-sky-500">React.js</span>.
+                  focused on building scalable backend system using{" "}
+                  <span className="font-semibold text-orange-400">Java</span> and{" "}
+                  <span className="font-semibold text-green-500">Spring Boot</span>,
+                  along with hands-on experience in frontend development using{" "}
+                  <span className="font-semibold text-sky-500">React.js</span> and{" "}
+                  <span className="font-semibold text-blue-400">Tailwind CSS</span>.
                 </p>
 
                 <p className="mt-2 text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-                  I have experience in building REST APIs with authentication and database integration, and have worked 
-                  on backend systems including order management and Stripe payment integration. I also have experience in building responsive frontends using React.js and Tailwind CSS.
+                  I have built REST APIs with authentication and database integration, and worked on backend systems including order management and Stripe payment integration.
+                  On the frontend side, I have developed responsive user interfaces and continuously improve my skills by building projects and exploring modern UI practices.
                 </p>
 
                 <div className="mt-8 flex flex-col items-start gap-3">
