@@ -169,8 +169,11 @@ const HeroSocial = () => {
             >
               {/* Close */}
               <button
-                onClick={() => setPopupOpen(false)}
-                className="absolute top-4 right-4 text-white text-3xl font-bold"
+                className="absolute top-4 right-4 text-white text-3xl font-bold z-50 cursor-pointer 
+             hover:text-red-400 hover:scale-110 transition duration-300"
+                onClick={(e) => {e.stopPropagation();
+                  setPopupOpen(false)}}
+                
               >
                 &times;
               </button>
