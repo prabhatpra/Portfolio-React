@@ -52,6 +52,7 @@ export default function AboutMain() {
   const [active, setActive] = useState(null);
   const [images, setImages] = useState([Prabhat1, Prabhat2, Prabhat3]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [startScroll, setStartScroll] = useState(0);
 
   // ✅ FIX 1: useScroll (replace deprecated useViewportScroll)
   const { scrollY } = useScroll();
@@ -69,7 +70,29 @@ export default function AboutMain() {
       });
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, []); 
+
+
+  useEffect(() => {
+    if (active) {
+      setStartScroll(scrollY.get());
+    }
+  }, [active, scrollY]);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const unsubscribe = scrollY.on("change", (latest) => {
+      const diff = Math.abs(latest - startScroll);
+
+      
+      if (diff > window.innerHeight) {
+        setActive(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [scrollY, active, startScroll]);
 
   const onMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -218,9 +241,13 @@ export default function AboutMain() {
               variants={cardPop}
             >
               <div className="bg-white/10 dark:bg-black/30 backdrop-blur-md rounded-2xl p-6 shadow-xl">
-                {React.createElement(componentsMap[active], {
-                  onClose: () => setActive(null),
-                })}
+
+                  {(() => {
+                    const ActiveComponent = componentsMap[active];
+                    return ActiveComponent && (
+                      <ActiveComponent onClose={() => setActive(null)} />
+                    );
+                  })()}
 
                 <div className="mt-6 flex justify-end">
                   <button
