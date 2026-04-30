@@ -146,7 +146,7 @@ const Navbar = () => {
                   {isOpen ? (
                     <HiX className="w-6 h-6 dark:text-white" />
                   ) : (
-                    <HiMenuAlt3 className="w-6 h-6 dark:text-white  transition" />
+                    <HiMenuAlt3 className="w-6 h-6 dark:text-white transition" />
                   )}
                 </button>
               </div>

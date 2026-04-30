@@ -14,12 +14,12 @@ const DarkMode = () => {
       : "light";
   });
 
-  // ✅ Apply theme
+
   React.useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
-  // ✅ System change listener (only if user ne override nahi kiya)
+  
   React.useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -33,7 +33,7 @@ const DarkMode = () => {
     return () => media.removeEventListener("change", handleChange);
   }, []);
 
-  // ✅ Toggle (user override)
+  
   const toggleTheme = () => {
     setTheme((prev) => {
       const newTheme = prev === "dark" ? "light" : "dark";
