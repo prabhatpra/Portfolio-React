@@ -3,68 +3,63 @@ import LightButton from "../../assets/DarkLight/light-mode-button.png";
 import DarkButton from "../../assets/DarkLight/dark-mode-button.png";
 
 const DarkMode = () => {
-  
+
   const [theme, setTheme] = React.useState(() => {
-    const savedTheme = localStorage.getItem("theme");
+    const saved = localStorage.getItem("theme");
 
-    if (savedTheme) {
-      return savedTheme;
-    }
+    if (saved) return saved;
 
-    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return systemDark ? "dark" : "light";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   });
 
-  const element = document.documentElement;
-
-  
+  // ✅ Apply theme
   React.useEffect(() => {
-    if (theme === "dark") {
-      element.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      element.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
+    document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
-  // ✅ Listen system theme change
+  // ✅ System change listener (only if user ne override nahi kiya)
   React.useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
 
     const handleChange = (e) => {
-      const savedTheme = localStorage.getItem("theme");
-
-      
-      if (!savedTheme) {
+      if (!localStorage.getItem("theme")) {
         setTheme(e.matches ? "dark" : "light");
       }
     };
 
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    media.addEventListener("change", handleChange);
+    return () => media.removeEventListener("change", handleChange);
   }, []);
+
+  // ✅ Toggle (user override)
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      const newTheme = prev === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
+  };
 
   return (
     <div className="relative">
-      
+
       <img
         src={LightButton}
         alt="Light Mode"
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className={`w-12 cursor-pointer drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)] transition-all duration-300 absolute right-0 z-10 ${
-          theme === "dark" ? "opacity-0" : "opacity-100"
-        }`}
+        onClick={toggleTheme}
+        className={`w-12 cursor-pointer transition-all absolute right-0 z-10 ${theme === "dark" ? "opacity-0" : "opacity-100"
+          }`}
       />
 
-     
       <img
         src={DarkButton}
         alt="Dark Mode"
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className="w-12 cursor-pointer drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)] transition-all duration-300"
+        onClick={toggleTheme}
+        className="w-12 cursor-pointer transition-all"
       />
+
     </div>
   );
 };
