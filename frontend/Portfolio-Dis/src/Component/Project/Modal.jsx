@@ -33,8 +33,8 @@ const Modal = ({ project, onClose }) => {
             <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-xl" />
 
             {/* Title & Description */}
-            <h2 className="text-2xl font-bold text-white">{project.title}</h2>
-            <p className="text-white/80 text-sm">{project.description}</p>
+            <h2 className="text-2xl font-bold text-gray-800  dark:text-white">{project.title}</h2>
+            <p className="dark:text-white/80 text-gray-800 text-sm">{project.description}</p>
 
             {/* Tech Tags */}
             <div className="flex flex-wrap gap-2 mt-2">

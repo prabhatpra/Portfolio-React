@@ -1,9 +1,21 @@
 // src/components/Project/ProjectData.jsx
+import portfolio from "../../assets/Project/portfolio.png";
 import Project1 from "../../assets/Project/Project1.png";
 import Project2 from "../../assets/Project/Project2.png";
 import Project3 from "../../assets/Project/Project3.png";
 
 export const demoProjects = [
+
+  {
+    title: "My Portfolio Website",
+    description: "Modern responsive portfolio built with React, Tailwind CSS, Framer Motion, dark/light mode, and project showcase system.",
+    image: portfolio,
+    tech: ["React", "TailwindCSS", "Framer Motion"],
+    liveLink: "https://prabhat-dis.vercel.app/",
+    githubLink: "#",
+    detailLink: "#",
+  }, 
+
   {
     title: "Portfolio Website",
     description: "Personal portfolio with dark mode and animations.",
@@ -45,15 +57,6 @@ export const demoProjects = [
     description: "Real-time chat application with WebSocket.",
     image: "https://via.placeholder.com/400x300.png?text=Chat+App",
     tech: ["React", "Socket.io", "Tailwind"],
-    liveLink: "#",
-    githubLink: "#",
-    detailLink: "#",
-  },
-  {
-    title: "Weather App",
-    description: "Check current weather in your city with API integration.",
-    image: "https://via.placeholder.com/400x300.png?text=Weather+App",
-    tech: ["React", "OpenWeather API", "Tailwind"],
     liveLink: "#",
     githubLink: "#",
     detailLink: "#",

@@ -35,8 +35,8 @@ const ProjectCard = ({ title, description, image, tech, liveLink, githubLink, de
       onClick={openModal}
     >
       <img src={image} alt={title} className="w-full h-48 object-cover rounded-xl" />
-      <h3 className="text-lg font-bold text-white">{title}</h3>
-      <p className="text-white/80 text-sm">{description}</p>
+      <h3 className="text-lg font-bold text-gray-800 dark:text-white">{title}</h3>
+      <p className="dark:text-white/80 text-pink-800 text-sm">{description}</p>
       <div className="flex flex-wrap gap-1 mt-2">
         {tech.map((t,i) => (
           <span key={i} className="px-2 py-0.5 rounded-full bg-blue-500 text-white text-xs">
