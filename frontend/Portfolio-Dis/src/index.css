@@ -89,3 +89,29 @@ body {
         display: none;
     }
 }
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill,
+.dark select:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    box-shadow: 0 0 0px 1000px #1f2937 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: black !important;
+    box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.12) inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+}
