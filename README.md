@@ -1,91 +1,124 @@
 # 🌟 Portfolio-Dis Frontend
 
-This is the **frontend part** of the Portfolio-Dis project, built with **React**, **Vite**, and **Tailwind CSS**.  
-It handles all UI components, animations, and client-side logic.  
-**Authentication (Signup/Login) connects to backend Spring Boot APIs.**
+This is the **frontend part** of the Portfolio-Dis project, built using **React**, **Vite**, and **Tailwind CSS**.
+The project focuses on creating a modern, responsive, and animated portfolio website with smooth UI interactions and backend integration using **Spring Boot APIs**.
+
+The frontend handles all UI components, animations, theme management, and client-side functionality, while the backend manages message handling, email services, and database operations.
 
 ---
 
-## 🛠 Tech Stack
+# 🛠 Tech Stack
 
-- ⚛️ React (Vite)
-- 🎨 Tailwind CSS
-- 🎥 Framer Motion (animations)
-- 🖼 React Icons
-- 🌐 Axios (for API calls to backend)
-
----
-
-## ⚡ Features
-
--  Responsive Navbar with login/signup and dark/light mode  
--  Hero section with social links and animations  
--  About, Experience, Projects, and Contact sections  
--  Project cards with dynamic content  
-- 🌙 Dark/Light mode toggle  
-- 🔑 **Signup/Login integrated with backend APIs** (`/user/register`, `/user/login`)  
+* ⚛️ React (Vite)
+* 🎨 Tailwind CSS
+* 🎥 Framer Motion
+* 🖼 React Icons
+* 🌐 Axios
+* ☕ Spring Boot (Backend API Integration)
+* 🗄 MySQL Database
+* ☁️ Vercel Deployment
 
 ---
 
-## 📂 Project Structure
+# ⚡ Features
+
+* ✅ Responsive Navbar
+* 🌙 Dark/Light Mode Toggle
+* 🎥 Smooth UI Animations using Framer Motion
+* 👨‍💻 Hero Section with Social Links
+* 📄 About, Experience, Projects, and Contact Sections
+* 📌 Dynamic Project Cards
+* 📬 Contact Form integrated with Spring Boot Backend APIs
+* 🗄 User messages stored securely in the database
+* ⏱ Email Rate Limiting System:
+
+  * Only 3 emails allowed within 10 minutes
+  * Additional requests blocked for 1 hour
+* 🎨 Centralized Global Background Color Management
+* 📱 Fully Responsive Design for Mobile & Desktop
+* 🚀 Live Deployment using Vercel
+
+---
+
+# 📂 Project Structure
 
 ```plaintext
 frontend/Portfolio-Dis/
-│── public/                # Static assets (favicon, images, etc.)
-│── src/                   # Main source code
-│   ├── assets/            # Images, icons, project screenshots
-│   ├── Component/         # All reusable components
-│   │   ├── Hero/          # Hero section (intro + social links)
-│   │   ├── About/         # About section
-│   │   ├── Experience/    # Experience section
-│   │   ├── Project/       # Projects section + ProjectData.jsx
-│   │   ├── Navbar/        # Navbar + login/signup components
-│   │   ├── Footer/        # Footer section
-│   │   └── BubbleBackground/ # Background animation
-│   ├── App.jsx            # Main App component
-│   ├── main.jsx           # React entry point
-│   └── index.css          # Global styles
-│── package.json           # Dependencies & project info
-│── vite.config.js         # Vite config file
-│── tailwind.config.js     # Tailwind CSS config
-│── postcss.config.js      # PostCSS config
-│── README.md              # Documentation
+│── public/                # Static assets
+│── src/
+│   ├── assets/            # Images & icons
+│   ├── Component/
+│   │   ├── Hero/
+│   │   ├── About/
+│   │   ├── Experience/
+│   │   ├── Project/
+│   │   ├── Navbar/
+│   │   ├── Footer/
+│   │   └── BubbleBackground/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│── package.json
+│── vite.config.js
+│── tailwind.config.js
+│── postcss.config.js
+│── README.md
+```
 
 ---
 
-## 💻 Project Setup
+# 💻 Project Setup
 
+```bash
 cd frontend/Portfolio-Dis
 npm install
 npm run dev
-
----
-🚀 Deployment
-
-This project is deployed using Vercel for easy hosting.
-You can access the live version here:
-🔗 [portfolio-dis-prabhatpra-vercel](https://portfolio-dis-prabhatpra.vercel.app/). Live
+```
 
 ---
 
-👤 Author
+# 🚀 Live Deployment
 
-Prabhat Prajapati
-📧 Email: prabhatprajapati01@gmail.com
+This project is deployed using Vercel.
 
-🔗 GitHub: prabhatpra
-
-🔗 LinkedIn: https://www.linkedin.com/in/prabhat-prajapati-01p6/
-
+🔗 Live Website:
+https://prabhat-dis.vercel.app/
 
 ---
 
-## 🙏 Thank You
+# 👨‍💻 Backend Features
 
-Thank you for visiting my project!  
-I really appreciate your time and interest.  
-If you liked this project or found it useful, don’t forget to ⭐ star the repo on GitHub.  
+The backend is developed using Spring Boot and handles:
 
-Suggestions and feedback are always welcome 😊
+* REST API development
+* Contact message handling
+* Database storage
+* Email sending functionality
+* Exception handling
+* Email rate limiting system
 
 ---
+
+# 👤 Author
+
+## Prabhat Prajapati
+
+📧 Email:
+[prabhatprajapati01@gmail.com](mailto:prabhatprajapati01@gmail.com)
+
+🔗 GitHub:
+https://github.com/prabhatpra
+
+🔗 LinkedIn:
+https://www.linkedin.com/in/prabhat-prajapati-01p6/
+
+---
+
+# 🙏 Thank You
+
+Thank you for visiting this project.
+
+If you found this project useful or interesting, feel free to ⭐ star the repository and share your feedback.
+
+Suggestions and improvements are always welcome 😊
+
