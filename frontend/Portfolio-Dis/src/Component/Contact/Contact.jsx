@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { sendContactMessage } from "./contactService";
 
 function Contact() {
 
@@ -7,6 +8,7 @@ function Contact() {
     name: "",
     email: "",
     subject: "",
+    customSubject: "",
     message: "",
   });
 
@@ -20,11 +22,10 @@ function Contact() {
       [e.target.name]: e.target.value,
     });
 
-    // remove error while typing
-    setErrors({
-      ...errors,
+    setErrors((prev) => ({
+      ...prev,
       [e.target.name]: "",
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -32,61 +33,58 @@ function Contact() {
 
     let newErrors = {};
 
-    // NAME
     if (!form.name.trim()) {
       newErrors.name = "Name is required";
     }
 
-    // EMAIL
     if (!form.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!form.email.includes("@")) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       newErrors.email = "Invalid email";
     }
 
-    // SUBJECT
     if (!form.subject.trim()) {
       newErrors.subject = "Please select reason";
     }
 
-    // MESSAGE
+    if (
+      form.subject === "Other" &&
+      form.customSubject.trim().length < 5
+    ) {
+      newErrors.customSubject =
+        "Please enter at least 5 characters";
+    }
+
     if (!form.message.trim()) {
       newErrors.message = "Message is required";
     }
 
     setErrors(newErrors);
 
-    // stop if errors exist
-    if (Object.keys(newErrors).length > 0) {
-      return;
-    }
+    if (Object.keys(newErrors).length > 0) return;
+
+    const finalData = {
+      ...form,
+      subject:
+        form.subject === "Other"
+          ? form.customSubject
+          : form.subject,
+    };
 
     try {
       setLoading(true);
       setResponse("");
 
-      console.log("Sending data 👉", form);
+      const result = await sendContactMessage(finalData);
 
-      const res = await fetch("http://localhost:8089/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-
-      console.log("Status 👉", res.status);
-
-      const data = await res.json();
-      console.log("Response 👉", data);
-
-      if (res.ok) {
+      if (result.ok) {
         setResponse("✅ Message sent successfully!");
 
         setForm({
           name: "",
           email: "",
           subject: "",
+          customSubject: "",
           message: "",
         });
 
@@ -96,29 +94,10 @@ function Contact() {
       }
 
     } catch (error) {
-      console.log("Error 👉", error);
       setResponse("❌ Server error");
     } finally {
       setLoading(false);
     }
-  };
-
-  const container = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 25 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
   };
 
   return (
@@ -129,7 +108,7 @@ function Contact() {
 
       <div className="relative z-10 w-full max-w-3xl">
 
-        {/* HEADER */}
+        {/* HEADER (UNCHANGED) */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -147,25 +126,18 @@ function Contact() {
           </p>
         </motion.div>
 
-        {/* FORM */}
+        {/* FORM (UNCHANGED UI) */}
         <motion.form
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
           onSubmit={handleSubmit}
           className="w-full rounded-2xl p-6 md:p-10 shadow-2xl space-y-5 backdrop-blur-xl bg-white/10 dark:bg-gradient-to-br dark:from-slate-900/40 dark:via-indigo-950/40 dark:to-slate-900/40 border border-white/10 dark:border-white/20"
         >
 
           {/* NAME + EMAIL */}
-          <motion.div
-            variants={item}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
             {/* NAME */}
             <div>
-              <motion.input
+              <input
                 type="text"
                 name="name"
                 value={form.name}
@@ -183,7 +155,7 @@ function Contact() {
 
             {/* EMAIL */}
             <div>
-              <motion.input
+              <input
                 type="email"
                 name="email"
                 value={form.email}
@@ -199,79 +171,71 @@ function Contact() {
               )}
             </div>
 
-          </motion.div>
+          </div>
 
           {/* SUBJECT */}
-          <motion.div variants={item}>
+          <select
+            name="subject"
+            value={form.subject}
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl outline-none transition bg-white/20 dark:bg-gray-800 backdrop-blur-md text-black dark:text-white border border-white/20"
+          >
+            <option value="">Select Reason</option>
+            <option value="Project Collaboration">Project Collaboration</option>
+            <option value="Job Opportunity">Job Opportunity</option>
+            <option value="Freelance Work">Freelance Work</option>
+            <option value="Support Help">Support / Help</option>
+            <option value="Other">Other</option>
+          </select>
 
-            <motion.select
-              name="subject"
-              value={form.subject}
+          {errors.subject && (
+            <p className="text-red-500 text-sm mt-1">
+              * {errors.subject}
+            </p>
+          )}
+
+          {/* CUSTOM SUBJECT */}
+          {form.subject === "Other" && (
+            <input
+              type="text"
+              name="customSubject"
+              value={form.customSubject}
               onChange={handleChange}
+              placeholder="Enter your reason"
               className="w-full p-3 rounded-xl outline-none transition bg-white/20 dark:bg-gray-800 backdrop-blur-md text-black dark:text-white border border-white/20"
-            >
-              <option value="">
-                Select Reason
-              </option>
+            />
+          )}
 
-              <option value="project">
-                Project Collaboration
-              </option>
-
-              <option value="job">
-                Job Opportunity
-              </option>
-
-              <option value="freelance">
-                Freelance Work
-              </option>
-
-              <option value="support">
-                Support / Help
-              </option>
-
-              <option value="other">
-                Other
-              </option>
-
-            </motion.select>
-
-            {errors.subject && (
-              <p className="text-red-500 text-sm mt-1">
-                * {errors.subject}
-              </p>
-            )}
-
-          </motion.div>
+          {errors.customSubject && (
+            <p className="text-red-500 text-sm mt-1">
+              * {errors.customSubject}
+            </p>
+          )}
 
           {/* MESSAGE */}
-          <motion.div variants={item}>
+          <textarea
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            placeholder="Write your message..."
+            rows="6"
+            className="w-full p-3 rounded-xl bg-white/20 dark:bg-gray-800 text-black dark:text-white border border-white/20"
+          />
 
-            <motion.textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="Write your message..."
-              rows="6"
-              className="w-full p-3 rounded-xl bg-white/20 dark:bg-gray-800 text-black dark:text-white border border-white/20"
-            />
-
-            {errors.message && (
-              <p className="text-red-500 text-sm mt-1">
-                * {errors.message}
-              </p>
-            )}
-
-          </motion.div>
+          {errors.message && (
+            <p className="text-red-500 text-sm mt-1">
+              * {errors.message}
+            </p>
+          )}
 
           {/* BUTTON */}
-          <motion.button
+          <button
             type="submit"
             disabled={loading}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300 font-semibold"
           >
             {loading ? "Sending..." : "Send Message 🚀"}
-          </motion.button>
+          </button>
 
           {/* RESPONSE */}
           {response && (
