@@ -24,18 +24,24 @@
     background: radial-gradient(circle at center, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.2), transparent 70%);
 }
 
-
-/* Hide scrollbar utility */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-    /* Chrome, Safari */
+.scrollbar-hide {
+    -ms-overflow-style: none !important;
+   
+    scrollbar-width: none !important;
+    
 }
 
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
+.scrollbar-hide::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    display: none !important;
+
+}
+*::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    
 }
 
 html {
@@ -66,9 +72,6 @@ body {
     scroll-behavior: smooth;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
 
 @media print {
 

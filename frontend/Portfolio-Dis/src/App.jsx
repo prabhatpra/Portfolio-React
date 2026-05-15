@@ -10,6 +10,7 @@ import Experience from './Component/Experience/Experience'
 import BubbleBackground from './Component/BubbleBackground/BubbleBackground'
 import Resume from './Component/Resume/Resume'
 import Contact from './Component/Contact/Contact'
+import ExperienceDetails from './Component/ExperienceDetails/JavaDetails';
 
 const Home = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/ExperienceDetails" element={<ExperienceDetails />} />
       </Routes>
   );
 };

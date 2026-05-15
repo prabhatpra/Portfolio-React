@@ -2,8 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { SnapshotRow } from "./ExperienceUtils";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function ExperiencePanel({ selected }) {
+  const navigate = useNavigate();
+
   if (!selected) return null;
 
   return (
@@ -168,7 +171,7 @@ function ExperiencePanel({ selected }) {
           )}
 
           <button
-            onClick={() => alert("Full details clicked!")}
+            onClick={() => navigate("/ExperienceDetails/")}
             className="flex items-center justify-center gap-2 
               px-4 py-2 rounded-lg text-sm font-semibold
               bg-gradient-to-r from-green-200 via-teal-300 to-fuchsia-300 text-black
