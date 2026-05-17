@@ -13,7 +13,7 @@ The frontend handles all UI components, animations, theme management, and client
 * 🎨 Tailwind CSS
 * 🎥 Framer Motion
 * 🖼 React Icons
-* 🌐 Axios
+* 🌐 Fetch API
 * ☕ Spring Boot (Backend API Integration)
 * 🗄 MySQL Database
 * ☁️ Vercel Deployment
