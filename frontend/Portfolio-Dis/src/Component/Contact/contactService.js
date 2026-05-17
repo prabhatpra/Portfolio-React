@@ -1,7 +1,7 @@
 export const sendContactMessage = async (data) => {
     try {
         const res = await fetch(
-            `http://localhost:8089/api/contact`,
+            `${import.meta.env.VITE_API_URL}/api/contact`,
             {
                 method: "POST",
                 headers: {

@@ -1,166 +1,455 @@
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  FaJava,
+  FaDatabase,
+  FaBug,
+  FaCode,
+  FaUsers,
+  FaServer,
+} from "react-icons/fa";
+import { MdApi } from "react-icons/md";
 
 const fadeUp = (i = 1) => ({
-    hidden: { opacity: 0, y: 50 },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            delay: i * 0.12,
-            duration: 0.6,
-            ease: "easeOut"
-        }
-    }
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.12,
+      duration: 0.7,
+      ease: "easeOut",
+    },
+  },
 });
 
-export default function JavaDetails() {
-    return (
-        <div className="min-h-screen bg-black text-white flex flex-col">
+const scaleFade = (i = 1) => ({
+  hidden: {
+    opacity: 0,
+    scale: 0.9,
+  },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+    },
+  },
+});
 
-            {/* HEADER */}
+const technologies = [
+  "Java",
+  "Spring Boot",
+  "MySQL",
+  "JDBC",
+  "Git",
+  "GitHub",
+];
+
+const responsibilities = [
+  {
+    icon: <FaJava />,
+    text: "Java backend development",
+  },
+  {
+    icon: <FaDatabase />,
+    text: "MySQL database handling",
+  },
+  {
+    icon: <FaBug />,
+    text: "Bug fixing & debugging",
+  },
+  {
+    icon: <MdApi />,
+    text: "REST API support",
+  },
+  {
+    icon: <FaUsers />,
+    text: "Team collaboration",
+  },
+  {
+    icon: <FaCode />,
+    text: "Code testing",
+  },
+];
+
+export default function JavaDetails() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-black text-white overflow-hidden relative">
+
+      {/* BACKGROUND GLOW */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+        }}
+        className="absolute top-0 left-0 w-72 h-72 bg-teal-500/20 blur-3xl rounded-full"
+      />
+
+      <motion.div
+        animate={{
+          scale: [1, 1.3, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+        }}
+        className="absolute bottom-0 right-0 w-72 h-72 bg-cyan-500/10 blur-3xl rounded-full"
+      />
+
+      {/* MAIN */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10">
+
+        {/* HERO */}
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <motion.div
+            whileHover={{
+              scale: 1.05,
+            }}
+            className="inline-block px-4 py-2 rounded-full border border-teal-400/30 bg-teal-400/10 text-teal-300 text-sm mb-5"
+          >
+            Internship Experience
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-4xl md:text-6xl font-bold tracking-wide"
+          >
+            HulkHire Tech
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-gray-400 mt-4 text-lg"
+          >
+            Java Backend Developer Intern
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="text-gray-500 text-sm mt-2"
+          >
+            Feb 2025 - Mar 2025 • Remote
+          </motion.p>
+        </motion.div>
+
+        {/* STATS */}
+        <motion.div
+          variants={fadeUp(1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-16"
+        >
+          {[
+            { number: "10+", label: "APIs Worked" },
+            { number: "15+", label: "Bugs Fixed" },
+            { number: "20+", label: "Database Queries" },
+            { number: "2", label: "Months Experience" },
+          ].map((item, i) => (
             <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="px-6 md:px-20 py-6 text-center border-b border-white/10"
+              key={i}
+              variants={scaleFade(i)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: false, amount: 0.3 }}
+              whileHover={{
+                y: -8,
+                scale: 1.04,
+              }}
+              className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center backdrop-blur-md"
             >
-                <h1 className="text-4xl md:text-5xl font-bold">
-                    Internship Experience
-                </h1>
-                <p className="text-gray-400 mt-2">
-                    Backend development journey
-                </p>
+              <motion.h2
+                whileHover={{ scale: 1.1 }}
+                className="text-3xl font-bold text-teal-400"
+              >
+                {item.number}
+              </motion.h2>
+
+              <p className="text-gray-400 mt-2 text-sm">
+                {item.label}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* OVERVIEW */}
+        <motion.section
+          variants={fadeUp(2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          whileHover={{
+            y: -5,
+          }}
+          className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md mb-10"
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <motion.div
+              whileHover={{
+                rotate: 360,
+              }}
+              transition={{ duration: 0.6 }}
+            >
+              <FaServer className="text-teal-400 text-2xl" />
             </motion.div>
 
-            {/* SCROLLABLE CONTENT */}
-            <div className="flex-1 px-6 md:px-20 py-10 space-y-12 overflow-y-auto scrollbar-hide">
+            <h2 className="text-3xl font-semibold">
+              Overview
+            </h2>
+          </div>
 
-                {/* COMPANY */}
-                <motion.section
-                    variants={fadeUp(1)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    <h2 className="text-3xl text-teal-400 font-semibold">
-                        HulkHire Tech
-                    </h2>
-                    <p className="text-gray-300 mt-1">
-                        Java Developer Intern • Remote
-                    </p>
-                    <p className="text-gray-500 text-sm mt-2">
-                        Feb 2025 - Mar 2025
-                    </p>
-                </motion.section>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-300 leading-relaxed text-lg"
+          >
+            Worked as a Java Backend Developer Intern contributing to
+            backend APIs, MySQL database handling, debugging,
+            request-response flow, and real-world project workflow.
+            Improved problem-solving skills and learned professional
+            development practices in a collaborative environment.
+          </motion.p>
+        </motion.section>
 
-                {/* OVERVIEW */}
-                <motion.section
-                    variants={fadeUp(2)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    <h3 className="text-2xl font-semibold mb-3">Overview</h3>
-                    <p className="text-gray-300 leading-8">
-                        Worked as a Java Backend Developer Intern contributing to
-                        APIs, database handling, debugging, and real-world project workflow.
-                    </p>
-                </motion.section>
+        {/* RESPONSIBILITIES */}
+        <motion.section
+          variants={fadeUp(3)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md mb-10"
+        >
+          <h2 className="text-3xl font-semibold mb-8">
+            Responsibilities
+          </h2>
 
-                {/* RESPONSIBILITIES */}
-                <motion.section
-                    variants={fadeUp(3)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    <h3 className="text-2xl font-semibold mb-4">Responsibilities</h3>
-
-                    <ul className="grid md:grid-cols-2 gap-2 text-gray-300 list-disc pl-5">
-                        <li>Java backend development</li>
-                        <li>MySQL database handling</li>
-                        <li>Bug fixing & debugging</li>
-                        <li>REST API support</li>
-                        <li>Team collaboration</li>
-                        <li>Code testing</li>
-                    </ul>
-                </motion.section>
-
-                {/* ACHIEVEMENTS */}
-                <motion.section
-                    variants={fadeUp(4)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    <h3 className="text-2xl font-semibold mb-4">Key Achievements</h3>
-
-                    <div className="space-y-2 text-gray-300">
-                        <p>✔ Completed 2-month internship successfully</p>
-                        <p>✔ Improved backend debugging skills</p>
-                        <p>✔ Learned Java + MySQL integration</p>
-                        <p>✔ Understood real project workflow</p>
-                    </div>
-                </motion.section>
-
-                {/* TECHNOLOGIES */}
-                <motion.section
-                    variants={fadeUp(5)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    <h3 className="text-2xl font-semibold mb-4">Technologies</h3>
-
-                    <div className="flex flex-wrap gap-3">
-                        {["Java", "Spring Boot", "MySQL", "JDBC", "Git", "GitHub"].map(
-                            (t, i) => (
-                                <span
-                                    key={i}
-                                    className="px-4 py-2 rounded-full bg-white/10 border border-white/10 text-teal-300"
-                                >
-                                    {t}
-                                </span>
-                            )
-                        )}
-                    </div>
-                </motion.section>
-
-                {/* SKILLS */}
-                <motion.section
-                    variants={fadeUp(6)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    <h3 className="text-2xl font-semibold mb-4">Skills Improved</h3>
-
-                    <div className="text-gray-300 space-y-2">
-                        <p>✔ Problem solving mindset</p>
-                        <p>✔ Backend architecture understanding</p>
-                        <p>✔ API handling & request flow</p>
-                        <p>✔ Team communication skills</p>
-                    </div>
-                </motion.section>
-
-                {/* BUTTONS */}
+          <div className="grid md:grid-cols-2 gap-5">
+            {responsibilities.map((item, i) => (
+              <motion.div
+                key={i}
+                variants={scaleFade(i)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, amount: 0.3 }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.02,
+                }}
+                className="flex items-center gap-4 bg-black/30 border border-white/5 rounded-2xl p-4 hover:border-teal-400/40 transition duration-300"
+              >
                 <motion.div
-                    variants={fadeUp(7)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.3 }}
-                    className="flex gap-4 flex-wrap pt-6"
+                  whileHover={{
+                    rotate: 15,
+                    scale: 1.2,
+                  }}
+                  className="text-2xl text-teal-400"
                 >
-                    <button className="px-6 py-3 bg-teal-500 text-black rounded-xl hover:scale-105 transition">
-                        Download Certificate
-                    </button>
-
-                    <button className="px-6 py-3 bg-white/10 border border-white/20 rounded-xl hover:scale-105 transition">
-                        Back to Portfolio
-                    </button>
+                  {item.icon}
                 </motion.div>
 
-            </div>
-        </div>
-    );
+                <p className="text-gray-300">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* ACHIEVEMENTS */}
+        <motion.section
+          variants={fadeUp(4)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md mb-10"
+        >
+          <h2 className="text-3xl font-semibold mb-6">
+            Key Achievements
+          </h2>
+
+          <div className="space-y-4">
+            {[
+              "Completed internship successfully",
+              "Improved backend debugging skills",
+              "Learned Java + MySQL integration",
+              "Understood real project workflow",
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                variants={scaleFade(i)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, amount: 0.3 }}
+                whileHover={{
+                  x: 10,
+                }}
+                className="flex items-center gap-4 bg-black/30 rounded-2xl p-4 border border-white/5"
+              >
+                <motion.div
+                  animate={{
+                    scale: [1, 1.3, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
+                  className="w-3 h-3 rounded-full bg-teal-400"
+                />
+
+                <p className="text-gray-300">
+                  {item}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* TECHNOLOGIES */}
+        <motion.section
+          variants={fadeUp(5)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md mb-10"
+        >
+          <h2 className="text-3xl font-semibold mb-6">
+            Technologies
+          </h2>
+
+          <div className="flex flex-wrap gap-4">
+            {technologies.map((tech, i) => (
+              <motion.div
+                key={i}
+                variants={scaleFade(i)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, amount: 0.3 }}
+                whileHover={{
+                  scale: 1.1,
+                  rotate: -2,
+                }}
+                className="px-5 py-3 rounded-full bg-black/30 border border-white/10 text-teal-300 hover:bg-teal-400 hover:text-black transition duration-300 cursor-pointer"
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* SKILLS */}
+        <motion.section
+          variants={fadeUp(6)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md mb-10"
+        >
+          <h2 className="text-3xl font-semibold mb-6">
+            Skills Improved
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              "Problem solving mindset",
+              "Backend architecture understanding",
+              "API handling & request flow",
+              "Team communication skills",
+            ].map((skill, i) => (
+              <motion.div
+                key={i}
+                variants={scaleFade(i)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, amount: 0.3 }}
+                whileHover={{
+                  y: -5,
+                  borderColor: "#2dd4bf",
+                }}
+                className="bg-black/30 border border-white/5 rounded-2xl p-5 transition duration-300"
+              >
+                <p className="text-gray-300">
+                  {skill}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* BUTTONS */}
+        <motion.div
+          variants={fadeUp(7)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="flex flex-wrap gap-5 pt-4"
+        >
+          <motion.a
+            href="/certificate.pdf"
+            download
+            whileHover={{
+              scale: 1.08,
+              y: -4,
+            }}
+            whileTap={{
+              scale: 0.95,
+            }}
+            className="
+              px-7 py-4
+              bg-teal-400
+              text-black
+              rounded-2xl
+              font-semibold
+              hover:bg-teal-300
+              hover:shadow-lg hover:shadow-teal-500/30
+              transition-all duration-300
+            "
+          >
+            Download Certificate
+          </motion.a>
+
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              y: -4,
+            }}
+            whileTap={{
+              scale: 0.95,
+            }}
+            className="
+              px-7 py-4
+              bg-white/10
+              border border-white/20
+              rounded-2xl
+              hover:bg-white/20
+              transition-all duration-300
+            "
+          >
+            Back to Portfolio
+          </motion.button>
+        </motion.div>
+
+      </div>
+    </div>
+  );
 }
