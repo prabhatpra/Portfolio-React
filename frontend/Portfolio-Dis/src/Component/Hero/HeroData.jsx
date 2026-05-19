@@ -1,5 +1,5 @@
 import Github from "../../assets/socialImg/github.png";
-import Intsta from "../../assets/socialImg/insta.png";
+import Insta from "../../assets/socialImg/insta.png";
 import Linkedin from "../../assets/socialImg/linkedin.png";
 import Facebook from "../../assets/socialImg/facebook.png";
 
@@ -40,7 +40,7 @@ building **real-world projects**, learning new technologies, and polishing my sk
 🎯 My goal is simple: **to deliver value, write clean and scalable code, and grow 
 as a developer while contributing to impactful projects.**
 `
-
+ 
   .split("\n")
   .map((line) => line.trim())
   .filter((line) => line);
@@ -96,7 +96,7 @@ export const profileWithImages = {
       "Follow me on Instagram!",
       "📸 Explore my latest posts.",
     ],
-    img: Intsta,
+    img: Insta,
     link: "https://www.instagram.com/prabhatprajapati_01/",
   },
   facebook: {

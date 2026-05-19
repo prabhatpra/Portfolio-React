@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from "react";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { roles, scrollingDetails, typewriterSettings } from "./HeroData";
 
 const HeroDetails = () => {
   const containerRef = useRef(null);
   const contentRef = useRef(null);
 
-  // Scroll-based minor scaling
-  const { scrollY } = useViewportScroll();
+  
+  const { scrollY } = useScroll();
   const scrollScale = useTransform(scrollY, [0, 300], [1, 1.3]); 
+  const speedRef = useRef(0.5);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -16,22 +17,50 @@ const HeroDetails = () => {
     if (!container || !content) return;
 
     let scrollPos = 0;
-    const speed = 0.5;
-
-    const totalScroll = content.offsetHeight + container.offsetHeight;
+    let animationFrameId;
 
     const step = () => {
-      scrollPos += speed;
+      scrollPos += speedRef.current;
 
-      if (scrollPos >= totalScroll) scrollPos = 0;
+      const maxScroll = content.offsetHeight/2;
+
+      if (scrollPos >= maxScroll) scrollPos = 0;
 
       content.style.transform = `translateY(${container.offsetHeight - scrollPos}px)`;
 
-      requestAnimationFrame(step);
+     animationFrameId = requestAnimationFrame(step);
     };
 
-    const rafId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafId);
+     animationFrameId = requestAnimationFrame(step);
+
+      const handleMouseEnter = () => {
+        speedRef.current = 0.15; 
+      };
+
+      const handleMouseLeave = () => {
+        speedRef.current = 0.5;
+      };
+
+      const handleTouchStart = () => {
+        speedRef.current = 0.15;
+      };
+     
+      const handleTouchEnd = () => {
+        speedRef.current = 0.5;
+      };
+
+      container.addEventListener("mouseenter", handleMouseEnter);
+      container.addEventListener("mouseleave", handleMouseLeave);
+      container.addEventListener("touchstart", handleTouchStart);
+      container.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      container.removeEventListener("mouseenter", handleMouseEnter);
+      container.removeEventListener("mouseleave", handleMouseLeave);
+      container.removeEventListener("touchstart", handleTouchStart);
+      container.removeEventListener("touchend", handleTouchEnd);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
@@ -55,7 +84,7 @@ const HeroDetails = () => {
      
       <div
         ref={containerRef}
-        className="overflow-hidden h-64 sm:h-72 md:h-80 relative mt-4 w-full text-center md:text-left"
+        className="overflow-hidden h-64 sm:h-72 md:h-96 relative mt-4 w-full text-center md:text-left"
       >
         <div ref={contentRef}>
           {scrollingDetails.map((line, i) => (
