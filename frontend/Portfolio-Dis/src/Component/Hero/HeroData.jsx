@@ -17,30 +17,36 @@ export const roles = [
 
 export const scrollingDetails = `
 
-🌟 Hi, I'm Prabhat Prajapati — a passionate Java & Full Stack Developer 🚀  
+🌟 Hi, I'm Prabhat Prajapati — a Java Full Stack Developer (2024 Graduate) 🚀
 
-💻 I have built this portfolio using **React + Vite + Tailwind CSS**, focusing on 
-modern design, performance, and responsiveness.  
+I have been actively learning and building projects in Java, Spring Boot, Microservices, MySQL, React, and Tailwind CSS since my graduation. My focus has been on improving my skills through real-world projects and continuous development practice.
 
-🔑 My expertise lies in building **secure, scalable, and production-ready 
-applications** using Java, Spring Boot, Microservices, MySQL, and React.  
+💻 I built this portfolio using React + Vite + Tailwind CSS, focusing on performance, responsiveness, and clean UI design.
 
-✅ I have completed my internship at **HulkHire Tech**, where I learned industry-level 
-development practices, team collaboration, and advanced integration techniques.  
+🔑 I have hands-on experience with backend development, REST APIs, authentication systems, and full-stack integration.
 
-⚡ Some of my key projects include:  
-- 🔒 **Authentication Service** – Role-based authentication, authorization, hashing, global exception handling, JDBC-MySQL.  
-- 📂 **Project Management Service** – Secure project storage & frontend showcase, with user project upload & feedback features.  
-- 🌍 **Travel & Tourism Management System** – A Java desktop app for bookings with secure login and intuitive dashboard.  
+🧑‍💻 I completed my internship at HulkHire Tech, where I worked on a Stripe-based Payment System built on a microservices architecture.
 
-📌 I actively update my GitHub with new features and improvements, reflecting my 
-continuous learning journey. Until I secure a role in the industry, I will keep 
-building **real-world projects**, learning new technologies, and polishing my skills.  
+During this project, I contributed to building:
 
-🎯 My goal is simple: **to deliver value, write clean and scalable code, and grow 
-as a developer while contributing to impactful projects.**
+💳 Stripe Payment Integration – Created Stripe checkout sessions for initial payment flow
+🔗 Microservice Communication – Worked in a distributed system where services interacted with each other for payment processing
+🧾 User Interaction Module – Developed features for user payment flow and transaction handling
+⚡ Webhook Handling – Implemented Stripe webhooks to manage payment status updates (success/failure events)
+
+This experience helped me understand real-world payment workflows, API communication between microservices, and event-driven architecture basics.
+
+⚡ Key Projects:
+
+🔒 Authentication System – Secure login system with role-based access, hashing, JWT, and MySQL integration
+📂 Contact Portfolio System (Spring Boot Backend) – A full-stack backend system for portfolio contact management, featuring email notifications using Resend API, rate limiting (spam protection), duplicate message detection, and MySQL-based message storage.
+🌍 Travel & Tourism System – Java-based application with booking system and authentication features
+
+📌 Since my graduation, I have consistently worked on improving my skills and building projects, and I actively maintain my GitHub with new updates.
+
+🎯 My goal is to join a development team where I can contribute to real-world projects, improve my skills, and grow as a software engineer.
 `
- 
+
   .split("\n")
   .map((line) => line.trim())
   .filter((line) => line);

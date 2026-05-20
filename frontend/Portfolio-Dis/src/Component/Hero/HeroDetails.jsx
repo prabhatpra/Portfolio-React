@@ -22,7 +22,7 @@ const HeroDetails = () => {
     const step = () => {
       scrollPos += speedRef.current;
 
-      const maxScroll = content.offsetHeight/2;
+      const maxScroll = content.offsetHeight + container.offsetHeight;
 
       if (scrollPos >= maxScroll) scrollPos = 0;
 
