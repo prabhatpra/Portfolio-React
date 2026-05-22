@@ -65,7 +65,6 @@ export const basicProfileDescriptions = {
     lines: [
       "📸 Sharing creative moments.",
       "🌟 Engaging with followers.",
-      "🎨 Passionate about photography and design.",
     ],
   },
   facebook: {

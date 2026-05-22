@@ -25,18 +25,6 @@ const HeroSocial = () => {
   const cardRef = useRef(null);
 
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setPopupOpen(false);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   
   const handleNext = () => {
     const nextIndex = (currentIndex + 1) % profiles.length;
@@ -120,7 +108,7 @@ const HeroSocial = () => {
       className="relative"
       initial={{ opacity: 0, scale: 0.5, y: 40 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       {/* Open Button */}
@@ -169,8 +157,10 @@ const HeroSocial = () => {
             >
               {/* Close */}
               <button
-                className="absolute top-4 right-4 text-white text-3xl font-bold z-50 cursor-pointer 
-                hover:text-red-400 hover:scale-110 transition duration-300"
+                className="absolute top-4 right-4 z-50 flex items-center justify-center w-10 h-10
+                rounded-full backdrop-blur-md bg-white/30 dark:bg-black/40 text-gray-800 dark:text-white
+                border border-white/20 dark:border-white/10 shadow-lg shadow-black/20 hover:bg 
+                hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
                 onClick={(e) => {e.stopPropagation();
                   setPopupOpen(false)}}
       
@@ -192,7 +182,7 @@ const HeroSocial = () => {
                   {profileWithImages[profile].title}
                 </h2>
 
-                <div className="text-white text-sm space-y-1 mb-2">
+                <div className="text-blue-500 dark:text-white font-semibold space-y-1 mb-2">
                   {allProfileLines.map((line, i) => (
                     <p key={i}>{line}</p>
                   ))}
@@ -208,11 +198,22 @@ const HeroSocial = () => {
                 </a>
 
                 {/* 🔥 Mobile Arrows */}
-                <div className="flex md:hidden justify-between w-full absolute top-1/2 left-0 px-2 -translate-y-1/2">
-                  <button onClick={handlePrev} className="text-white bg-black/40 px-3 py-1 rounded-full">
+                <div className={`flex md:hidden justify-between w-full absolute top-1/2 left-0 px-2 -translate-y-1/2
+                          transition-all duration-300
+                          ${isHovering ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+>
+                  <button onClick={handlePrev} className="flex items-center justify-center w-10 h-10 rounded-full backdrop-blur-md
+                  bg-white/30 dark:dg-black/40 text-gray-800 dark:text-white
+                  border border-white/20 dark:border-white/10 shadow-lg shadow-black/20
+                  hover:scale-110 hover:bg-white/50 dark:hover:bg-black/60
+                  active:scale-95 transition-all duration-300">
                     ←
                   </button>
-                  <button onClick={handleNext} className="text-white bg-black/40 px-3 py-1 rounded-full">
+                  <button onClick={handleNext} className="flex items-center justify-center w-10 h-10 rounded-full backdrop-blur-md
+                  bg-white/30 dark:dg-black/40 text-gray-800 dark:text-white
+                  border border-white/20 dark:border-white/10 shadow-lg shadow-black/20
+                  hover:scale-110 hover:bg-white/50 dark:hover:bg-black/60
+                  active:scale-95 transition-all duration-300">
                     →
                   </button>
                 </div>
