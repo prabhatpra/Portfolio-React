@@ -22,12 +22,17 @@ const Modal = ({ project, onClose }) => {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute top-2 right-2 text-2xl font-bold text-white"
-            >
-              &times;
-            </button>
+             <button
+                className="absolute top-4 right-4 z-50 flex items-center justify-center w-10 h-10
+                rounded-full backdrop-blur-md bg-white/30 dark:bg-black/40 text-gray-800 dark:text-white
+                border border-white/20 dark:border-white/10 shadow-lg shadow-black/20 hover:bg-red-300 
+                hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClose();}}
+              >
+                &times;
+              </button>
 
             {/* Image */}
             <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-xl" />

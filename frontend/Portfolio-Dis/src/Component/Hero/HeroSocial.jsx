@@ -159,7 +159,7 @@ const HeroSocial = () => {
               <button
                 className="absolute top-4 right-4 z-50 flex items-center justify-center w-10 h-10
                 rounded-full backdrop-blur-md bg-white/30 dark:bg-black/40 text-gray-800 dark:text-white
-                border border-white/20 dark:border-white/10 shadow-lg shadow-black/20 hover:bg 
+                border border-white/20 dark:border-white/10 shadow-lg shadow-black/20 hover:bg-yellow-700 
                 hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
                 onClick={(e) => {e.stopPropagation();
                   setPopupOpen(false)}}
@@ -182,7 +182,7 @@ const HeroSocial = () => {
                   {profileWithImages[profile].title}
                 </h2>
 
-                <div className="text-blue-500 dark:text-white font-semibold space-y-1 mb-2">
+                <div className="text-black dark:text-white font-semibold space-y-1 mb-2">
                   {allProfileLines.map((line, i) => (
                     <p key={i}>{line}</p>
                   ))}
@@ -192,7 +192,7 @@ const HeroSocial = () => {
                   href={profileWithImages[profile].link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-cyan-400 hover:underline font-semibold"
+                  className="text-gray-500 hover:underline font-semibold"
                 >
                   Click to visit profile
                 </a>
