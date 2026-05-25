@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Birztech from "../../assets/certificates/birztech.jpg";
+import Lifetack from "../../assets/certificates/lifetack.jpg";
+
 
 const certificates = [
-  { id: 1, title: "Java Full Stack Certificate", img: "/certificates/java_fullstack.png" },
-  { id: 2, title: "React Developer Certificate", img: "/certificates/react_dev.png" },
-  { id: 3, title: "Spring Boot Expert", img: "/certificates/spring_boot.png" },
+  { id: 1, title: "Python, NumPy, Django, Machine Learning", img: Birztech },
+  { id: 2, title: "Web-Development(HTML, CSS, JavaScript)", img: Lifetack },
 ];
 
 const Certificate = ({ isAuthenticated }) => {
