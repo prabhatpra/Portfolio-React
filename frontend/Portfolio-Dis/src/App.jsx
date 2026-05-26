@@ -7,14 +7,14 @@ import Projects from './Component/Project/Projects'
 import About from './Component/About/About'
 import Footer from './Component/Footer/Footer'
 import Experience from './Component/Experience/Experience'
-import BubbleBackground from './Component/BubbleBackground/BubbleBackground'
+import WelcomeBG from './Component/WelcomeBG/WelcomeBG'
 import Resume from './Component/Resume/Resume'
 import Contact from './Component/Contact/Contact'
 import ExperienceDetails from './Component/ExperienceDetails/JavaDetails';
 
 const Home = () => {
   return (
-    <BubbleBackground>
+    <WelcomeBG>
       <Navbar />
       <Hero />
       <About />
@@ -22,7 +22,7 @@ const Home = () => {
       <Experience />
       <Contact />
       <Footer />
-    </BubbleBackground>
+    </WelcomeBG>
   );
 };
 
