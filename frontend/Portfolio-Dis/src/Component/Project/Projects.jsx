@@ -85,7 +85,7 @@ const Projects = () => {
           variants={fadeInUp}
           initial="hidden"
           whileInView="show"
-          className="text-lg sm:text-xl font-medium text-center bg-gradient-to-r from-blue-500 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-relaxed max-w-2xl"
+          className="text-lg sm:text-xl font-medium text-center bg-gradient-to-r from-blue-700 via-purple-600 to-sky-800 bg-clip-text text-transparent leading-relaxed max-w-2xl"
         >
           Welcome to my code-space 👨‍💻 <br />
           Here, logic meets creativity and ideas turn into real experiences. <br />
@@ -162,7 +162,7 @@ const Projects = () => {
           variants={fadeInUp}
           initial="hidden"
           whileInView="show"
-          className="mt-10 text-center text-base sm:text-lg text-gray-600 dark:text-gray-300 italic"
+          className="mt-10 text-center text-base sm:text-lg bg-gradient-to-r from-blue-700 via-purple-600 to-sky-800 bg-clip-text text-transparent italic"
         >
           Thanks for visiting 💙 Your time here means a lot!
         </motion.p>

@@ -74,7 +74,7 @@ const Navbar = () => {
             </a>
 
             {/* MENU */}
-            <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 text-gray-800 dark:text-gray-200 font-medium">
+            <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 text-gray-800 dark:text-yellow-400 font-extrabold">
               {menuItems.map((item, i) =>
                 item.link.startsWith("#") ? (
                   <a
