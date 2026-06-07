@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const BubbleBackground = ({ children }) => {
+const WelcomeBG = ({ children }) => {
   const [loading, setLoading] = useState(() => {
     return !sessionStorage.getItem('visited');
   });
@@ -85,4 +85,4 @@ const BubbleBackground = ({ children }) => {
   );
 };
 
-export default BubbleBackground;
+export default WelcomeBG;

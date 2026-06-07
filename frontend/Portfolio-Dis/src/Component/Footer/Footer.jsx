@@ -1,5 +1,6 @@
 import React from "react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -99,11 +100,18 @@ const Footer = () => {
 
       {/* Bottom */}
       <div className="text-center py-4 text-xs text-gray-500">
+        <span>
         Designed & built with ❤️ by{" "}
         <span className="font-semibold">Prabhat Prajapati</span>
+      </span>
+
+      <span className="text-gray-400">|</span>
+      
+      <Link to="/admin/login">Admin</Link>
+
       </div>
     </footer>
   );
 };
-
+ 
 export default Footer;

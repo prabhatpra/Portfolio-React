@@ -11,6 +11,8 @@ import WelcomeBG from './Component/WelcomeBG/WelcomeBG'
 import Resume from './Component/Resume/Resume'
 import Contact from './Component/Contact/Contact'
 import ExperienceDetails from './Component/ExperienceDetails/JavaDetails';
+import Login from './Admin/LoginSignup/Login';
+import Dashboard from './Admin/Dashboard/Dashboard';
 
 const Home = () => {
   return (
@@ -35,7 +37,19 @@ const App = () => {
         <Route path="/ExperienceDetails" element={
             <ExperienceDetails />
         } />
+
+        <Route
+          path="/admin/login" element={<Login />}
+          />
+
+           <Route
+        path="/admin/dashboard"
+        element={<Dashboard />}
+      />
+      
       </Routes>
+
+      
   );
 };
 
