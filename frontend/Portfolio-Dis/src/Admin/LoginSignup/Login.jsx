@@ -199,9 +199,10 @@ transition-all duration-700">
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onMouseEnter={handleMouseEnter}
-            className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white
-            p-5 sm:p-6 rounded-2xl w-[90%] max-w-md relative
-            shadow-2xl border border-gray-200 dark:border-gray-700"
+           className="bg-gradient-to-br from-blue-300 via-slate-600 to-purple-50 dark:bg-gray-900 dark:text-white
+          text-gray-900 p-5 sm:p-6 rounded-2xl w-[90%] sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl relative
+            shadow-2xl border border-blue-100 dark:border-gray-700
+            h-auto min-h-[420px] sm:min-h-[460px] md:min-h-[500px] lg:min-h-[540px]"
             style={{
               boxShadow: glowShadow,
             }}
@@ -244,7 +245,7 @@ transition-all duration-700">
               <motion.div
                 animate={{ rotateY: isLogin ? 0 : 180 }}
                 transition={{ duration: 0.8 }}
-                className="relative [transform-style:preserve-3d]"
+                className="relative [transform-style:preserve-3d] h-full"
               >
 
                 <LoginCard
