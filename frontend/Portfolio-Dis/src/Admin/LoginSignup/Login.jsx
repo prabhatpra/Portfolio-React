@@ -245,7 +245,7 @@ transition-all duration-700">
               <motion.div
                 animate={{ rotateY: isLogin ? 0 : 180 }}
                 transition={{ duration: 0.8 }}
-                className="relative [transform-style:preserve-3d] h-full"
+                className="relative [transform-style:preserve-3d] h-[500px]"
               >
 
                 <LoginCard
