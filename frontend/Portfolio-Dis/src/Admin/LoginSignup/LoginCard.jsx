@@ -41,7 +41,11 @@ const LoginCard = ({
       </div>
 
       {/* FORM */}
-      <form onSubmit={handleLoginSubmit}>
+      <form onSubmit={(e) => {
+        alert("Form Submitted");
+        handleLoginSubmit(e);
+      }
+    }>
 
         {/* EMAIL */}
         <input

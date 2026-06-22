@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
+import { loginUser, registerUser } from "./authService"
 import LoginCard from "./LoginCard";
 import SignupCard from "./SignupCard";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -93,6 +94,10 @@ const Login = () => {
   // LOGIN API
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("Login button clicked");
+    alert("Login button clicked");
+    
     setLoading(true);
 
     try {
@@ -138,7 +143,7 @@ const Login = () => {
       const res = await registerUser(formData);
 
       setMessage({
-        text: res.data.message,
+        text: res.data.message || "Signup successful",
         type: "success",
       });
 
@@ -166,10 +171,7 @@ const Login = () => {
     e.preventDefault();
 
     if (!forgotEmail) {
-      setMessage({
-        text: "Enter your email",
-        type: "error",
-      });
+      setMessage({ text: "Enter your email", type: "error" });
       return;
     }
 

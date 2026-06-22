@@ -268,7 +268,7 @@ export default function AboutMain() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 0.6 }}
-          className="mt-20 text-lg text-center  bg-gradient-to-r from-blue-800 via-pink-900 to-emerald-800 bg-clip-text font-medium text-transparent"
+          className="mt-20 text-lg text-center  bg-gradient-to-r from-blue-500 via-pink-400 to-emerald-800 bg-clip-text font-medium text-transparent"
         >
          I am a passionate Full Stack Developer skilled in React, Tailwind CSS, and backend technologies, actively seeking opportunities to build scalable applications, solve real-world problems, and grow in a professional environment.
         </motion.p>

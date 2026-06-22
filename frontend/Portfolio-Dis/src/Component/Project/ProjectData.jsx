@@ -6,6 +6,17 @@ import Project3 from "../../assets/Project/Project3.png";
 
 export const demoProjects = [
 
+
+  {
+  title: "EMI Calculator",
+  description: "A modern EMI calculator web app that calculates monthly installments based on loan amount, interest rate, and tenure. Built with React and deployed on Vercel. It also includes multi-currency support, allowing users to switch between currencies for better financial understanding.",
+  image: Project3,
+  tech: ["React", "JavaScript", "Tailwind CSS"],
+  liveLink: "https://p-emi.vercel.app/", 
+  githubLink: "https://github.com/prabhatpra/emi-calculator",
+  detailLink: "#",
+},
+
   {
     title: "My Portfolio Website",
     description: "Modern responsive portfolio built with React, Tailwind CSS, Framer Motion, dark/light mode, and project showcase system.",
