@@ -12,6 +12,7 @@ const menuItems = [
   { name: "Project", link: "#project" },
   { name: "Experience", link: "#experience" },
   { name: "Contact", link: "#contact" },
+  { name: "Dashboard", link: "/admin" },
 ];
 
 const Navbar = () => {
