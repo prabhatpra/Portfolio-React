@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import DarkMode from "./DarkMode";
 import PrabhatImg from "../../assets/myimg/prabhat.png";
 import { Link } from "react-router-dom";
-import MobileMenu from "./mobileMenu";
+import MobileMenu from "./MobileMenu";
 
 const menuItems = [
   { name: "Home", link: "#home" },
