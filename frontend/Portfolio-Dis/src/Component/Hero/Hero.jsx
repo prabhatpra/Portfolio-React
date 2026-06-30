@@ -9,7 +9,7 @@ const Hero = () => {
     <section
       id="home"
       className="
-      relative w-screen h-screen min-h-screen overflow-hidden
+      relative w-full h-screen min-h-screen overflow-hidden
       flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-20
       transition-colors duration-700
     "

@@ -15,41 +15,52 @@ export const roles = [
 
 
 
-export const scrollingDetails = `
+export const scrollingDetails = [
+  "🌟 Hi, I'm Prabhat Prajapati — Java Backend Developer",
+  "",
+  "2024 graduate from Dr. Shyama Prasad Mukherjee University, Ranchi.",
+  "Focused on building production-grade backend systems with Java & Spring Boot.",
+  "",
+  "💻 PROFESSIONAL EXPERIENCE:",
+  "",
+  "🏢 HulkHire Tech Internship ⭐ Star Performer of Month",
+  "Built Stripe Payment System on microservices architecture:",
+  "✓ Stripe Payment Integration – Checkout sessions & payment flow",
+  "✓ Microservice Communication – Event-driven payment processing",
+  "✓ Webhook Management – Real-time payment status updates",
+  "✓ User Transaction Module – Payment flow & transaction handling",
+  "",
+  "📌 KEY PROJECTS:",
+  "",
+  "🔒 Authentication System",
+  "Java + Spring Boot + MySQL",
+  "Secure login with JWT & role-based access control",
+  "",
+  "📂 Portfolio Contact Management System (Backend)",
+  "Spring Boot + MySQL + Email API",
+  "Email notifications, rate limiting, duplicate detection",
+  "",
+  "🌍 Travel & Tourism Booking System",
+  "Java + Spring Boot with booking & authentication features",
+  "",
+  "🎯 TECH STACK:",
+  "Backend: Java • Spring Boot • REST APIs • Microservices",
+  "Database: MySQL • SQL Optimization",
+  "Tools: Git • GitHub • Postman • JIRA",
+  "Learning: AWS • Docker • System Design",
+  "",
+  "💡 I believe in writing clean, scalable, maintainable code.",
+  "Every project teaches me better architecture & real-world problem solving.",
+  "",
+  "🚀 Currently focused on system design, cloud deployment & open-source.",
+  "",
+  "🎯 GOAL: Join a team where I can contribute to meaningful projects,",
+  "collaborate with experienced developers, and grow as a software engineer.",
+  "",
+  "Let's connect and build something amazing! 💪",
+];
 
-🌟 Hi, I'm Prabhat Prajapati — a Java Full Stack Developer (2024 Graduate) 🚀
 
-I have been actively learning and building projects in Java, Spring Boot, Microservices, MySQL, React, and Tailwind CSS since my graduation. My focus has been on improving my skills through real-world projects and continuous development practice.
-
-💻 I built this portfolio using React + Vite + Tailwind CSS, focusing on performance, responsiveness, and clean UI design.
-
-🔑 I have hands-on experience with backend development, REST APIs, authentication systems, and full-stack integration.
-
-🧑‍💻 I completed my internship at HulkHire Tech, where I worked on a Stripe-based Payment System built on a microservices architecture.
-
-During this project, I contributed to building:
-
-💳 Stripe Payment Integration – Created Stripe checkout sessions for initial payment flow
-🔗 Microservice Communication – Worked in a distributed system where services interacted with each other for payment processing
-🧾 User Interaction Module – Developed features for user payment flow and transaction handling
-⚡ Webhook Handling – Implemented Stripe webhooks to manage payment status updates (success/failure events)
-
-This experience helped me understand real-world payment workflows, API communication between microservices, and event-driven architecture basics.
-
-⚡ Key Projects:
-
-🔒 Authentication System – Secure login system with role-based access, hashing, JWT, and MySQL integration
-📂 Contact Portfolio System (Spring Boot Backend) – A full-stack backend system for portfolio contact management, featuring email notifications using Resend API, rate limiting (spam protection), duplicate message detection, and MySQL-based message storage.
-🌍 Travel & Tourism System – Java-based application with booking system and authentication features
-
-📌 Since my graduation, I have consistently worked on improving my skills and building projects, and I actively maintain my GitHub with new updates.
-
-🎯 My goal is to join a development team where I can contribute to real-world projects, improve my skills, and grow as a software engineer.
-`
-
-  .split("\n")
-  .map((line) => line.trim())
-  .filter((line) => line);
 
 
 export const typewriterSettings = {
