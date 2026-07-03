@@ -11,9 +11,9 @@ import WelcomeBG from './Component/WelcomeBG/WelcomeBG'
 import Resume from './Component/Resume/Resume'
 import Contact from './Component/Contact/Contact'
 import ExperienceDetails from './Component/ExperienceDetails/JavaDetails';
-import Login from './admin/LoginSignup/Login';
-import Dashboard from './admin/pages/Dashboard/Dashboard';
-import AdminLayout from './admin/layout/AdminLayout';
+import Login from './Admin/LoginSignup/Login';
+import Dashboard from './Admin/pages/Dashboard/Dashboard';
+import AdminLayout from './Admin/layout/AdminLayout';
 
 const Home = () => {
   return (
@@ -39,9 +39,9 @@ const App = () => {
 
         <Route path="/ExperienceDetails" element={<ExperienceDetails />} />
 
-        <Route path="/admin/login" element={<Login />} />
+        <Route path="/Admin/login" element={<Login />} />
 
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/Admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
         </Route>
