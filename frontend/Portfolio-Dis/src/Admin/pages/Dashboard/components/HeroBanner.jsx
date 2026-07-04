@@ -1,11 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FaArrowRight,
   FaCode,
   FaFolderOpen,
 } from "react-icons/fa";
 
+
 const HeroBanner = () => {
+  const navigate = useNavigate();
 
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -13,6 +16,7 @@ const HeroBanner = () => {
     month: "long",
     year: "numeric",
   });
+
 
   return (
     <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-8 text-white shadow-xl">
@@ -45,7 +49,9 @@ const HeroBanner = () => {
         {/* Right */}
         <div className="flex flex-wrap gap-4">
 
-          <button className="flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-slate-900 transition hover:scale-105">
+          <button 
+               onClick={() => navigate("/Admin/projects/add")}
+               className="flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-slate-900 transition hover:scale-105">
 
             <FaFolderOpen />
 

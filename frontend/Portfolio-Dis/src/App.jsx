@@ -14,6 +14,9 @@ import ExperienceDetails from './Component/ExperienceDetails/JavaDetails';
 import Login from './Admin/LoginSignup/Login';
 import Dashboard from './Admin/pages/Dashboard/Dashboard';
 import AdminLayout from './Admin/layout/AdminLayout';
+import AdminProjects from "./Admin/pages/Projects/AdminProjects";
+import AddProject from "./Admin/pages/Projects/AddProject";
+import EditProject from "./Admin/pages/Projects/EditProject";
 
 const Home = () => {
   return (
@@ -44,7 +47,13 @@ const App = () => {
         <Route path="/Admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
+
+          {/* PROJECT ROUTES */}
+          <Route path="projects" element={<AdminProjects />} />
+          <Route path='projects/add' element={<AddProject />} />
+          <Route path='projects/edit/:id' element={<EditProject />} />
         </Route>
+         
       </Routes>
 
       
