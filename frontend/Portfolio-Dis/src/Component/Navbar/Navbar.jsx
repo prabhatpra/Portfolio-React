@@ -59,7 +59,7 @@ const Navbar = () => {
       <div
         className={`mx-auto transition-all duration-300 shadow-md relative
         ${scrolled
-            ? "w-[90%] md:w-1/2 h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-lg"
+            ? "w-[95%] sm:w-[85%] md:w-[70%] h-12 rounded-lg bg-white/10 dark:bg-black/30 backdrop-blur-lg"
             : "w-full h-12 bg-white/30 dark:bg-black/40 backdrop-blur-lg"
           }`}
       >
