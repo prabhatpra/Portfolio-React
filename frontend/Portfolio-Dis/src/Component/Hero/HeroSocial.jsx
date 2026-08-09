@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FaInstagram,
-  FaFacebook,
   FaLinkedin,
   FaGithub,
+  FaInstagram,
+  FaFacebook,
   FaUserCircle,
 } from "react-icons/fa";
 import { profileWithImages, basicProfileDescriptions } from "./HeroData";
@@ -13,12 +13,12 @@ const HeroSocial = () => {
   const [popupOpen, setPopupOpen] = useState(false);
 
 
-  const [profile, setProfile] = useState("instagram");
+  const [profile, setProfile] = useState("linkedin");
 
-  const profiles = ["instagram", "facebook", "linkedin", "github"];
+  const profiles = ["linkedin","github", "facebook", "instagram"];
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [hoverText, setHoverText] = useState("Instagram Profile");
+  const [hoverText, setHoverText] = useState("Connect on LinkedIn");
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
@@ -41,6 +41,22 @@ const HeroSocial = () => {
 
   const socialButtons = [
     {
+      id: "linkedin",
+      label: "LinkedIn",
+      icon: <FaLinkedin />,
+      activeClass: "bg-blue-400 text-black shadow-md shadow-blue-500/40",
+      hoverClass: "hover:bg-blue-300 hover:text-white",
+      text: "Connect on LinkedIn",
+    },
+     {
+      id: "github",
+      label: "GitHub",
+      icon: <FaGithub />,
+      activeClass: "bg-green-400 text-black shadow-md shadow-green-500/40",
+      hoverClass: "hover:bg-green-300 hover:text-white",
+      text: "View GitHub Projects",
+    },
+    {
       id: "instagram",
       label: "Instagram",
       icon: <FaInstagram />,
@@ -56,22 +72,7 @@ const HeroSocial = () => {
       hoverClass: "hover:bg-blue-500 hover:text-white",
       text: "Facebook Profile",
     },
-    {
-      id: "linkedin",
-      label: "LinkedIn",
-      icon: <FaLinkedin />,
-      activeClass: "bg-blue-400 text-black shadow-md shadow-blue-500/40",
-      hoverClass: "hover:bg-blue-300 hover:text-white",
-      text: "Connect on LinkedIn",
-    },
-    {
-      id: "github",
-      label: "GitHub",
-      icon: <FaGithub />,
-      activeClass: "bg-green-400 text-black shadow-md shadow-green-500/40",
-      hoverClass: "hover:bg-green-300 hover:text-white",
-      text: "View GitHub Projects",
-    },
+    
   ];
 
   const handleMouseMove = (e) => {
